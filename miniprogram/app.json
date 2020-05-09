@@ -1,20 +1,21 @@
 {
   "pages": [
+    "pages/person/index",
     "pages/realtime/index",
-    "pages/track/index",
-    "pages/person/index"
+    "pages/track/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#1296db",
     "navigationBarTitleText": "实时",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   },
   "tabBar": {
-    "color": "white",
     "backgroundColor": "#EEEEEE",
     "borderStyle": "black",
+    
     "list": [
       {
         "pagePath": "pages/realtime/index",

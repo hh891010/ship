@@ -1,23 +1,33 @@
 // pages/realtime/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    latitude: '',
+    longitude: ''
   },
-
+  handlerGobackClick() {
+    console.log('返回')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    const _that = this
     wx.getLocation({
-      type: 'wgs84',
       success: function(res) {
-        console.log(res)
+        const { latitude, longitude } = res
+        _that.setData({
+          latitude,
+          longitude
+        })
       },
+      fail: function(err) {
+        console.log(err)
+      }
     })
   },
 

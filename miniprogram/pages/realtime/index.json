@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "navBar": "miniprograms-navigation-bar"
+  },
+  "navigationBarTitleText": "实时"
 }

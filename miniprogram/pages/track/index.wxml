@@ -1,2 +1,1 @@
-<!--pages/track/index.wxml-->
-<text>pages/track/index.wxml</text>
+<nav-bar title='南极科考船2号' background='#7dc5eb' back="{{true}}" bindback="handlerGobackClick"></nav-bar>

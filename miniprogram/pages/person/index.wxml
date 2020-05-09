@@ -1,2 +1,26 @@
-<!--pages/person/index.wxml-->
-<text>pages/person/index.wxml</text>
+<navBar title='个人中心'  background='#7dc5eb' back="{{true}}"  home="{{true}}" bindback="handlerGobackClick" bindhome="handlerGohomeClick">
+ss</navBar>
+<view class="user-head">
+  <view class="head-image">
+    <image src="../../images/head.png"></image>
+  </view>
+  <view class="user-info">
+    <view class="user-name">马云</view>
+    <view class="ship-info">长江科考一号船</view>
+  </view>
+  <view>
+    <image class="more-icon" src="../../images/more.png"></image>
+  </view>
+</view>
+<s-cell isInput="true"></s-cell>
+<s-cell isInput="true"></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>
+<s-cell></s-cell>

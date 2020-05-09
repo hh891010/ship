@@ -1,1 +1,37 @@
-/* pages/person/index.wxss */
+
+.user-head{
+  display: flex;
+  height: 200rpx;
+  align-items: center;
+  background-color: #7dc5eb;
+  padding-right: 20rpx;
+}
+.more-icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.user-head .head-image{
+  width: 200rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-head .head-image image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+}
+.user-head .user-info{
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  justify-content: center;
+  flex: 1;
+}
+.user-info .ship-info{
+  color: #666666;
+  font-size: 14px;
+  margin-top: 5px;
+}
