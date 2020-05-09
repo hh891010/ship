@@ -1,0 +1,43 @@
+
+.s-cell{
+  display: flex;
+  height: 90rpx;
+  width: 100%;
+  align-items: center;
+  padding: 0 20rpx;
+}
+.s-cell .icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.s-cell .content{
+  height: 100%;
+  flex: 1;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+}
+.s-cell .content .content-info{
+  font-size: 28rpx;
+  flex: 1;
+  padding-left: 20rpx;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.s-cell .content .content-info .title{
+  width: 30%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.s-cell .content .content-info input{
+  width: 90%;
+}
+.s-cell .content .content-info .content-right{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}

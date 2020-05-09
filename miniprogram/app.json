@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/person/index",
+    "pages/realtime/index",
+    "pages/track/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1296db",
+    "navigationBarTitleText": "实时",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "backgroundColor": "#EEEEEE",
+    "borderStyle": "black",
+    
+    "list": [
+      {
+        "pagePath": "pages/realtime/index",
+        "text": "实时",
+        "iconPath": "images/realtime.png",
+        "selectedIconPath": "images/realtime-select.png"
+      },
+      {
+        "pagePath": "pages/track/index",
+        "text": "航迹",
+        "iconPath": "images/track.png",
+        "selectedIconPath": "images/track-select.png"
+      },
+      {
+        "pagePath": "pages/person/index",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-select.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序实时位置效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

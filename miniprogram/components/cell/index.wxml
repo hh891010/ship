@@ -1,0 +1,13 @@
+<view class="s-cell">
+  <image class="icon" src="../../images/aboutme.png"></image>
+  <view class="content">
+    <view class="content-info">
+      <view class="title">个人资料</view>
+      <view class="content-right">
+        <input wx:if="{{isInput}}" placeholder="输入个人资料"></input>
+        <slot></slot>
+      </view>
+    </view>
+    <image class="icon" src="../../images/more.png"></image>
+  </view>
+</view>

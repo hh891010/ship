@@ -1,0 +1,10 @@
+.realtime{
+  width: 100%;
+  height: 100%;
+}
+.home-page {
+  height: 160rpx;
+  width: 100%;
+  border: 1rpx solid red;
+  font-size: 60rpx;
+}
