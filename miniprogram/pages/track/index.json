@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "nav-bar": "/components/navbar/index"
+    "navBar": "miniprograms-navigation-bar"
   },
   "navigationBarTitleText": "航迹"
 }

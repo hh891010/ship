@@ -1,1 +1,7 @@
-<nav-bar title='南极科考船2号' background='#7dc5eb' back="{{true}}" bindback="handlerGobackClick"></nav-bar>
+<navBar 
+  title='航迹'  
+  background='#7dc5eb' 
+  back="{{true}}"  
+  home="{{true}}" 
+  bindback="handlerGobackClick" 
+  bindhome="handlerGohomeClick"></navBar>

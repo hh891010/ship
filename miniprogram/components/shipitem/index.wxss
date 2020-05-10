@@ -1,0 +1,61 @@
+.ship-item {
+  width: 100%;
+  border: 1px solid #eeeeee;
+  height: 300rpx;
+  border-radius: 16rpx;
+  padding: 10rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15rpx;
+}
+.ship-item .ship-name {
+  display: flex;
+  height: 50rpx;
+  align-items: center;
+}
+.ship-item .ship-name .name {
+  color: #666666;
+  margin-left: 16rpx;
+}
+.ship-item .ship-info {
+  flex: 1;
+  display: flex;
+}
+.ship-item .ship-info .ship-image {
+  width: 200rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ship-item .ship-info .ship-image image {
+  width: 180rpx;
+  height: 180rpx;
+}
+.ship-item .ship-info .detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15rpx;
+}
+.ship-item .ship-info .detail .item {
+  color: #666666;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.ship-item .ship-info .detail .item .title {
+  width: 25%;
+}
+.ship-item .ship-icons {
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ship-item .ship-icons .icon {
+  width: 65rpx;
+  text-align: center;
+  color: #1296db;
+}

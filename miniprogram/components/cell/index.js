@@ -4,7 +4,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    isInput: Boolean
+    inputInfo: {
+      type: Object
+    }
   },
 
   /**
@@ -18,6 +20,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onChange() {
+      this.triggerEvent('onChange', {
+        a: 1
+      })
+    },
+    cellClick() {
+      const _that = this
+      _that.triggerEvent('onCellClick', _that.properties.inputInfo)
+    }
   }
 })

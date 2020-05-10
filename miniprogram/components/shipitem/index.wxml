@@ -1,0 +1,41 @@
+<view class="ship-item">
+  <view class="ship-name">
+    <view style="color: #1296db;" class="s-icon iconchuanbo"></view>
+    <view class="name">长江7号科考船</view>
+  </view>
+  <view class="ship-info">
+    <view class="ship-image">
+      <image src="../../images/hangmu.jpeg"></image>
+    </view>
+    <view class="detail">
+      <view class="item">
+        <view class="title">编号：</view>
+        <view class="nametext">cj-ship-001</view>
+      </view>
+      <view class="item">
+        <view class="title">责任人：</view>
+        <view class="nametext">马化腾</view>
+      </view>
+      <view class="item">
+        <view class="title">电话：</view>
+        <view class="nametext">18888888888</view>
+      </view>
+      <view class="item">
+        <view class="title">码头：</view>
+        <view class="nametext">天津港码头</view>
+      </view>
+    </view>
+  </view>
+  <view class="ship-icons">
+    <view class="icon s-icon iconguanli"></view>
+    <view class="icon s-icon iconbianji"></view>
+    <view class="icon s-icon icondingwei"></view>
+    <switch 
+      class="" 
+      style="zoom:0.6;"
+      checked="false" 
+      type="switch"
+      color="#1296db"
+      bindchange=""></switch>
+  </view>
+</view>

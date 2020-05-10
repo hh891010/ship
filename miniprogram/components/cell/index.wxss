@@ -1,23 +1,56 @@
-
-.s-cell{
+@font-face {
+  font-family: "s-icon";
+  src: url('iconfont.eot?t=1589109636415');
+  /* IE9 */
+  src: url('iconfont.eot?t=1589109636415#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'), url('iconfont.woff?t=1589109636415') format('woff'), url('iconfont.ttf?t=1589109636415') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('iconfont.svg?t=1589109636415#s-icon') format('svg');
+  /* iOS 4.1- */
+}
+.s-icon {
+  font-family: "s-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconchuanbo:before {
+  content: "\e608";
+}
+.icongerenziliao:before {
+  content: "\e607";
+}
+.iconxiugaimima:before {
+  content: "\e604";
+}
+.iconyonghuguanli:before {
+  content: "\e606";
+}
+.iconmore:before {
+  content: "\e602";
+}
+.icondingwei:before {
+  content: "\e601";
+}
+.s-cell {
   display: flex;
-  height: 90rpx;
+  height: 100rpx;
   width: 100%;
   align-items: center;
   padding: 0 20rpx;
 }
-.s-cell .icon{
-  width: 40rpx;
-  height: 40rpx;
+.s-cell .titleicon {
+  width: 60rpx;
+  height: 60rpx;
+  color: red;
+  border: 1px solid red;
 }
-.s-cell .content{
+.s-cell .content {
   height: 100%;
   flex: 1;
   border-bottom: 1px solid #eeeeee;
   display: flex;
   align-items: center;
 }
-.s-cell .content .content-info{
+.s-cell .content .content-info {
   font-size: 28rpx;
   flex: 1;
   padding-left: 20rpx;
@@ -25,16 +58,18 @@
   align-items: center;
   height: 100%;
 }
-.s-cell .content .content-info .title{
-  width: 30%;
+.s-cell .content .content-info .title {
+  width: 35%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.s-cell .content .content-info input{
-  width: 90%;
+.s-cell .content .content-info .inputcls {
+  width: 80%;
+  text-align: right;
+  color: #666666;
 }
-.s-cell .content .content-info .content-right{
+.s-cell .content .content-info .content-right {
   display: flex;
   height: 100%;
   width: 100%;

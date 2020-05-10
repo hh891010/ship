@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/person/index",
+    "pages/personcenter/home/index",
     "pages/realtime/index",
-    "pages/track/index"
+    "pages/track/index",
+    "pages/personcenter/detail/detail",
+    "pages/personcenter/password/index",
+    "pages/ship/list/index",
+    "components/shipitem/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -15,7 +19,6 @@
   "tabBar": {
     "backgroundColor": "#EEEEEE",
     "borderStyle": "black",
-    
     "list": [
       {
         "pagePath": "pages/realtime/index",
@@ -30,7 +33,7 @@
         "selectedIconPath": "images/track-select.png"
       },
       {
-        "pagePath": "pages/person/index",
+        "pagePath": "pages/personcenter/home/index",
         "text": "我的",
         "iconPath": "images/user.png",
         "selectedIconPath": "images/user-select.png"

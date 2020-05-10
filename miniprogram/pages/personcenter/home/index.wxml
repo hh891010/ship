@@ -1,0 +1,25 @@
+<navBar 
+  title='个人中心'  
+  background='#7dc5eb' 
+  back="{{true}}"  
+  home="{{true}}" 
+  bindback="handlerGobackClick" 
+  bindhome="handlerGohomeClick"></navBar>
+<view class="user-head">
+  <view class="head-image">
+    <open-data type="userAvatarUrl" class="myimage"></open-data>
+  </view>
+  <view class="user-info">
+    <view class="user-name">马云</view>
+    <view class="ship-info"><text class="s-icon icondingwei"></text>长江科考一号船</view>
+  </view>
+  <view class="s-icon iconmore"></view>
+</view>
+
+<block wx:for="{{list}}" wx:key="id" >
+  <s-cell wx:if="{{item.canShow}}" bind:onCellClick="onCellClick" inputInfo="{{item}}"></s-cell>
+</block>
+<!-- <picker 
+  mode="date" 
+  bindchange="bindPickerChange"  start="1970-01-01" end="2020-05-10">选择时间</picker>
+<button bindgetuserinfo="getUserData"  open-type="getUserInfo">授权登陆</button> -->
