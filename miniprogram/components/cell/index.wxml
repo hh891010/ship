@@ -1,13 +1,22 @@
 <view class="s-cell">
-  <image class="icon" src="../../images/aboutme.png"></image>
+  <view class="titleicon" wx:if="{{inputInfo.titleIcon}}"  class="s-icon {{inputInfo.titleIcon}}"></view>
   <view class="content">
     <view class="content-info">
-      <view class="title">个人资料</view>
+      <view class="title">{{inputInfo.title}}</view>
       <view class="content-right">
-        <input wx:if="{{isInput}}" placeholder="输入个人资料"></input>
+        <block wx:if="{{inputInfo.isInput}}">
+          <input
+            class="inputcls"
+            bindinput="onChange"
+            value="{{inputInfo.value}}"
+            type="{{inputInfo.inputtype}}"
+            maxlength="{{inputInfo.maxlength}}"
+            placeholder="{{inputInfo.placeholder}}" 
+            readonly="{{inputInfo.readonly}}"></input>
+        </block>
         <slot></slot>
       </view>
     </view>
-    <image class="icon" src="../../images/more.png"></image>
+    <text wx:if="{{inputInfo.iconmore}}" bindtap="cellClick" class="s-icon iconmore"></text>
   </view>
 </view>

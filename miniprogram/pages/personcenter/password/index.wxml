@@ -1,0 +1,19 @@
+<navBar 
+  title='修改密码'  
+  background='#7dc5eb' 
+  back="{{true}}"  
+  home="{{true}}" 
+  bindback="handlerGobackClick" 
+  bindhome="handlerGohomeClick"></navBar>
+  <view class="wrapper-password">
+    <block wx:for="{{passwords}}" wx:key="id" >
+      <s-cell wx:if="{{item.canShow}}" bind:onCellClick="onCellClick" inputInfo="{{item}}">
+      </s-cell>
+    </block>
+    <view class="tip">
+      密码至少包含8个字符，必须同时包含数字和字母，忘记密码请联系管理员重置。
+    </view>
+    <button bindtap="save" class="savebtn">保存并返回</button>
+  </view>
+    
+
