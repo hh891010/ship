@@ -13,7 +13,7 @@ Page({
   },
   onCellClick(obj) {
     const { id } = obj.detail || {};
-    let _url = ''
+    let _url = '/pages/personcenter/detail/detail'
     switch (id) {
       case 1:
         _url = '/pages/personcenter/detail/detail';
@@ -27,7 +27,6 @@ Page({
       case 4:
         break;
     }
-    console.log(_url)
     wx.navigateTo({
       url: _url
     });

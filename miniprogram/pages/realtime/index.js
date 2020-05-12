@@ -12,6 +12,11 @@ Page({
   handlerGobackClick() {
     console.log('返回')
   },
+  addMonitor() {
+    wx.navigateTo({
+      url: '/pages/monitor/detail/index'
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

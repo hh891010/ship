@@ -13,7 +13,7 @@
     <view class="user-name">马云</view>
     <view class="ship-info"><text class="s-icon icondingwei"></text>长江科考一号船</view>
   </view>
-  <view class="s-icon iconmore"></view>
+  <view bindtap="onCellClick" class="s-icon iconmore"></view>
 </view>
 
 <block wx:for="{{list}}" wx:key="id" >

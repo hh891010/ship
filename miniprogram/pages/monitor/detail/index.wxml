@@ -1,0 +1,31 @@
+<view class="wrapper-detail">
+  <navBar 
+    title='监测数据'  
+    background='#7dc5eb' 
+    back="{{true}}"  
+    home="{{true}}" 
+    bindback="handlerGobackClick" 
+    bindhome="handlerGohomeClick"></navBar>
+  <s-cell inputInfo="{{monitorType}}">
+    <picker 
+      mode="selector" 
+      bindchange="monitorTypePickerChange" 
+      value="{{typeIndex}}" 
+      name=""
+      range-key="value" 
+      range="{{monitorTypes}}">
+      <view>{{monitorTypes[typeIndex].value}}</view>
+    </picker>
+  </s-cell>
+  <block wx:if="{{typeIndex == 0}}" wx:for="{{fishType}}" wx:key="id" >
+    <s-cell wx:if="{{item.canShow}}"  inputInfo="{{item}}"></s-cell>
+  </block>
+  <block wx:if="{{typeIndex == 1}}" wx:for="{{initType}}" wx:key="id" >
+    <s-cell wx:if="{{item.canShow}}"  inputInfo="{{item}}"></s-cell>
+  </block>
+  <block wx:if="{{typeIndex == 2}}" wx:for="{{environmentType}}" wx:key="id" >
+    <s-cell wx:if="{{item.canShow}}"  inputInfo="{{item}}"> </s-cell>
+  </block>
+  <button class="savebtn">保存并使用</button>   
+</view>
+  

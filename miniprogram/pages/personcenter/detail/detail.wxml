@@ -7,15 +7,15 @@
   bindhome="handlerGohomeClick"></navBar>
 <view class="wrapper-detail">
   <view class="head">
-    <image class="head-img" src="../../../images/head.png"></image>
+    <open-data type="userAvatarUrl" class="head-img"></open-data>
   </view>
   <block wx:for="{{cells}}" wx:key="id" >
     <s-cell wx:if="{{item.canShow}}" bind:onCellClick="onCellClick" inputInfo="{{item}}">
       <view wx:if="{{item.isSlot}}">
         <picker 
           mode="selector" 
-          bindchange="bindPickerChange" 
-          value="{{index}}" range="{{sexs}}">{{sexs[index]}}</picker>
+          bindchange="sexPickerChange" 
+          value="{{sexIndex}}" range="{{sexs}}">{{sexs[sexIndex]}}</picker>
       </view>
     </s-cell>
   </block>
