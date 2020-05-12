@@ -45,3 +45,24 @@
 .icondingwei:before {
   content: "\e601";
 }
+.s-search {
+  height: 80rpx;
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s-search .search {
+  height: 60rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #EEEEEE;
+  border-radius: 24rpx;
+  padding: 0 16rpx;
+}
+.s-search .search .search-input {
+  margin-left: 10rpx;
+  flex: 1;
+}

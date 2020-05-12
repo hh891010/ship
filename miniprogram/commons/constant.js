@@ -72,7 +72,8 @@ export const userOps = [
     iconmore: false,
     readonly: true,
     value: 'mahuaten@tuhu.cn',
-    maxlength: 50
+    maxlength: 50,
+    inputtype: 'text'
   },
   {
     id: 4,
@@ -83,7 +84,8 @@ export const userOps = [
     iconmore: false,
     readonly: true,
     value: '18888888888',
-    maxlength: 11
+    maxlength: 11,
+    inputtype: 'number'
   },
   {
     id: 5,
@@ -131,7 +133,8 @@ export const passwords = [
     readonly: false,
     placeholder: '请输入旧密码',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    password: true
   },
   {
     id: 2,
@@ -142,7 +145,8 @@ export const passwords = [
     readonly: false,
     placeholder: '请输入新密码',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    password: true
   },
   {
     id: 3,
@@ -153,7 +157,8 @@ export const passwords = [
     readonly: false,
     placeholder: '请再次输入新密码',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    password: true
   }
 ]
 
@@ -179,7 +184,8 @@ export const fishType = [
     readonly: false,
     placeholder: '单位:尾',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    inputtype: 'number'
   },
   {
     id: 3,
@@ -190,7 +196,8 @@ export const fishType = [
     readonly: false,
     placeholder: '单位:kg',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    inputtype: 'digit'
   },
   {
     id: 4,
@@ -226,7 +233,8 @@ export const initType = [
     readonly: false,
     placeholder: '单位:粒',
     value: '',
-    maxlength: 10
+    maxlength: 10,
+    inputtype: 'number'
   },
   {
     id: 2,
@@ -237,7 +245,8 @@ export const initType = [
     readonly: false,
     placeholder: '单位:尾',
     value: '',
-    maxlength: 10
+    maxlength: 10,
+    inputtype: 'number'
   },
   {
     id: 3,
@@ -248,7 +257,8 @@ export const initType = [
     readonly: false,
     placeholder: '单位:次',
     value: '',
-    maxlength: 10
+    maxlength: 10,
+    inputtype: 'number'
   },
   {
     id: 4,
@@ -259,7 +269,8 @@ export const initType = [
     readonly: false,
     placeholder: '单位:分钟',
     value: '',
-    maxlength: 10
+    maxlength: 10,
+    inputtype: 'number'
   },
   {
     id: 5,

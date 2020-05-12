@@ -1,15 +1,13 @@
 <navBar 
   title='南极科考船1号'  
   background='#7dc5eb' 
-  back="{{true}}"  
-  home="{{true}}" 
   bindback="handlerGobackClick" 
   bindhome="handlerGohomeClick"></navBar>
 <map
-  longitude="{{longitude}}"
+  longitude="{{longitude}}" 
   latitude="{{latitude}}"
-  show-location="true"
   show-compass="true" 
+  scale="14"
   style="width: 100%; height: 100vh;"></map>
   <view class="wrapper-realtime">
     <image bindtap="addMonitor" class="add" src="../../images/add.png"></image>

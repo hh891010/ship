@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTime: formatTime(),
+    currentTime: formatTime(new Date()),
     typeIndex: 0,
     fishType: com.fishType,
     initType: com.initType,

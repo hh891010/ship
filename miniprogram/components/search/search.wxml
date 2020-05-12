@@ -1,0 +1,14 @@
+<view class="s-search">
+  <view class="search">
+    <view class="s-icon iconsearch"></view>
+    <input 
+      class="search-input" 
+      value="{{searchValue}}" 
+      type="text" 
+      placeholder="请输入用户名查询" placeholder-style="" placeholder-class="input-placeholder"
+      maxlength="20" 
+      bindinput="" bindblur="" bindconfirm="onInputConfirm"></input>
+    <view bind:tap="clearSearch" class="s-icon iconclose"></view>
+  </view> 
+  <slot></slot>
+</view>

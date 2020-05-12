@@ -1,0 +1,57 @@
+.user-item{
+  height: 140rpx;
+  width: 100%;
+  border: 1px solid #EEEEEE;
+  margin-top: 16rpx;
+  border-radius: 16rpx;
+  display: flex;
+  .left{
+    width: 140rpx;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .surname{
+      width: 100rpx;
+      height: 100rpx;
+      font-size: 50rpx;
+      font-weight: 800;
+      background-color: #bfbfbf;
+      border-radius: 50%;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .content{
+    flex: 1;
+    padding: 12rpx 12rpx;
+    font-size: 28rpx;
+    color: #666666;
+    .phone{
+      font-size: 24rpx;
+      margin-left: 10rpx;
+      color: #999999;
+    }
+  }
+  .right{
+    width: 120rpx;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666666;
+    position: relative;
+    &::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 100rpx;
+      width: 1px;
+      border-left: 1px solid #EEEEEE;
+    }
+  }
+}

@@ -1,10 +1,4 @@
-<navBar 
-  title='个人中心'  
-  background='#7dc5eb' 
-  back="{{true}}"  
-  home="{{true}}" 
-  bindback="handlerGobackClick" 
-  bindhome="handlerGohomeClick"></navBar>
+<navBar title='个人中心' background='#7dc5eb'></navBar>
 <view class="user-head">
   <view class="head-image">
     <open-data type="userAvatarUrl" class="myimage"></open-data>
