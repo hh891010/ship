@@ -1,0 +1,14 @@
+<view class="user-item">
+  <view class="left">
+    <view class="surname">马</view>
+  </view>
+  <view class="content">
+    <view class="userinfo">
+      <text class="name">马化腾</text>
+      <text class="phone">188888888888</text>
+    </view>
+    <text class="group">长江水产研究所渔业资源与环境保护研究室</text> 
+  </view>
+  <view class="right">编辑</view>
+</view>
+  

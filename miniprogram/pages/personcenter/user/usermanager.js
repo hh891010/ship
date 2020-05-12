@@ -1,41 +1,24 @@
-// pages/realtime/index.js
-const app = getApp()
+// miniprogram/pages/personcenter/user/usermanager.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    latitude: '',
-    longitude: ''
+
   },
-  handlerGobackClick() {
-    console.log('返回')
-  },
-  addMonitor() {
-    wx.navigateTo({
-      url: '/pages/monitor/detail/index'
-    });
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const _that = this
-    wx.getLocation({
-      success: function(res) {
-        const { latitude, longitude } = res
-        _that.setData({
-          latitude,
-          longitude
-        })
-      },
-      fail: function(err) {
-        console.log(err)
-      }
+
+  },
+  handlerGobackClick() {
+    wx.navigateBack({
+      delta: 1
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -10,6 +10,7 @@
             bindinput="onChange"
             value="{{inputInfo.value}}"
             type="{{inputInfo.inputtype}}"
+            password="{{inputInfo.password}}"
             maxlength="{{inputInfo.maxlength}}"
             placeholder="{{inputInfo.placeholder}}" 
             readonly="{{inputInfo.readonly}}"></input>

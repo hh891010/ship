@@ -13,7 +13,7 @@ Page({
   },
   onCellClick(obj) {
     const { id } = obj.detail || {};
-    let _url = ''
+    let _url = '/pages/personcenter/detail/detail'
     switch (id) {
       case 1:
         _url = '/pages/personcenter/detail/detail';
@@ -25,9 +25,9 @@ Page({
         _url = "/pages/ship/list/index"
         break;
       case 4:
+        _url = "/pages/personcenter/user/usermanager"
         break;
     }
-    console.log(_url)
     wx.navigateTo({
       url: _url
     });
@@ -39,14 +39,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    console.log(this.data.list)
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.hideLoading()
   },
 
   /**

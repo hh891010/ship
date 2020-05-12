@@ -3,5 +3,6 @@
     "navBar": "miniprograms-navigation-bar",
     "s-cell": "/components/cell/index"
   },
-  "navigationBarTitleText": "我的"
+  "navigationBarTitleText": "我的",
+  "disableScroll":true
 }

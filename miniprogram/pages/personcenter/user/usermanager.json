@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navBar": "miniprograms-navigation-bar",
+    "s-cell": "/components/cell/index",
+    "s-search": "/components/search/search",
+    "user-item": "/components/useritem/index"
+  },
+  "disableScroll": true
+}

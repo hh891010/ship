@@ -1,0 +1,24 @@
+.user-manager {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.user-manager .userlist {
+  padding: 0 16rpx;
+  flex: 1;
+  overflow: scroll;
+}
+.user-manager .add {
+  width: 100%;
+  height: 130rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+}
+.user-manager .add .addbtn {
+  width: 80%;
+  color: #FFFFFF;
+  background-color: #1296db;
+}

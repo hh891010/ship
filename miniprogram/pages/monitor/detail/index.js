@@ -1,29 +1,56 @@
 const com = require('../../../commons/constant');
+const { formatTime } = require('../../../commons/utils');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cells: com.userOps,
-    sexs: ['男', '女'],
-    sexIndex: 0
+    currentTime: formatTime(new Date()),
+    typeIndex: 0,
+    fishType: com.fishType,
+    initType: com.initType,
+    environmentType: com.environmentType,
+    monitorType: {
+      id: 1,
+      title: '调查种类：',
+      isInput: false,
+      canShow: true,
+      iconmore: false,
+      readonly: false,
+      value: '',
+      isSlot: true
+    },
+    monitorTypes: [
+      {
+        id: 1,
+        value: '鱼类资源'
+      },
+      {
+        id: 2,
+        value: '早期资源'
+      },
+      {
+        id: 3,
+        value: '环境生物'
+      }
+    ]
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-  sexPickerChange(e) {
+  monitorTypePickerChange(e) {
     this.setData({
-      sexIndex: e.detail.value
+      typeIndex: e.detail.value
     })
   },
   handlerGobackClick() {
     wx.navigateBack({
       delta: 1
     })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
