@@ -1,0 +1,24 @@
+.total-voyage {
+  width: 100%;
+  padding: 20rpx 0;
+}
+.total-voyage .voyage-info {
+  margin: 16rpx 0;
+}
+.total-voyage .voyage-info .voyage {
+  font-size: 60rpx;
+  margin-right: 6rpx;
+  color: #7dc5eb;
+  font-weight: 500;
+}
+.total-voyage .detail {
+  margin-top: 20rpx;
+}
+.total-voyage .detail .item {
+  margin-right: 30rpx;
+}
+.total-voyage .detail .item .data {
+  color: #7dc5eb;
+  font-size: 40rpx;
+  font-weight: 500;
+}

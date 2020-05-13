@@ -3,13 +3,22 @@
   background='#7dc5eb' 
   bindback="handlerGobackClick" 
   bindhome="handlerGohomeClick"></navBar>
-<map
+<!-- <map
   longitude="{{longitude}}" 
   latitude="{{latitude}}"
   show-compass="true" 
   scale="14"
+  polyline="{{polyline}}"
   style="width: 100%; height: 100vh;"></map>
   <view class="wrapper-realtime">
     <image bindtap="addMonitor" class="add" src="../../images/add.png"></image>
   </view>
-    
+     -->
+  <map id="mapp" 
+    latitude="37.48205260" 
+    longitude="121.44577861" 
+    scale="16"
+    markers="{{markers}}"
+	  show-compass="true"show-scale="true" 
+    style="width: 100%; height: 100vh;"
+	  polyline="{{polyline}}"></map>

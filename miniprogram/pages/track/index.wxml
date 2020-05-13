@@ -1,1 +1,45 @@
-<navBar title='航迹' background='#7dc5eb'></navBar>
+<view class="wrapper-track">
+  <navBar title='航迹' background='#7dc5eb'></navBar>
+  <view class="tabs">
+    <view class="wrapper-tab">
+      <block wx:key="idx" wx:for-index="idx"  wx:for="{{tabs}}">
+        <view data-index="{{idx}}" bind:tap="switchSwiper" class="tab {{currentIndex == idx ? 'selected' : ''}} ">{{item}}</view>   
+      </block>
+    </view>
+  </view>
+  <view class="swiper-content">
+    <swiper bindchange="swiperChange" style="height: {{swiperHeight}};min-height:100%;" current="{{currentIndex}}">
+      <swiper-item class="swiper-item">
+        <view class="swiper-item-info">
+          <view class="times">
+            <view class="item">
+              <picker 
+                mode="date"
+                data-type="startDate"
+                bindchange="pickerChange"
+                start="2020-01-01" 
+                end="{{currentDate}}">{{startDate ? startDate : '请选择开始日期'}}</picker>
+            </view>
+            <view class="bridge">-</view>
+            <view class="item">
+              <picker 
+                mode="date"
+                data-type="endDate"
+                bindchange="pickerChange"  
+                start="{{startDate}}"
+                end="{{currentDate}}">{{endDate ? endDate : '请选择截止日期'}}</picker></view>
+          </view>
+          <total-voyage></total-voyage>
+          <s-voyage isSwitch="{{false}}" voyages="{{voyages}}"></s-voyage>
+          <view bind:tap="moreVoyage" class="showmore">查看更多<text class="s-icon iconzhankai"></text></view>
+        </view>
+      </swiper-item>
+      <swiper-item class="swiper-item">
+        <view class="swiper-item-info">
+          <total-voyage ></total-voyage>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+  

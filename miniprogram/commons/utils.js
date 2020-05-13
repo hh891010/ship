@@ -4,14 +4,18 @@ const interceptorMethods = ['fail', 'success', 'complete']
  * @param {*} date 
  * @param {*} symbol 年月日连接符
  */
-const formatTime = (date, symbol) => {
+const formatTime = (date, symbol, isTime = true) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
   const seconds = date.getSeconds()
-  return [year, month, day].map(formatNumber).join(symbol || '-') + ' ' + [hour, minute, seconds].map(formatNumber).join(':')
+  let _date = [year, month, day].map(formatNumber).join(symbol || '-')
+  if (isTime) {
+    _date = _date + ' ' + [hour, minute, seconds].map(formatNumber).join(':')
+  }
+  return _date
 }
 
 const formatNumber = n => {

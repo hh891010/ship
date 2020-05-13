@@ -1,0 +1,11 @@
+<view class="wrapper-list">
+  <navBar title='航迹列表' background='#7dc5eb'></navBar>
+  <view class="list">
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+  </view>
+</view>
