@@ -1,5 +1,9 @@
 <view class="wrapper-list">
-  <navBar title='航迹列表' background='#7dc5eb'></navBar>
+  <navBar title='航迹列表' background='#7dc5eb'     
+    back="{{true}}"  
+    home="{{true}}" 
+    bindback="handlerGobackClick" 
+    bindhome="handlerGohomeClick"></navBar>
   <view class="list">
     <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
     <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>

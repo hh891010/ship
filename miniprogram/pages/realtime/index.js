@@ -1,4 +1,5 @@
 const com = require('../../commons/constant') 
+const util = require('../../commons/utils')
 const app = getApp()
 Page({
 
@@ -6,17 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    latitude: '',
-    longitude: '',
-    // polyline: [{
-    //   points: com.points,
-    //   color: "#ff6600",
-    //   width: 2,
-    //   dottedLine: false,
-    //   arrowLine: true,
-    //   borderColor: "#000000",
-    //   borderWidth: 5
-    // }]
+    latitude: 37.48205260,
+    longitude: 121.44577861,
     markers: [
       {
         id: 1,
@@ -132,19 +124,16 @@ Page({
    */
   onLoad: function (options) {
     const _that = this
-    wx.getLocation({
-      success: function(res) {
-        const { latitude, longitude } = res
-        _that.setData({
-          latitude,
-          longitude
-        })
-      },
-      fail: function(err) {
-        console.log(err)
-      }
-    })
     _that.realtimeGetLocation()
+    util.promisify(wx.showModal, {
+      title: '提示',
+      content: '您暂无船只权限，请联系管理员',
+      showCancel: false,
+      confirmText: '知道了'}).then(res => {
+        if (res.confirm) {
+          console.log('用户点了ok')
+        }
+      })
   },
   realtimeGetLocation() {
     const _that = this
@@ -166,11 +155,6 @@ Page({
         latitude: 37.48330837
       }
     ]
-    // setTimeout(() => {
-    //   _that.setData({
-    //     ['polyline[0].points']: _locations
-    //   })
-    // }, 3000)
     let index = 0
     const timer = setInterval(() => {
       if (index >= _locations.length) {

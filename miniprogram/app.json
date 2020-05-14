@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/home/login/index",
     "pages/personcenter/home/index",
     "pages/realtime/index",
     "pages/track/index",
