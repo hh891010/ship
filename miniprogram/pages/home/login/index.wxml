@@ -6,11 +6,11 @@
     </view>
     <view class="item">
       <view class="s-icon iconzhanghao"></view>
-      <input data-type="username" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{username}}" type="text"  placeholder="账号" maxlength="40"></input>
+      <input data-type="username" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{username}}" type="text"  placeholder="请输入账号" maxlength="40"></input>
     </view>
     <view class="item">
       <view class="s-icon iconmima"></view>
-      <input data-type="password" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{password}}" type="text" password="true"  placeholder="密码" maxlength="40"></input>
+      <input data-type="password" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{password}}" type="text" password="true"  placeholder="请输入密码" maxlength="40"></input>
     </view>
     <button bind:tap="onLogin" class="login" type="primary">登录</button>
   </view>

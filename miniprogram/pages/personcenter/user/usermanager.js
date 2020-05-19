@@ -15,6 +15,9 @@ Page({
 
   },
   handlerGobackClick() {
+    wx.$eventBus.$emit('aaaaa', {
+      aaa: 'aaa12'
+    })
     wx.navigateBack({
       delta: 1
     })

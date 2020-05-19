@@ -1,0 +1,1 @@
+export const userAuth = 's_user_auth'

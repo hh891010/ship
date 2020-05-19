@@ -1,4 +1,4 @@
-// miniprogram/pages/home/login/index.js
+// const com = require('../../../commons/utils')
 Page({
 
   /**
@@ -13,6 +13,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    // com.promisify(wx.login, {
+    //   timeout: 5000
+    // }).then(res => {
+    //   const { code } = res || {}
+    // })
   },
   onInputBlur(e) {
     const value = e.detail.value
