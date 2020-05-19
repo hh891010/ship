@@ -1,37 +1,10 @@
-const com = require('./commons/utils')
+
 const { sRequest } = require('./commons/request')
 const eventBus = require('./commons/eventBus')
 wx.sRequest = sRequest
 wx.$eventBus = new eventBus()
 App({
-  onLogin() {
-    const _that = this
-    com.promisify(wx.login, {
-      timeout: 5000
-    }).then(res => {
-      const { code } = res || {}
-      _that.getOpenidAndToken(code)
-    })
-  },
-  async getOpenidAndToken(code) {
-    const _that = this
-    const _url = `${_that.globalData.api_host}/ship-api/api/user/findOpenId`
-    const param = {
-      code
-    }
-    const userInfo = await wx.sRequest(_url, param, {
-      isLoading: true,
-      noAuth: true
-    }).catch(res => {
-      console.log(2222, res)
-    })
-    console.log(11111111, userInfo)
-    // wx.switchTab({
-    //   url: '/pages/realtime/index'
-    // })
-  },
   onLaunch: function (options) {
-    console.log(wx.$eventBus)
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -59,7 +32,6 @@ App({
         this.globalData.height = res.statusBarHeight
       }
     })
-    this.onLogin()
   },
   globalData: {
     share: false,  // 分享默认为false

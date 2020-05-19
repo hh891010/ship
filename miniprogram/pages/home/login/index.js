@@ -1,4 +1,7 @@
 // const com = require('../../../commons/utils')
+const { apis } = require('../../../commons/config')
+const base64 = require('js-base64').Base64
+const app = getApp()
 Page({
 
   /**
@@ -26,30 +29,57 @@ Page({
       [key]: value
     })
   },
-  onLogin() {
+  userCheck() {
+    let _ = true
     if (!this.data.username) {
       wx.showToast({
         title: '账号不能为空',
         icon: 'none'
       })
-      return
+      _ = false
     }
     if (!this.data.password) {
       wx.showToast({
         title: '密码不能为空',
         icon: 'none'
       })
-      return
+      _ = false
     }
-    wx.showLoading({
-      title: '登录中'
-    })
-    setTimeout(() => {
-      wx.hideLoading()
-      wx.reLaunch({
-        url: '/pages/realtime/index'
+    return _
+  },
+  onLogin() {
+    const _that = this
+    if (_that.userCheck()) {
+      const basicAuth = base64.encode(`webapp:surveyship$2020`)
+      console.log(basicAuth)
+      wx.sRequest(`${app.globalData.api_host}:${apis.userLogin}`, {
+        grant_type: 'password',
+        username: _that.data.username,
+        password: _that.data.password
+      }, {
+        isLoading: true,
+        loadingTitle: '登录中...',
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${basicAuth}`
+        }
+      }).then(res => {
+        console.log('login success', res)
+      }).catch(err => {
+        console.log('login error', err)
       })
-    }, 2000)
+    }
+    // setTimeout(() => {
+    //   wx.hideLoading()
+    //   wx.$eventBus.$emit('sLogin', {
+    //     token: 'adsfasdf',
+    //     userid: 'fasdfasdf'
+    //   })
+    //   wx.navigateBack({
+    //     delta: 1
+    //   })
+    // }, 2000)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

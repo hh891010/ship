@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/realtime/index",
     "pages/personcenter/home/index",
     "pages/home/login/index",
-    "pages/realtime/index",
     "pages/track/index",
     "pages/personcenter/detail/detail",
     "pages/personcenter/password/index",

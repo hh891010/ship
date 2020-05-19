@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    title: '未知',
     latitude: 37.48205260,
     longitude: 121.44577861,
     markers: [
@@ -111,9 +112,6 @@ Page({
       arrowLine: true
     }]
   },
-  handlerGobackClick() {
-    console.log('返回')
-  },
   addMonitor() {
     wx.navigateTo({
       url: '/pages/monitor/detail/index'
@@ -124,16 +122,51 @@ Page({
    */
   onLoad: function (options) {
     const _that = this
-    _that.realtimeGetLocation()
+    if (!app.globalData.token) {
+      _that.onLogin()
+    } else {
     util.promisify(wx.showModal, {
       title: '提示',
       content: '您暂无船只权限，请联系管理员',
       showCancel: false,
-      confirmText: '知道了'}).then(res => {
-        if (res.confirm) {
-          console.log('用户点了ok')
-        }
+      confirmText: '知道了'
+    }).then(res => {
+      if (res.confirm) {
+        console.log('用户点了ok')
+      }
+    })
+    }
+  },
+  async getOpenidAndToken(code) {
+    const _that = this
+    const _url = `${app.globalData.api_host}/ship-api/api/user/findOpenId`
+    const param = {
+      code
+    }
+    const userInfo = await wx.sRequest(_url, param, {
+      isLoading: true,
+      noAuth: true
+    })
+    const { token } = userInfo || {}
+    app.globalData.token = token
+    if (!token) {
+      wx.$eventBus.$on('sLogin', (res) => {
+        console.log('sLogin back', res)
+        _that.realtimeGetLocation()
       })
+      wx.navigateTo({
+        url: '/pages/home/login/index'
+      })
+    }
+  },
+  onLogin() {
+    const _that = this
+    util.promisify(wx.login, {
+      timeout: 5000
+    }).then(res => {
+      const { code } = res || {}
+      _that.getOpenidAndToken(code)
+    })
   },
   realtimeGetLocation() {
     const _that = this
