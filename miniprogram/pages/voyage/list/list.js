@@ -1,11 +1,11 @@
-// miniprogram/pages/personcenter/user/usermanager.js
+// miniprogram/pages/voyage/list/list.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    voyages: [1, 2, 3, 4, 5, 6, 7]
   },
 
   /**
@@ -15,9 +15,6 @@ Page({
 
   },
   handlerGobackClick() {
-    wx.$eventBus.$emit('aaaaa', {
-      aaa: 'aaa12'
-    })
     wx.navigateBack({
       delta: 1
     })
