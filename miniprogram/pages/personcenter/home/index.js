@@ -28,6 +28,9 @@ Page({
         _url = "/pages/personcenter/user/usermanager"
         break;
     }
+    wx.$eventBus.$on('aaaaa', (obj) => {
+      console.log('aaa回来了', obj)
+    })
     wx.navigateTo({
       url: _url
     });

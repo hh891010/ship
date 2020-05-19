@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "navBar": "miniprograms-navigation-bar"
+    "navBar": "miniprograms-navigation-bar",
+    "total-voyage": "/components/totalvoyage/totalvoyage",
+    "s-voyage": "/components/voyage/voyage"
   },
-  "navigationBarTitleText": "航迹"
+  "navigationBarTitleText": "航迹",
+  "disableScroll": true
 }

@@ -1,4 +1,8 @@
-//app.js
+
+const { sRequest } = require('./commons/request')
+const eventBus = require('./commons/eventBus')
+wx.sRequest = sRequest
+wx.$eventBus = new eventBus()
 App({
   onLaunch: function (options) {
     if (!wx.cloud) {
@@ -31,6 +35,7 @@ App({
   },
   globalData: {
     share: false,  // 分享默认为false
-    height: 0
+    token: '',
+    api_host: 'https://www.orangesoda.cn'
   }
 })

@@ -1,0 +1,18 @@
+<view class="wrapper-login">
+  <view class="content">
+    <view class="logo-info">
+      <image class="logo" src="https://img3.tuhu.org/MLraNhsOmh7TG0b5uzkXQA/logo.jpg"  lazy-load="false"  />
+      <text class="system-name">科研调查船信息管理系统</text>
+    </view>
+    <view class="item">
+      <view class="s-icon iconzhanghao"></view>
+      <input data-type="username" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{username}}" type="text"  placeholder="请输入账号" maxlength="40"></input>
+    </view>
+    <view class="item">
+      <view class="s-icon iconmima"></view>
+      <input data-type="password" bindblur="onInputBlur" placeholder-style="color: #eeeeee;" class="myinput" value="{{password}}" type="text" password="true"  placeholder="请输入密码" maxlength="40"></input>
+    </view>
+    <button bind:tap="onLogin" class="login" type="primary">登录</button>
+  </view>
+</view>
+  
