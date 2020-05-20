@@ -52,7 +52,7 @@ Page({
     if (_that.userCheck()) {
       const basicAuth = base64.encode(`webapp:surveyship$2020`)
       console.log(basicAuth)
-      wx.sRequest(`${app.globalData.api_host}:${apis.userLogin}`, {
+      wx.sRequest(`${app.globalData.api_host}${apis.userLogin}`, {
         grant_type: 'password',
         username: _that.data.username,
         password: _that.data.password
@@ -62,8 +62,9 @@ Page({
         method: 'POST',
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${basicAuth}`
-        }
+          'Authorization': `Basic ${basicAuth}`
+        },
+        basicAuth:true
       }).then(res => {
         console.log('login success', res)
       }).catch(err => {
