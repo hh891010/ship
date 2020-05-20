@@ -9,16 +9,17 @@ const sRequest = (url, data, options) => {
     isLoading,
     loadingTitle,
     method,
-    noAuth
+    noAuth,
+    basicAuth
   } = options || {}
-  const _header = Object({
+  const _header = Object.assign({
     Authorization: `Bearer ${userToken}`
   }, header)
   if (noAuth) {
     delete _header.Authorization
   }
   return new Promise((resolve, reject) => {
-    if (userToken || noAuth) {
+    if (userToken || noAuth || basicAuth) {
       if (isLoading) {
         wx.showLoading({
           title: loadingTitle || '加载中...'
