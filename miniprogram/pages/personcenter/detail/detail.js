@@ -1,4 +1,5 @@
 const com = require('../../../commons/constant');
+const { apis, apiHost } = require('../../../commons/config')
 Page({
 
   /**
@@ -8,7 +9,8 @@ Page({
     cells: com.userOps,
     sexs: ['男', '女'],
     sexIndex: 0,
-    userPkid: 0
+    userPkid: 0,
+    user: null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -16,12 +18,18 @@ Page({
   onLoad: function (options) {
     const _that = this
     const { pkid } = options || {}
-    _that.setData({
-      userPkid: pkid
-    })
+    if (pkid > 0) {
+      _that.setData({
+        userPkid: pkid
+      })
+      _that.getUserDetail()
+    }
+
   },
-  getUserDetail() {
-    
+  async getUserDetail() {
+    const _userDetail = await wx.sRequest(`${apiHost}${apis.getUserDetail}`, {
+      id: this.data.userPkid
+    })
   },
   sexPickerChange(e) {
     this.setData({
