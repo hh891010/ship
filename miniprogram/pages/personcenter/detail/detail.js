@@ -7,13 +7,21 @@ Page({
   data: {
     cells: com.userOps,
     sexs: ['男', '女'],
-    sexIndex: 0
+    sexIndex: 0,
+    userPkid: 0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const _that = this
+    const { pkid } = options || {}
+    _that.setData({
+      userPkid: pkid
+    })
+  },
+  getUserDetail() {
+    
   },
   sexPickerChange(e) {
     this.setData({

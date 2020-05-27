@@ -1,24 +1,52 @@
 
-const { userAuth } = require('./config')
- 
+const { userAuthKey } = require('./config')
+const { getStorageSync, removeStorageSync } = require('../commons/utils')
+const _host = 'https://www.orangesoda.cn'
+const filterApis = [
+  `${_host}/ship-auth-server/oauth/token`
+]
+const authFilter = (url) => {
+  return filterApis.includes(url)
+}
+
+const errToast = (message) => {
+  wx.showToast({
+    title: message || '网络异常',
+    icon: 'none',
+    duration: 3000
+  })
+}
+
+const toLogin = (resolve, reject, ops) => {
+  // 跳转登录
+  removeStorageSync(userAuthKey)
+  wx.$eventBus.$on('login_success', (token) => {
+    token && sRequest(ops.url, ops.data, ops.options).then(resolve, reject).catch(() => {})
+  })
+  wx.navigateTo({
+    url: '/pages/home/login/index'
+  })
+}
+
 const sRequest = (url, data, options) => {
   // 获取auth信息
-  const userToken = wx.getStorageSync(userAuth)
+  const userToken = getStorageSync(userAuthKey)
   const { 
     header,
     isLoading,
     loadingTitle,
     method,
-    noAuth
+    noAuth,
+    specialResponse
   } = options || {}
-  const _header = Object({
+  const _header = Object.assign({
     Authorization: `Bearer ${userToken}`
   }, header)
   if (noAuth) {
     delete _header.Authorization
   }
   return new Promise((resolve, reject) => {
-    if (userToken || noAuth) {
+    if (userToken || noAuth || authFilter(url)) {
       if (isLoading) {
         wx.showLoading({
           title: loadingTitle || '加载中...'
@@ -33,39 +61,48 @@ const sRequest = (url, data, options) => {
           if (isLoading) {
             wx.hideLoading()
           }
-          const  statusCode = res.statusCode
+          const statusCode = res.statusCode
+          const _data = res.data
           switch (statusCode) {
             case 200:
-              resolve(res.data)
+              const { data, code, success, message } = _data || {}
+              if (specialResponse || (code === 1000000 && success)) {
+                resolve(specialResponse ? _data : _data.data)
+              } else {
+                errToast(message)
+                reject(_data)
+              }
               break;
             case 401:
-              // 跳转登录
+              toLogin(resolve, reject, {
+                url,
+                data,
+                options
+              })
               break;
             default:
-              reject(res)
+              reject(_data)
               break;
           }
         },
         fail: res => {
           if (isLoading) {
             wx.hideLoading()
-            wx.showToast({
-              title: '网络异常，请检查网络状态',
-              icon: 'none',
-              duration: 3000
-            })
-            reject(res)
           }
+          errToast(res.errMsg)
+          reject(res)
         }
       })
     } else {
-      // 跳转登录
-      reject({
-        message: '授权信息失效，请从新登陆'
+      toLogin(resolve, reject, {
+        url,
+        data,
+        options
       })
     }
   })
 }
+
 module.exports = {
   sRequest
 }

@@ -20,6 +20,6 @@
     </s-cell>
   </block>
   
-  <button class="savebtn">保存并使用</button>
+  <button wx:if="{{userPkid === 0}}" class="savebtn">保存并使用</button>
 </view>
 

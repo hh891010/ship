@@ -47,6 +47,18 @@ const promisify = (method, params) => {
   })
 }
 
+const setStorageSync = (key, data) => {
+  console.log(key, data)
+  return wx.setStorageSync(key, data)
+}
+
+const getStorageSync = (key) => {
+  return wx.getStorageSync(key)
+}
+
+const removeStorageSync = (key) => {
+  return wx.removeStorageSync(key)
+}
 /**
  * 拆分页面路径和参数
  * @param path
@@ -119,5 +131,8 @@ module.exports = {
   promisify,
   formatPath,
   createUid,
-  once
+  once,
+  setStorageSync,
+  getStorageSync,
+  removeStorageSync
 }

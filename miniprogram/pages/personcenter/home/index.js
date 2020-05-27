@@ -1,22 +1,24 @@
-// pages/person/index.js
+
 const com = require('../../../commons/constant');
+const { getStorageSync } = require('../../../commons/utils')
+const { userInfoKey } = require('../../../commons/config')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: com.homelist
+    list: com.homelist,
+    userInfo: {}
   },
   onChange (e) {
     console.log(e.detail)
   },
   onCellClick(obj) {
     const { id } = obj.detail || {};
-    let _url = '/pages/personcenter/detail/detail'
+    let _url = `/pages/personcenter/detail/detail?pkid=${this.data.userInfo.pkid}`
     switch (id) {
       case 1:
-        _url = '/pages/personcenter/detail/detail';
         break;
       case 2:
         _url = "/pages/personcenter/password/index";
@@ -42,9 +44,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
+    const _that = this
+    _that.setData({
+      userInfo: getStorageSync(userInfoKey)
     })
   },
 
@@ -52,7 +54,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.hideLoading()
+    // wx.hideLoading()
   },
 
   /**

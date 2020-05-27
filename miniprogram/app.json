@@ -11,6 +11,9 @@
     "pages/personcenter/user/usermanager",
     "pages/voyage/list/list"
   ],
+  "usingComponents": {
+
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

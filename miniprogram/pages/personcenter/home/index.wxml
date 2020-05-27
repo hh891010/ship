@@ -4,8 +4,8 @@
     <open-data type="userAvatarUrl" class="myimage"></open-data>
   </view>
   <view class="user-info">
-    <view class="user-name">马云</view>
-    <view class="ship-info"><text class="s-icon icondingwei"></text>长江科考一号船</view>
+    <view class="user-name">{{userInfo.userName}}</view>
+    <view class="ship-info"><text class="s-icon icondingwei"></text>{{userInfo.followShipName || '暂无跟踪船只'}}</view>
   </view>
   <view bindtap="onCellClick" class="s-icon iconmore"></view>
 </view>
