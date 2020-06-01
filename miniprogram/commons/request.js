@@ -69,8 +69,16 @@ const sRequest = (url, data, options) => {
               if (specialResponse || (code === 1000000 && success)) {
                 resolve(specialResponse ? _data : _data.data)
               } else {
-                errToast(message)
-                reject(_data)
+                if (code === 401) {
+                  toLogin(resolve, reject, {
+                    url,
+                    data,
+                    options
+                  })
+                } else {
+                  errToast(message)
+                  reject(_data)
+                }
               }
               break;
             case 401:
