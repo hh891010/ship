@@ -48,8 +48,9 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    value: '马化腾',
-    maxlength: 10
+    value: '',
+    maxlength: 10,
+    attrKey: 'userName'
   },
   {
     id: 2,
@@ -61,7 +62,8 @@ export const userOps = [
     readonly: true,
     value: '',
     maxlength: 2,
-    isSlot: true
+    isSlot: true,
+    attrKey: 'sex'
   },
   {
     id: 3,
@@ -71,9 +73,10 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: 'mahuaten@tuhu.cn',
+    value: '',
     maxlength: 50,
-    inputtype: 'text'
+    inputtype: 'text',
+    attrKey: 'email'
   },
   {
     id: 4,
@@ -83,9 +86,10 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '18888888888',
+    value: '',
     maxlength: 11,
-    inputtype: 'number'
+    inputtype: 'number',
+    attrKey: 'mobile'
   },
   {
     id: 5,
@@ -95,8 +99,9 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '腾讯总部董事会',
-    maxlength: 50
+    value: '',
+    maxlength: 50,
+    attrKey: 'department'
   },
   {
     id: 6,
@@ -106,8 +111,9 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: 'mahuaten',
-    maxlength: 20
+    value: '',
+    maxlength: 20,
+    attrKey: 'userCode'
   },
   {
     id: 7,
@@ -117,8 +123,9 @@ export const userOps = [
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '管理员',
-    maxlength: 20
+    value: '',
+    maxlength: 20,
+    attrKey: 'roleCode'
   }
 ]
 

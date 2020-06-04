@@ -176,7 +176,6 @@ Page({
       timeout: 5000
     }).then(res => {
       const { code } = res || {}
-      console.log(1111111111, code)
       _that.getOpenidAndToken(code)
     })
   },

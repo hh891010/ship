@@ -17,18 +17,53 @@ Page({
    */
   onLoad: function (options) {
     const _that = this
-    const { pkid } = options || {}
+    const { pkid, isEdit = false } = options || {}
     if (pkid > 0) {
       _that.setData({
         userPkid: pkid
       })
-      _that.getUserDetail()
+      _that.getUserDetail(isEdit)
+    } else {
+      const cells = _that.data.cells
+      _that.setData({
+        cells: cells.map(x => {
+          x.value = ''
+          x.readonly = false
+          x.canShow = x.attrKey !== 'roleCode'
+          return x
+        })
+      })
     }
 
   },
-  async getUserDetail() {
+  async getUserDetail(isEdit) {
+    const _that = this
     const _userDetail = await wx.sRequest(`${apiHost}${apis.getUserDetail}`, {
       id: this.data.userPkid
+    })
+    const cells = _that.data.cells
+    _that.setData({
+      cells: cells.map(x => {
+        x.value = _userDetail[x.attrKey]
+        x.readonly = isEdit
+        return x
+      })
+    })
+  },
+  addUser() {
+    console.log(1111222, this.data.cells)
+  },
+  onInputChange(e) {
+    const _that = this
+    const cells = _that.data.cells
+    const item = e.detail
+    _that.setData({
+      cells: cells.map(x => {
+        if (x.attrKey === item.attrKey) {
+          x.value = item.newValue
+        }
+        return x
+      })
     })
   },
   sexPickerChange(e) {

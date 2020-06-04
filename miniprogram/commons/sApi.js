@@ -7,3 +7,12 @@ export const getUserInfo = () => {
   }).catch((e) => {
   })
 }
+/**
+ * 获取用户列表
+ * @param {*} ops 
+ */
+export const getUsers = (ops) => {
+  return wx.sRequest(apiHost + apis.getUserList, ops, {
+    method: 'POST'
+  }).catch((e) => {})
+}

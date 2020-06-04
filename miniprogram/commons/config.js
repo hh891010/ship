@@ -6,6 +6,7 @@ export const apis = {
     userLogin: '/ship-auth-server/oauth/token',
     userLogout: '/ship-auth-server/api/exit',
     getUserInfo: '/ship-api/api/user/findUserDetail',
+    getUserList: '/ship-api/api/user/findPage',
     getUserDetail: '/ship-api/api/user/findById',
     getOpenidAndToken: '/ship-api/api/user/findOpenId'
 }
