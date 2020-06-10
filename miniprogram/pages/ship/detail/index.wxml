@@ -1,0 +1,22 @@
+<navBar 
+  title='添加科考船'  
+  background='#7dc5eb' 
+  back="{{true}}"  
+  home="{{true}}" 
+  bindback="handlerGobackClick" 
+  bindhome="handlerGohomeClick"></navBar>
+<view class="wrapper-detail">
+  <block wx:for="{{cells}}" wx:key="id" >
+    <s-cell wx:if="{{item.canShow}}" bind:onChange="onInputChange" bind:onCellClick="onCellClick" inputInfo="{{item}}">
+      <view wx:if="{{item.isSlot}}">
+        <picker 
+          mode="selector" 
+          disabled="{{item.readonly}}"
+          bindchange="sexPickerChange" 
+          value="{{sexIndex}}" range="{{sexs}}">{{sexs[sexIndex]}}</picker>
+      </view>
+    </s-cell>
+  </block>
+  <button bindtap="add" wx:if="{{shipId === 0}}" class="savebtn">保存并使用</button>
+</view>
+

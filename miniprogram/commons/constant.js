@@ -1,3 +1,11 @@
+const shipOpsCom = {
+  iconClass: '',
+  isInput: true,
+  canShow: true,
+  iconmore: false,
+  readonly: false,
+  value: '',
+}
 // 个人中心
 export const homelist = [
   {
@@ -141,7 +149,8 @@ export const passwords = [
     placeholder: '请输入旧密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'oldPassword'
   },
   {
     id: 2,
@@ -153,7 +162,8 @@ export const passwords = [
     placeholder: '请输入新密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'password'
   },
   {
     id: 3,
@@ -165,7 +175,8 @@ export const passwords = [
     placeholder: '请再次输入新密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'repeatPassword'
   }
 ]
 
@@ -404,6 +415,88 @@ export const environmentType = [
   }
 ]
 
+export const shipOps = [
+  {
+    id: 1,
+    title: '名称：',
+    maxlength: 50,
+    attrKey: 'shipName',
+    placeholder: '请输入科考船名称',
+    ...shipOpsCom
+  },
+  {
+    id: 2,
+    title: '编号：',
+    placeholder: '请输入科考船编号',
+    maxlength: 50,
+    attrKey: 'shipCode',
+    ...shipOpsCom
+  },
+  {
+    id: 3,
+    title: '码头：',
+    placeholder: '请输入码头名称',
+    maxlength: 50,
+    attrKey: 'dockName',
+    ...shipOpsCom
+  },
+  {
+    id: 4,
+    title: '备用码头：',
+    placeholder: '请输入备用码头名称',
+    maxlength: 50,
+    attrKey: 'chargePerson',
+    ...shipOpsCom
+  },
+  {
+    id: 5,
+    title: '责任人：',
+    placeholder: '请输入责任人名称',
+    maxlength: 20,
+    attrKey: 'chargePerson',
+    ...shipOpsCom
+  },
+  {
+    id: 6,
+    title: '责任人电话：',
+    placeholder: '请输入责任人电话',
+    maxlength: 20,
+    attrKey: 'chargePersonMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 7,
+    title: '船长姓名：',
+    placeholder: '请输入船长名称',
+    maxlength: 10,
+    attrKey: 'captain',
+    ...shipOpsCom
+  },
+  {
+    id: 8,
+    title: '船长电话：',
+    placeholder: '请输入船长电话',
+    maxlength: 10,
+    attrKey: 'captainMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 9,
+    title: 'GPS设备识别号：',
+    placeholder: '请输入GPS设备识别号',
+    maxlength: 30,
+    attrKey: 'gpsNumber',
+    ...shipOpsCom
+  },
+  {
+    id: 10,
+    title: '船舶状态：',
+    maxlength: 30,
+    attrKey: 'gpsNumber',
+    isSlot: true,
+    ...shipOpsCom
+  }
+]
 export const points = [
   {longitude: 118.793425, latitude: 32.040599},
   {longitude: 118.793657, latitude: 32.042257},

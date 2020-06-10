@@ -45,7 +45,7 @@ Page({
     _that.setData({
       cells: cells.map(x => {
         x.value = _userDetail[x.attrKey]
-        x.readonly = isEdit
+        x.readonly = !isEdit
         return x
       })
     })

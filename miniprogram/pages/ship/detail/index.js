@@ -1,30 +1,22 @@
-// miniprogram/pages/ship/list/index.js
+const { shipOps } = require('../../../commons/constant');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    shipId: 0,
+    cells: shipOps
+  },
 
-  },
-  handlerGobackClick() {
-    wx.navigateBack({
-      delta: 1
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-  addShip() {
-    wx.$eventBus.$on('ship_success', (obj) => {
-      console.log('ship_success', obj)
+    const { shipId } = options || {}
+    this.setData({
+      shipId
     })
-    wx.navigateTo({
-      url: '/pages/ship/detail/index'
-    });
   },
 
   /**

@@ -9,11 +9,10 @@
     "pages/ship/list/index",
     "pages/monitor/detail/index",
     "pages/personcenter/user/usermanager",
-    "pages/voyage/list/list"
+    "pages/voyage/list/list",
+    "pages/ship/detail/index"
   ],
-  "usingComponents": {
-
-  },
+  "usingComponents": {},
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

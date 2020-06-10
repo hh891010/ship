@@ -8,5 +8,6 @@ export const apis = {
     getUserInfo: '/ship-api/api/user/findUserDetail',
     getUserList: '/ship-api/api/user/findPage',
     getUserDetail: '/ship-api/api/user/findById',
+    updateUserPassWord: '/ship-api/api/user/resetUserPassword',	
     getOpenidAndToken: '/ship-api/api/user/findOpenId'
 }
