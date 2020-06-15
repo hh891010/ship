@@ -48,7 +48,6 @@ const promisify = (method, params) => {
 }
 
 const setStorageSync = (key, data) => {
-  console.log(key, data)
   return wx.setStorageSync(key, data)
 }
 

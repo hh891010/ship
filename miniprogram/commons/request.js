@@ -21,6 +21,7 @@ const toLogin = (resolve, reject, ops) => {
   // 跳转登录
   removeStorageSync(userAuthKey)
   wx.$eventBus.$on('login_success', (token) => {
+    console.log(token, ops)
     token && sRequest(ops.url, ops.data, ops.options).then(resolve, reject).catch(() => {})
   })
   wx.navigateTo({
@@ -29,6 +30,8 @@ const toLogin = (resolve, reject, ops) => {
 }
 
 const sRequest = (url, data, options) => {
+  const baseData = data
+  const baseOps = options
   // 获取auth信息
   const userToken = getStorageSync(userAuthKey)
   const { 
@@ -72,8 +75,8 @@ const sRequest = (url, data, options) => {
                 if (code === 401) {
                   toLogin(resolve, reject, {
                     url,
-                    data,
-                    options
+                    data: baseData,
+                    options: baseOps
                   })
                 } else {
                   errToast(message)
@@ -84,8 +87,8 @@ const sRequest = (url, data, options) => {
             case 401:
               toLogin(resolve, reject, {
                 url,
-                data,
-                options
+                data: baseData,
+                options: baseOps
               })
               break;
             default:
