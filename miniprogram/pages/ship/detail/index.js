@@ -18,7 +18,27 @@ Page({
       shipId
     })
   },
-
+  onInputChange(e) {
+    const _that = this
+    const cells = _that.data.cells
+    const item = e.detail
+    _that.setData({
+      cells: cells.map(x => {
+        if (x.attrKey === item.attrKey) {
+          x.value = item.newValue
+        }
+        return x
+      })
+    })
+  },
+  save() {
+    const _that = this
+    let _param = {}
+    _that.data.cells.map(x => {
+      _param[x.attrKey] = x.value
+    })
+    console.log(_param)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -17,6 +17,6 @@
       </view>
     </s-cell>
   </block>
-  <button bindtap="add" wx:if="{{shipId === 0}}" class="savebtn">保存并使用</button>
+  <button bindtap="save" wx:if="{{shipId === 0}}" class="savebtn">保存并使用</button>
 </view>
 

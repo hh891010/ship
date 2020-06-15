@@ -415,6 +415,7 @@ export const environmentType = [
   }
 ]
 
+// 船舶
 export const shipOps = [
   {
     id: 1,
@@ -445,7 +446,7 @@ export const shipOps = [
     title: '备用码头：',
     placeholder: '请输入备用码头名称',
     maxlength: 50,
-    attrKey: 'chargePerson',
+    attrKey: 'spareDockName',
     ...shipOpsCom
   },
   {
@@ -492,7 +493,7 @@ export const shipOps = [
     id: 10,
     title: '船舶状态：',
     maxlength: 30,
-    attrKey: 'gpsNumber',
+    attrKey: 'status',
     isSlot: true,
     ...shipOpsCom
   }
