@@ -14,8 +14,8 @@
           <picker 
             mode="selector" 
             disabled="{{item.readonly}}"
-            bindchange="sexPickerChange" 
-            value="{{sexIndex}}" range="{{sexs}}">{{sexs[sexIndex]}}</picker>
+            bindchange="shipStatusPickerChange" 
+            value="{{statusIndex}}" range="{{shipStatus}}">{{shipStatus[statusIndex]}}</picker>
         </view>
       </s-cell>
     </block>

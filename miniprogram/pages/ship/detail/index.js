@@ -9,6 +9,8 @@ Page({
    */
   data: {
     pageTitle: '添加科考船',
+    shipStatus: ['运行中', '注销'],
+    statusIndex: 0,
     shipId: 0,
     cells: shipOps,
     shipImages: []
@@ -64,6 +66,11 @@ Page({
         })
       })
     }
+  },
+  shipStatusPickerChange(e) {
+    this.setData({
+      statusIndex: e.detail.value
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
