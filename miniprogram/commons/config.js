@@ -9,5 +9,6 @@ export const apis = {
     getUserList: '/ship-api/api/user/findPage',
     getUserDetail: '/ship-api/api/user/findById',
     updateUserPassWord: '/ship-api/api/user/resetUserPassword',	
-    getOpenidAndToken: '/ship-api/api/user/findOpenId'
+    getOpenidAndToken: '/ship-api/api/user/findOpenId',
+    uploadImage: '/ship-api/api/file/upload'
 }

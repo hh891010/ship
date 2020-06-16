@@ -35,4 +35,17 @@ export const saveShip = (ops) => {
   return wx.sRequest(apiHost + apis.addAndUpdateShip, ops, {
     method: 'POST'
   }).catch((e) => {})
-} 
+}
+
+export const uploadImg = (path) => {
+  return wx.sRequest(apiHost + apis.uploadImage, {}, {
+    method: 'POST',
+    header: {
+      'Content-Type': 'multipart/form-data'
+    },
+    wxParams: {
+      name: 'file',
+      filePath: path,
+    }
+  }, 'uploadFile').catch((e) => {})
+}

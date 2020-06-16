@@ -17,19 +17,19 @@ const errToast = (message) => {
   })
 }
 
-const toLogin = (resolve, reject, ops) => {
+const toLogin = (resolve, reject, ops, requestName) => {
   // 跳转登录
   removeStorageSync(userAuthKey)
   wx.$eventBus.$on('login_success', (token) => {
     console.log(token, ops)
-    token && sRequest(ops.url, ops.data, ops.options).then(resolve, reject).catch(() => {})
+    token && sRequest(ops.url, ops.data, ops.options, requestName).then(resolve, reject).catch(() => {})
   })
   wx.navigateTo({
     url: '/pages/home/login/index'
   })
 }
 
-const sRequest = (url, data, options) => {
+const sRequest = (url, data, options, requestName = 'request') => {
   const baseData = data
   const baseOps = options
   // 获取auth信息
@@ -40,7 +40,8 @@ const sRequest = (url, data, options) => {
     loadingTitle,
     method,
     noAuth,
-    specialResponse
+    specialResponse,
+    wxParams
   } = options || {}
   const _header = Object.assign({
     Authorization: `Bearer ${userToken}`
@@ -55,7 +56,8 @@ const sRequest = (url, data, options) => {
           title: loadingTitle || '加载中...'
         })
       }
-      wx.request({
+      wx[requestName]({
+        ...wxParams,
         url,
         data,
         header: _header,
@@ -65,7 +67,7 @@ const sRequest = (url, data, options) => {
             wx.hideLoading()
           }
           const statusCode = res.statusCode
-          const _data = res.data
+          const _data = JSON.parse(res.data)
           switch (statusCode) {
             case 200:
               const { data, code, success, message } = _data || {}
@@ -76,7 +78,8 @@ const sRequest = (url, data, options) => {
                   toLogin(resolve, reject, {
                     url,
                     data: baseData,
-                    options: baseOps
+                    options: baseOps,
+                    requestName
                   })
                 } else {
                   errToast(message)
@@ -88,7 +91,8 @@ const sRequest = (url, data, options) => {
               toLogin(resolve, reject, {
                 url,
                 data: baseData,
-                options: baseOps
+                options: baseOps,
+                requestName
               })
               break;
             default:
@@ -97,6 +101,7 @@ const sRequest = (url, data, options) => {
           }
         },
         fail: res => {
+          console.log(2222222)
           if (isLoading) {
             wx.hideLoading()
           }
@@ -108,7 +113,8 @@ const sRequest = (url, data, options) => {
       toLogin(resolve, reject, {
         url,
         data,
-        options
+        options,
+        requestName
       })
     }
   })

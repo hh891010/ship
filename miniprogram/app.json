@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/ship/detail/index",
     "pages/realtime/index",
     "pages/personcenter/home/index",
     "pages/home/login/index",
@@ -9,8 +10,7 @@
     "pages/ship/list/index",
     "pages/monitor/detail/index",
     "pages/personcenter/user/usermanager",
-    "pages/voyage/list/list",
-    "pages/ship/detail/index"
+    "pages/voyage/list/list"
   ],
   "usingComponents": {},
   "window": {

@@ -1,12 +1,69 @@
 .wrapper-detail {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper-detail .opts {
+  flex: 1;
+  overflow: scroll;
+}
+.wrapper-detail .opts .upload-img {
+  margin-top: 10rpx;
+}
+.wrapper-detail .opts .upload-img .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  height: 60rpx;
+  align-items: center;
+}
+.wrapper-detail .opts .upload-img .imgInfo {
+  display: flex;
+  margin: 20rpx 20rpx;
+}
+.wrapper-detail .opts .upload-img .imgInfo .imgbox {
+  position: relative;
+  width: 120rpx;
+  height: 120rpx;
+  border: 1px solid #EEEEEE;
+  margin-right: 30rpx;
+}
+.wrapper-detail .opts .upload-img .imgInfo .imgbox .shipImg {
+  width: 100%;
+  height: 100%;
+}
+.wrapper-detail .opts .upload-img .imgInfo .imgbox .del {
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+  opacity: 0.9;
+  width: 40rpx;
+  height: 40rpx;
+}
+.wrapper-detail .opts .upload-img .imgInfo .upload-btn {
+  width: 120rpx;
+  height: 120rpx;
+  border: 1px solid #EEEEEE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper-detail .opts .upload-img .imgInfo .upload-btn .upload-icon {
+  width: 80rpx;
+  height: 80rpx;
+}
+.wrapper-detail .opts .upload-img .imgInfo .upload-btn .del {
+  position: absolute;
 }
 .wrapper-detail .savebtn {
-  position: absolute;
-  bottom: 35rpx;
-  left: 50%;
-  transform: translate(-50%);
-  width: 80%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-detail .savebtn .save {
   color: #FFFFFF;
-  background-color: #1296db;
+  background: #7dc5eb;
+  width: 80%;
 }
