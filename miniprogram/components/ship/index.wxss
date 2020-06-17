@@ -63,48 +63,67 @@
 .icondingwei:before {
   content: "\e601";
 }
-.s-cell {
-  display: flex;
-  height: 100rpx;
+.ship-item {
   width: 100%;
-  align-items: center;
-  padding: 0 20rpx;
-}
-.s-cell .titleicon {
-  width: 60rpx;
-  height: 60rpx;
-  color: red;
-  border: 1px solid red;
-}
-.s-cell .content {
-  height: 100%;
-  flex: 1;
-  border-bottom: 1px solid #eeeeee;
+  border: 1px solid #eeeeee;
+  height: 300rpx;
+  border-radius: 16rpx;
+  padding: 10rpx 16rpx;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15rpx;
 }
-.s-cell .content .content-info {
-  font-size: 28rpx;
-  flex: 1;
+.ship-item .ship-name {
   display: flex;
+  height: 50rpx;
   align-items: center;
-  height: 100%;
 }
-.s-cell .content .content-info .title {
-  width: 48%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.s-cell .content .content-info .inputcls {
-  width: 80%;
-  text-align: right;
+.ship-item .ship-name .name {
   color: #666666;
+  margin-left: 16rpx;
 }
-.s-cell .content .content-info .content-right {
+.ship-item .ship-info {
+  flex: 1;
   display: flex;
+}
+.ship-item .ship-info .ship-image {
+  width: 200rpx;
   height: 100%;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ship-item .ship-info .ship-image image {
+  width: 180rpx;
+  height: 180rpx;
+}
+.ship-item .ship-info .detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15rpx;
+}
+.ship-item .ship-info .detail .item {
+  color: #666666;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.ship-item .ship-info .detail .item .title {
+  width: 25%;
+}
+.ship-item .ship-icons {
+  height: 40rpx;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+.ship-item .ship-icons .icon {
+  width: 65rpx;
+  text-align: center;
+  color: #1296db;
+}
+.ship-item .ship-icons .watchShip {
+  color: #999999;
 }

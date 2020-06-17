@@ -9,6 +9,8 @@ const authFilter = (url) => {
   return filterApis.includes(url)
 }
 
+const jsonDataType = ['uploadFile']
+
 const errToast = (message) => {
   wx.showToast({
     title: message || '网络异常',
@@ -67,7 +69,7 @@ const sRequest = (url, data, options, requestName = 'request') => {
             wx.hideLoading()
           }
           const statusCode = res.statusCode
-          const _data = JSON.parse(res.data)
+          const _data = jsonDataType.indexOf(requestName) > -1 ? JSON.parse(res.data) : res.data
           switch (statusCode) {
             case 200:
               const { data, code, success, message } = _data || {}
@@ -101,7 +103,7 @@ const sRequest = (url, data, options, requestName = 'request') => {
           }
         },
         fail: res => {
-          console.log(2222222)
+          console.log(res)
           if (isLoading) {
             wx.hideLoading()
           }

@@ -38,7 +38,7 @@
     </view>
   </view>
    <view class="savebtn">
-     <button class="save" bindtap="save" wx:if="{{shipId === 0}}">保存并使用</button>
+     <button class="save" bindtap="save" wx:if="{{shipId === 0 || isEdit}}">保存并使用</button>
    </view>
 </view>
 

@@ -1,4 +1,4 @@
-<!--miniprogram/pages/ship/list/index.wxml-->
+
   <view class="wrapper-list">
   <navBar 
     title='船舶列表'  
@@ -7,17 +7,17 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-    <view class="list">
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
-      <ship-item></ship-item>
+    <view class="list" wx:if="{{shipList.length > 0}}">
+      <block wx:key="pkid" wx:for="{{shipList}}">
+        <ship-item
+          bind:onEditShip="onEditShip"
+          bind:onToDetail="toDetail"
+          bind:onWatchShip="watchShip"
+          bind:onSwitchChange="switchChange"
+          ship="{{item}}"></ship-item>
+      </block>
     </view>
-    <view class="nodata">暂无科考船数据</view>
+    <view class="nodata" wx:if="{{shipList.length === 0}}">暂无科考船数据</view>
     <view class="add">
       <button bindtap="addShip" class="addbtn">添加科考船</button>
     </view>

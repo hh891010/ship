@@ -4,7 +4,7 @@ const shipOpsCom = {
   canShow: true,
   iconmore: false,
   readonly: false,
-  value: '',
+  value: ''
 }
 // 个人中心
 export const homelist = [
@@ -461,7 +461,7 @@ export const shipOps = [
     id: 6,
     title: '责任人电话：',
     placeholder: '请输入责任人电话',
-    maxlength: 20,
+    maxlength: 11,
     attrKey: 'chargePersonMobile',
     ...shipOpsCom
   },
@@ -477,7 +477,7 @@ export const shipOps = [
     id: 8,
     title: '船长电话：',
     placeholder: '请输入船长电话',
-    maxlength: 10,
+    maxlength: 11,
     attrKey: 'captainMobile',
     ...shipOpsCom
   },
@@ -491,13 +491,27 @@ export const shipOps = [
   },
   {
     id: 10,
+    title: 'GPS设备手机号：',
+    placeholder: '请输入GPS设备手机号：',
+    maxlength: 11,
+    attrKey: 'gpsMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 11,
     title: '船舶状态：',
-    maxlength: 30,
+    maxlength: 5,
     attrKey: 'status',
     isSlot: true,
-    ...shipOpsCom
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    value: ''
   }
 ]
+
 export const points = [
   {longitude: 118.793425, latitude: 32.040599},
   {longitude: 118.793657, latitude: 32.042257},

@@ -1,7 +1,7 @@
 const { shipOps } = require('../../../commons/constant');
 const { userAuthKey, apiHost } = require('../../../commons/config')
-const { promisify, getStorageSync } = require('../../../commons/utils')
-const { uploadImg } = require('../../../commons/sApi')
+const { promisify, verifyPhone } = require('../../../commons/utils')
+const { uploadImg, saveShip, selectShipInfo } = require('../../../commons/sApi')
 Page({
 
   /**
@@ -12,6 +12,7 @@ Page({
     shipStatus: ['运行中', '注销'],
     statusIndex: 0,
     shipId: 0,
+    isEdit: false,
     cells: shipOps,
     shipImages: []
   },
@@ -20,10 +21,57 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { shipId } = options || {}
+    const { shipId, isEdit = false } = options || {}
     this.setData({
-      shipId
+      shipId,
+      isEdit
     })
+    if (shipId > 0) {
+      this.getShipDetail()
+    }
+  },
+  handlerGobackClick() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  save() {
+    const _that = this
+    let _param = {}
+    _that.data.cells.map(x => {
+      _param[x.attrKey] = x.value
+    })
+    _param.pkid = _that.data.shipId
+    _param.status = _that.data.statusIndex
+    _param.pic = _that.data.shipImages.join(',')
+    if (!verifyPhone(_param.gpsMobile) || !verifyPhone(_param.chargePersonMobile)) {
+      wx.showToast({
+        title: '手机号码格式错误',
+        icon: 'none'
+      })
+      return
+    }
+    saveShip(_param).then(res => {
+      if (res && res > 0) {
+        wx.$eventBus.$emit('ship_success', res)
+        _that.handlerGobackClick()
+      }
+    })
+  },
+  async chooseImg() {
+    const _that = this
+    if (!_that.data.isEdit) return
+    const { tempFilePaths } = (await promisify(wx.chooseImage, {}).catch(err => {})) || {}
+    if (tempFilePaths && tempFilePaths.length > 0) {
+      const path = tempFilePaths[0]
+      uploadImg(path).then(res => {
+        const _url = `${apiHost}/ship-api${res}`
+        _that.data.shipImages.push(_url)
+        _that.setData({
+          shipImages: _that.data.shipImages
+        })
+      })
+    }
   },
   onInputChange(e) {
     const _that = this
@@ -38,14 +86,6 @@ Page({
       })
     })
   },
-  save() {
-    const _that = this
-    let _param = {}
-    _that.data.cells.map(x => {
-      _param[x.attrKey] = x.value
-    })
-    console.log(_param)
-  },
   delImg(e) {
     const _that = this
     const { url } = e.target.dataset
@@ -53,23 +93,26 @@ Page({
       shipImages: _that.data.shipImages.filter(x => x !== url)
     })
   },
-  async chooseImg() {
-    const _that = this
-    const { tempFilePaths } = await promisify(wx.chooseImage, {})
-    if (tempFilePaths && tempFilePaths.length > 0) {
-      const path = tempFilePaths[0]
-      uploadImg(path).then(res => {
-        const _url = `${apiHost}/ship-api${res}`
-        _that.data.shipImages.push(_url)
-        _that.setData({
-          shipImages: _that.data.shipImages
-        })
-      })
-    }
-  },
   shipStatusPickerChange(e) {
     this.setData({
       statusIndex: e.detail.value
+    })
+  },
+  getShipDetail() {
+    const _that = this
+    selectShipInfo(_that.data.shipId).then(ship => {
+      const cells = _that.data.cells
+      const imgs = (ship.pic || '').split(',').filter(x => x)
+      console.log(imgs)
+      _that.setData({
+        statusIndex: ship.status,
+        shipImages: imgs,
+        cells: cells.map(x => {
+          x.value = ship[x.attrKey]
+          x.readonly = !_that.data.isEdit
+          return x
+        })
+      })
     })
   },
   /**

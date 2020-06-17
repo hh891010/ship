@@ -96,6 +96,12 @@ const once = (fn) => {
   }
 }
 
+// 校验手机号
+const verifyPhone = (mobile) => {
+  return /^(?:(?:\+|00)86)?1\d{10}$/.test(mobile)
+}
+
+
 // 页面导航
 // const navigateTo = (eventKey, data) => {
 //   const _that = this
@@ -133,5 +139,6 @@ module.exports = {
   once,
   setStorageSync,
   getStorageSync,
-  removeStorageSync
+  removeStorageSync,
+  verifyPhone
 }

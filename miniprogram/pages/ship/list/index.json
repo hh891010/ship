@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "navBar": "miniprograms-navigation-bar",
-    "ship-item": "/components/shipitem/index"
+    "ship-item": "/components/ship/index"
   },
   "navigationBarTitleText": "船舶列表",
   "disableScroll": true

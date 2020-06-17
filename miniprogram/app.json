@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/ship/list/index",
     "pages/ship/detail/index",
     "pages/realtime/index",
     "pages/personcenter/home/index",
@@ -7,7 +8,6 @@
     "pages/track/index",
     "pages/personcenter/detail/detail",
     "pages/personcenter/password/index",
-    "pages/ship/list/index",
     "pages/monitor/detail/index",
     "pages/personcenter/user/usermanager",
     "pages/voyage/list/list"

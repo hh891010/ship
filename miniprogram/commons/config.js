@@ -10,5 +10,10 @@ export const apis = {
     getUserDetail: '/ship-api/api/user/findById',
     updateUserPassWord: '/ship-api/api/user/resetUserPassword',	
     getOpenidAndToken: '/ship-api/api/user/findOpenId',
-    uploadImage: '/ship-api/api/file/upload'
+    uploadImage: '/ship-api/api/file/upload',
+    addAndEditShip: '/ship-api/api/ship/saveShip',
+    selectShipList: '/ship-api/api/ship/findPage',
+    selectShipDetail: '/ship-api/api/ship/findById',
+    setWakeStatus: '/ship-api/api/ship/setWakeStatus',
+    setFollowByShipId: '/ship-api/api/user/setFollow'			
 }
