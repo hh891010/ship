@@ -9,9 +9,9 @@ Page({
   data: {
     pageIndex: 1,
     totalPage: 0,
-    pageSize: 10,
+    pageSize: 80,
     keywordName: '',
-    shipList: []
+    shipList: null
   },
   handlerGobackClick() {
     wx.navigateBack({

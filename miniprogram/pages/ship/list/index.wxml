@@ -7,7 +7,7 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-    <view class="list" wx:if="{{shipList.length > 0}}">
+    <view class="list" wx:if="{{shipList && shipList.length > 0}}">
       <block wx:key="pkid" wx:for="{{shipList}}">
         <ship-item
           bind:onEditShip="onEditShip"
@@ -17,7 +17,7 @@
           ship="{{item}}"></ship-item>
       </block>
     </view>
-    <view class="nodata" wx:if="{{shipList.length === 0}}">暂无科考船数据</view>
+    <view class="nodata" wx:if="{{shipList && shipList.length === 0}}">暂无科考船数据</view>
     <view class="add">
       <button bindtap="addShip" class="addbtn">添加科考船</button>
     </view>
