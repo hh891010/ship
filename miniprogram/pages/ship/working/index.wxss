@@ -1,0 +1,32 @@
+.wrapper-working {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.wrapper-working .working-ships {
+  flex: 1;
+  overflow: scroll;
+}
+.wrapper-working .working-ships .shipinfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.wrapper-working .nodata {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-working .savebtn {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-working .savebtn .save {
+  color: #FFFFFF;
+  background: #7dc5eb;
+  width: 80%;
+}

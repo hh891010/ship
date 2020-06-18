@@ -11,6 +11,15 @@ export const getUserInfo = () => {
   })
 }
 /**
+ * 获取当前用户详细信息
+ * @param {*} pkid 
+ */
+export const getCurrentUserDetail = (pkid) => {
+  return wx.sRequest(`${apiHost}${apis.getUserDetail}`, {
+    id: pkid
+  })
+}
+/**
  * 获取用户列表
  * @param {*} ops 
  */
@@ -76,6 +85,19 @@ export const setFollow = (shipId) => {
   }).catch(err => {})
 }
 
+/**
+ * 获取角色列表
+ */
+export const selectRoleList = () => {
+  return wx.sRequest(`${apiHost}${apis.getRoleList}`).catch(err => {})
+}
+
+/**
+ * 获取运行中的所有船只
+ */
+export const selectWorkingShipList = () => {
+  return wx.sRequest(`${apiHost}${apis.selectWorkingShips}`).catch(err => {})
+}
 /**
  * 上传图片
  * @param {*} path 

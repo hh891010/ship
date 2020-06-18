@@ -6,8 +6,9 @@ Page({
    */
   data: {
     pageIndex: 1,
-    pageSize: 10,
-    userName: ''
+    pageSize: 100,
+    userName: '',
+    userList: null
   },
 
   /**
@@ -17,13 +18,21 @@ Page({
     this.getUserList()
   },
   async getUserList() {
+    const _that = this
     const { pageNum, pageSize, userName } = this.data
-    const users = await getUsers({
+    const result = await getUsers({
       pageNum,
       pageSize,
       userName
     })
-    console.log(1111111, users)
+    const { records } = result || {} 
+    _that.setData({
+      userList: (records || []).map(x => {
+        const arr = (x.userName || '').split('');
+        x.surname = arr.length > 0 ? arr[0] : ''
+        return x
+      })
+    })
   },
   handlerGobackClick() {
     wx.$eventBus.$emit('aaaaa', {

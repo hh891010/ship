@@ -1,0 +1,30 @@
+
+<view class="wrapper-working">
+  <navBar 
+    title='船舶权限'  
+    background='#7dc5eb' 
+    back="{{true}}"  
+    home="{{true}}" 
+    bindback="handlerGobackClick" 
+    bindhome="handlerGohomeClick"></navBar>
+    <view wx:if="{{cells && cells.length > 0}}" class="working-ships">
+        <block wx:key="pkid" wx:for="{{cells}}">
+            <s-cell inputInfo="{{item}}">
+                <view class="shipinfo" wx:if="{{item.isSlot}}">
+                    <view class="shipcode">{{item.shipCode}}</view>
+                    <switch
+                        data-ship="{{item}}"
+                        checked="{{item.selected}}"        
+                        style="zoom:0.6;"
+                        type="switch"
+                        color="#1296db"
+                        bindchange="switchChange" />
+                </view>
+            </s-cell>
+        </block>
+    </view>
+     <view class="nodata" wx:if="{{cells && cells.length === 0}}">暂无数据</view>
+    <view class="savebtn">
+        <button class="save" bindtap="save">保存并使用</button>
+    </view>
+</view>

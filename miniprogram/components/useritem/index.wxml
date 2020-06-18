@@ -1,13 +1,13 @@
 <view class="user-item">
   <view class="left">
-    <view class="surname">马</view>
+    <view class="surname">{{user.surname}}</view>
   </view>
   <view class="content">
     <view class="userinfo">
-      <text class="name">马化腾</text>
-      <text class="phone">188888888888</text>
+      <text class="name">{{user.userName}}</text>
+      <text class="phone">{{user.mobile}}</text>
     </view>
-    <text class="group">长江水产研究所渔业资源与环境保护研究室</text> 
+    <text class="group">{{user.department}}</text> 
   </view>
   <view class="right">编辑</view>
 </view>

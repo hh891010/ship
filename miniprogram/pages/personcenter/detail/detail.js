@@ -1,26 +1,44 @@
-const com = require('../../../commons/constant');
-const { apis, apiHost } = require('../../../commons/config')
+const { userOps } = require('../../../commons/constant');
+const { apis, apiHost, userInfoKey } = require('../../../commons/config')
+const { selectRoleList, getCurrentUserDetail } = require('../../../commons/sApi')
+const { getStorageSync } = require('../../../commons/utils');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cells: com.userOps,
+    cells: userOps,
+    isHead: false,
     sexs: ['男', '女'],
     sexIndex: 0,
     userPkid: 0,
-    user: null
+    user: null,
+    roleNames: [],
+    roles: [],
+    roleIndex: 0,
+    workingShips: []
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     const _that = this
-    const { pkid, isEdit = false } = options || {}
+    _that.initFn(options)
+  },
+  async initFn(ops) {
+    const _that = this
+    const _roles = await selectRoleList()
+    _that.setData({
+      roles: _roles || [],
+      roleNames: (_roles || []).map(x => x.roleName)
+    })
+    const { pkid, isEdit = false } = ops || {}
     if (pkid > 0) {
+      const _user = getStorageSync(userInfoKey)
       _that.setData({
-        userPkid: pkid
+        userPkid: pkid,
+        isHead: pkid === _user.pkid
       })
       _that.getUserDetail(isEdit)
     } else {
@@ -29,18 +47,14 @@ Page({
         cells: cells.map(x => {
           x.value = ''
           x.readonly = false
-          x.canShow = x.attrKey !== 'roleCode'
           return x
         })
       })
     }
-
   },
   async getUserDetail(isEdit) {
     const _that = this
-    const _userDetail = await wx.sRequest(`${apiHost}${apis.getUserDetail}`, {
-      id: this.data.userPkid
-    })
+    const _userDetail = await getCurrentUserDetail(_that.data.userPkid)
     const cells = _that.data.cells
     _that.setData({
       cells: cells.map(x => {
@@ -50,8 +64,31 @@ Page({
       })
     })
   },
+  onCellClick(e) {
+    const _that = this
+    const { id } = e.detail || {}
+    if (id === 9) {
+      wx.$eventBus.$on('working_success', (res) => {
+        _that.setData({
+          workingShips: res
+        })
+      })
+      wx.navigateTo({
+        url: '/pages/ship/working/index'
+      });
+    }
+  },
   addUser() {
-    console.log(1111222, this.data.cells)
+    const _that = this
+    const { sexs, sexIndex, roleIndex, roles } = _that.data
+    let _param = {}
+    _that.data.cells.map(x => {
+      _param[x.attrKey] = x.value
+    })
+    _param.userShipIds = _that.data.workingShips
+    _param.sex = sexs[sexIndex]
+    _param.roleId = roles[roleIndex].pkid
+    console.log('user', _param)
   },
   onInputChange(e) {
     const _that = this
@@ -69,6 +106,11 @@ Page({
   sexPickerChange(e) {
     this.setData({
       sexIndex: e.detail.value
+    })
+  },
+  rolePickerChange(e) {
+    this.setData({
+      roleIndex: e.detail.value
     })
   },
   handlerGobackClick() {

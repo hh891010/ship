@@ -52,6 +52,7 @@ export const userOps = [
     id: 1,
     title: '姓名：',
     iconClass: '',
+    placeholder: '请输入姓名',
     isInput: true,
     canShow: true,
     iconmore: false,
@@ -76,6 +77,7 @@ export const userOps = [
   {
     id: 3,
     title: '电子邮箱：',
+    placeholder: '请输入电子邮箱',
     iconClass: '',
     isInput: true,
     canShow: true,
@@ -90,6 +92,7 @@ export const userOps = [
     id: 4,
     title: '电话：',
     iconClass: '',
+    placeholder: '请输入电话号码',
     isInput: true,
     canShow: true,
     iconmore: false,
@@ -103,6 +106,7 @@ export const userOps = [
     id: 5,
     title: '所属部门：',
     iconClass: '',
+    placeholder: '请输入所属部门',
     isInput: true,
     canShow: true,
     iconmore: false,
@@ -115,6 +119,7 @@ export const userOps = [
     id: 6,
     title: '登录用户名：',
     iconClass: '',
+    placeholder: '请输入登录用户名',
     isInput: true,
     canShow: true,
     iconmore: false,
@@ -125,15 +130,38 @@ export const userOps = [
   },
   {
     id: 7,
-    title: '角色类型：',
+    title: '初始密码：',
     iconClass: '',
+    placeholder: '请输入初始密码',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
     value: '',
     maxlength: 20,
-    attrKey: 'roleCode'
+    attrKey: 'password'
+  },
+  {
+    id: 8,
+    title: '角色类型：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: true,
+    value: '',
+    maxlength: 10,
+    isSlot: true,
+    attrKey: 'roleId'
+  },
+  {
+    id: 9,
+    title: '船舶权限：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: true,
+    attrKey: 'userShipIds'
   }
 ]
 
