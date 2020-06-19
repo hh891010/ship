@@ -101,6 +101,18 @@ const verifyPhone = (mobile) => {
   return /^(?:(?:\+|00)86)?1\d{10}$/.test(mobile)
 }
 
+// 校验电子邮箱
+const verifyExmail = (exmail) => {
+  return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(exmail)
+}
+
+const verifyUserName = () => {
+  
+}
+// 校验密码
+// const verifyPassword = (password) => {
+//   return /^.*(?=.{8,})(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).$/.test(password)
+// }
 
 // 页面导航
 // const navigateTo = (eventKey, data) => {
