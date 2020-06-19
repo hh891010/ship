@@ -74,7 +74,7 @@ Page({
         })
       })
       wx.navigateTo({
-        url: '/pages/ship/working/index'
+        url: `/pages/ship/working/index`
       });
     }
   },

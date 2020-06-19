@@ -1,25 +1,31 @@
 const { selectWorkingShipList, getCurrentUserDetail } = require('../../../commons/sApi')
-const { userInfoKey } = require('../../../commons/config')
-const { getStorageSync } = require('../../../commons/utils')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cells: null
+    cells: null,
+    uPkid: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { pkid } = options || {}
+    this.setData({
+      uPkid: pkid || ''
+    })
     this.initFn()
   },
   async initFn() {
-    const _user = await getStorageSync(userInfoKey)
-    const _currentUser = await getCurrentUserDetail(_user.pkid)
-    const { userShipIds } = _currentUser || {}
+    const _that = this
+    let userShipIds = ''
+    if (_that.uPkid) {
+      const _currentUser = await getCurrentUserDetail(_that.uPkid)
+      userShipIds = (_currentUser || {}).userShipIds || ''
+    }
     const ships = await selectWorkingShipList()
     const _cells = ships.map(x => {
       x.isInput = false
