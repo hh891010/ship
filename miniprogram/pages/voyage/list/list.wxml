@@ -5,11 +5,14 @@
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
   <view class="list">
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
-    <s-voyage isSwitch="{{true}}" isOpen="{{true}}"  voyages="{{voyages}}"></s-voyage>
+    <block wx:key="pkid" wx:for="{{list}}"> 
+      <s-voyage 
+        bind:onSwitchClick="onSwitchClick"
+        isSwitch="{{true}}" 
+        isOpen="{{item.isOpen}}"
+        pkid="{{item.index}}"  
+        voyagesDate="{{item.showDate}}" 
+        voyages="{{item.shipTrackList}}"></s-voyage>
+   </block> 
   </view>
 </view>

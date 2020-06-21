@@ -4,7 +4,15 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    totalMileage: {
+      type: Number
+    },
+    totalTrackCount: {
+      type: Number
+    },
+    totalMonitoringCount: {
+      type: Number
+    }
   },
 
   /**

@@ -98,6 +98,25 @@ export const selectRoleList = () => {
 export const selectWorkingShipList = () => {
   return wx.sRequest(`${apiHost}${apis.selectWorkingShips}`).catch(err => {})
 }
+
+export const calculateTrackInfo = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.calculateTrackInfo}`, ops , {
+    method: 'POST'
+  }).catch(err => {})
+}
+
+export const findCurrentTrack = () => {
+  return wx.sRequest(`${apiHost}${apis.findCurrentTrack}`,null,{
+    method: 'GET'
+  }).catch(err => {})
+}
+
+export const findTrackPage = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.findTrackPage}`, ops , {
+    method: 'POST'
+  }).catch(err => {})
+}
+
 /**
  * 上传图片
  * @param {*} path 
@@ -114,3 +133,4 @@ export const uploadImg = (path) => {
     }
   }, 'uploadFile').catch((e) => {})
 }
+
