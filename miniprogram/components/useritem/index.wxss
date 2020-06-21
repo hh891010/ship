@@ -30,6 +30,9 @@
   padding: 12rpx 12rpx;
   font-size: 28rpx;
   color: #666666;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .user-item .content .phone {
   font-size: 24rpx;

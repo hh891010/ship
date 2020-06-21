@@ -9,6 +9,6 @@
     </view>
     <text class="group">{{user.department}}</text> 
   </view>
-  <view class="right">编辑</view>
+  <view bindtap="userClick" class="right">编辑</view>
 </view>
   

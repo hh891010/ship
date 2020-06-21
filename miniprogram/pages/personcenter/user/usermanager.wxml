@@ -6,10 +6,10 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-    <s-search></s-search> 
+    <s-search bind:onClearSearch="onClearSearch" bind:onInputConfirm="onSearchConfirm"></s-search> 
     <view class="userlist" wx:if="{{userList && userList.length >0 }}">
       <block wx:key="pkid" wx:for="{{userList}}">
-        <user-item user="{{item}}"></user-item>
+        <user-item bind:onUserClick="onUserClick" user="{{item}}"></user-item>
       </block> 
     </view>
     <view class="nodata" wx:if="{{userList && userList.length === 0}}">暂无用户数据</view>

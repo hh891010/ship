@@ -28,6 +28,16 @@ export const getUsers = (ops) => {
     method: 'POST'
   }).catch((e) => {})
 }
+
+/**
+ * 添加&修改用户信息
+ */
+export const saveUserInfo = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.addAndUpdateUser}`, ops, {
+    method: 'POST'
+  }).catch(err => {})
+}
+
 /**
  * 修改密码
  * @param {*} ops 

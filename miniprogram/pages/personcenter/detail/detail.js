@@ -1,6 +1,6 @@
 const { userOps } = require('../../../commons/constant');
 const { apis, apiHost, userInfoKey } = require('../../../commons/config')
-const { selectRoleList, getCurrentUserDetail } = require('../../../commons/sApi')
+const { selectRoleList, getCurrentUserDetail, saveUserInfo } = require('../../../commons/sApi')
 const { getStorageSync } = require('../../../commons/utils');
 Page({
 
@@ -10,6 +10,7 @@ Page({
   data: {
     cells: userOps,
     isHead: false,
+    isEdit: false,
     sexs: ['男', '女'],
     sexIndex: 0,
     userPkid: 0,
@@ -28,12 +29,13 @@ Page({
   },
   async initFn(ops) {
     const _that = this
+    const { pkid, isEdit = false } = ops || {}
     const _roles = await selectRoleList()
     _that.setData({
       roles: _roles || [],
-      roleNames: (_roles || []).map(x => x.roleName)
+      roleNames: (_roles || []).map(x => x.roleName),
+      isEdit: isEdit
     })
-    const { pkid, isEdit = false } = ops || {}
     if (pkid > 0) {
       const _user = getStorageSync(userInfoKey)
       _that.setData({
@@ -60,6 +62,7 @@ Page({
       cells: cells.map(x => {
         x.value = _userDetail[x.attrKey]
         x.readonly = !isEdit
+        x.canShow = x.attrKey !== 'password'
         return x
       })
     })
@@ -88,7 +91,14 @@ Page({
     _param.userShipIds = _that.data.workingShips
     _param.sex = sexs[sexIndex]
     _param.roleId = roles[roleIndex].pkid
-    console.log('user', _param)
+    _param.pkid = _that.data.userPkid
+    console.log(1111, _param)
+    saveUserInfo(_param).then(res => {
+      if (res) {
+        wx.$eventBus.$emit('add_success', res)
+        _that.handlerGobackClick()
+      }
+    })
   },
   onInputChange(e) {
     const _that = this

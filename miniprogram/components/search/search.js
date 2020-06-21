@@ -18,16 +18,21 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onInputConfirm(e) {
-      const _searchText = e.detail.value
-      wx.showToast({
-        title: _searchText
+    onChange(e) {
+      const _that = this
+      const item = e.detail
+      _that.setData({
+        searchValue: item.value
       })
+    },
+    onInputConfirm(e) {
+      this.triggerEvent('onInputConfirm', this.data.searchValue)
     },
     clearSearch() {
       this.setData({
         searchValue: ''
       })
+      this.triggerEvent('onClearSearch')
     }
   }
 })

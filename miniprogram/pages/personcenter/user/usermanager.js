@@ -19,9 +19,9 @@ Page({
   },
   async getUserList() {
     const _that = this
-    const { pageNum, pageSize, userName } = this.data
+    const { pageIndex, pageSize, userName } = this.data
     const result = await getUsers({
-      pageNum,
+      pageNum: pageIndex,
       pageSize,
       userName
     })
@@ -35,20 +35,46 @@ Page({
     })
   },
   handlerGobackClick() {
-    wx.$eventBus.$emit('aaaaa', {
-      aaa: 'aaa12'
-    })
     wx.navigateBack({
       delta: 1
     })
   },
   addUser() {
+    const _that = this
     wx.$eventBus.$on('add_success', (obj) => {
-      console.log('添加成功', obj)
+      _that.resetData()
+      _that.getUserList()
     })
     wx.navigateTo({
       url: `/pages/personcenter/detail/detail`
     });
+  },
+  onUserClick(e) {
+    const _user = e.detail
+    wx.navigateTo({
+      url: `/pages/personcenter/detail/detail?pkid=${_user.pkid}&isEdit=true`
+    });
+  },
+  onClearSearch() {
+    this.resetData()
+    this.setData({
+      userName: ''
+    })
+    this.getUserList()
+  },
+  onSearchConfirm(e) {
+    this.resetData()
+    this.setData({
+      userName: e.detail
+    })
+    this.getUserList()
+  },
+  resetData() {
+    this.setData({
+      pageIndex: 1,
+      userName: '',
+      userList: []
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -10,7 +10,11 @@
     <open-data type="userAvatarUrl" class="head-img"></open-data>
   </view>
   <block wx:for="{{cells}}" wx:key="id" >
-    <s-cell wx:if="{{item.canShow}}" bind:onChange="onInputChange" bind:onCellClick="onCellClick" inputInfo="{{item}}">
+    <s-cell 
+      wx:if="{{item.canShow}}" 
+      bind:onChange="onInputChange" 
+      bind:onCellClick="onCellClick" 
+      inputInfo="{{item}}">
       <view wx:if="{{item.isSlot}}">
         <picker
           wx:if="{{item.attrKey === 'sex'}}"
@@ -27,6 +31,6 @@
       </view>
     </s-cell>
   </block>
-  <button bindtap="addUser" wx:if="{{userPkid === 0}}" class="savebtn">保存并使用</button>
+  <button bindtap="addUser" wx:if="{{userPkid === 0 || isEdit}}" class="savebtn">保存并使用</button>
 </view>
 
