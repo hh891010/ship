@@ -1,17 +1,17 @@
 <view class="voyage">
   <view class="gap"></view>
   <view class="voyage-date">
-    <view>2020年05月12日</view>
-    <view wx:if="{{isSwitch}}" class="s-icon {{isOpen ? 'iconzhankai' : 'iconshouqi'}}"></view>  
+    <view>{{voyagesDate}}</view>
+    <view bindtap="switchClick" wx:if="{{isSwitch}}" class="s-icon {{isOpen ? 'iconzhankai' : 'iconshouqi'}}"></view>  
   </view>
-  <block wx:key="index" wx:for="{{voyages}}">
-    <view class="voyage-item" wx:show="{{isOpen}}">
+  <block wx:key="index"  wx:for="{{voyages}}">
+    <view class="voyage-item" wx:if="{{isOpen}}">
       <view class="s-icon iconchuanbo"></view>
       <view class="detail">
         <view class="shipname">长江科考船1号</view>
         <view class="mileage"><text class="data">244.32</text> km <text class="s-icon iconhangcheng"></text> </view> 
         <view class="record"><text class="data">12</text><text class="s-icon iconjilu"></text></view> 
-        <view class="s-icon iconmore"></view>
+        <view data-item="{{item}}" bindtap="voyageClick" class="s-icon iconmore"></view>
       </view>
     </view>
   </block>

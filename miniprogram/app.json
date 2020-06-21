@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/realtime/index",
+    "pages/voyage/detail/index",
     "pages/personcenter/user/usermanager",    
     "pages/ship/working/index",
     "pages/personcenter/home/index",

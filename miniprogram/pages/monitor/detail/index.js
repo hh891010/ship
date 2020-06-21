@@ -1,5 +1,6 @@
 const com = require('../../../commons/constant');
 const { formatTime } = require('../../../commons/utils');
+const { findTypeOfInquiry, findMonitoringById, saveMonitoring, getCurrentShip } = require('../../../commons/sApi')
 Page({
 
   /**
@@ -7,10 +8,23 @@ Page({
    */
   data: {
     currentTime: formatTime(new Date()),
+    surveyTime: formatTime(new Date(), '', false),
     typeIndex: 0,
+    trackIndex: 0,
     fishType: com.fishType,
     initType: com.initType,
     environmentType: com.environmentType,
+    trackShip: {
+      id: 1,
+      title: '跟踪船只：',
+      isInput: false,
+      canShow: true,
+      iconmore: false,
+      readonly: false,
+      value: '',
+      isSlot: true
+    },
+    trackShips: [],
     monitorType: {
       id: 1,
       title: '调查种类：',
@@ -21,24 +35,22 @@ Page({
       value: '',
       isSlot: true
     },
-    monitorTypes: [
-      {
-        id: 1,
-        value: '鱼类资源'
-      },
-      {
-        id: 2,
-        value: '早期资源'
-      },
-      {
-        id: 3,
-        value: '环境生物'
-      }
-    ]
+    monitorTypes: []
+  },
+  trackPickerChange(e) {
+    this.setData({
+      trackIndex: e.detail.value
+    })
   },
   monitorTypePickerChange(e) {
     this.setData({
       typeIndex: e.detail.value
+    })
+  },
+  surveyTimeChange(e) {
+    const value = e.detail.value
+    this.setData({
+      surveyTime: value
     })
   },
   handlerGobackClick() {
@@ -50,54 +62,105 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const pkid = options.id || 0
+    if (pkid > 0) {
 
+    }
+    this.initFn()
+    console.log(pkid)
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onInputChange(e) {
+    const { type } = e.target.dataset
+    let cells = []
+    const _that = this
+    const item = e.detail
+    let key = ''
+    switch (type) {
+      case 1:
+        key = 'fishType'
+        cells = _that.data.fishType
+        break;
+      case 2:
+        key = 'initType'
+        cells = _that.data.initType
+        break;
+      case 3:
+        key = 'environmentType'
+        cells = _that.data.environmentType
+        break;
+    }
+    _that.setData({
+      [key]: cells.map(x => {
+        if (x.attrKey === item.attrKey) {
+          x.value = item.newValue
+        }
+        return x
+      })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  async initFn() {
+    // this.getMonitorInfo()
+    this.getMonitorType()
+    this.getCurrentUserShip()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  getCurrentUserShip() {
+    const _that = this
+    getCurrentShip().then(res => {
+      _that.setData({
+        trackShips: (res || []).map(x => {
+          x.value = x.shipName
+          return x
+        })
+      }) 
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  async getMonitorType() {
+    const result = await findTypeOfInquiry()
+    this.setData({
+      monitorTypes: (result || []).map(x => {
+        x.id = x.key
+        x.info = JSON.parse(x.content || {})
+        return x
+      })
+    })
+    return result
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  saveShipMonitorInfo(e) {
+    const _that = this
+    const _type = parseInt(_that.data.typeIndex)
+    let _key = ''
+    let _param = {}
+    const _ship = _that.data.trackShips[_that.data.trackIndex]
+    const _monitor = _that.data.monitorTypes[_that.data.typeIndex]
+    _param.shipId = _ship.shipId
+    _param.resourceType = _monitor.key
+    _param.surveyTime = _that.data.surveyTime
+    switch (_type) {
+      case 0:
+          _key = 'fishType'
+        break;
+      case 1:
+          _key = 'initType'
+        break;
+      case 2:
+          _key = 'environmentType'
+        break;
+    }
+    const _ = {}
+    _that.data[_key].map(x => {
+      if (x.canShow && x.attrKey !== 'surveyTime') {
+        _[x.attrKey] = x.value
+      }
+    })
+    _param.content = JSON.stringify(_)
+    saveMonitoring(_param).then(res => {
+      if (res > 0) {
+        _that.handlerGobackClick()
+      }
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  async getMonitorInfo() {
+    const result = await findMonitoringById()
+    console.log(result)
   }
 })

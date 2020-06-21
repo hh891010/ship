@@ -109,6 +109,76 @@ export const selectWorkingShipList = () => {
   return wx.sRequest(`${apiHost}${apis.selectWorkingShips}`).catch(err => {})
 }
 /**
+ * 统计航迹信息
+ * @param {*} ops 
+ */
+export const calculateTrackInfo = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.calculateTrackInfo}`, ops , {
+    method: 'POST'
+  }).catch(err => {})
+}
+/**
+ * 查询当天航迹信息
+ */
+export const findCurrentTrack = () => {
+  return wx.sRequest(`${apiHost}${apis.findCurrentTrack}`,null,{
+    method: 'GET'
+  }).catch(err => {})
+}
+
+/**
+ * 航迹列表
+ * @param {*} ops 
+ */
+export const findTrackPage = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.findTrackPage}`, ops , {
+    method: 'POST'
+  }).catch(err => {})
+}
+/**
+ * 获取航迹详情
+ * @param {*} id 
+ */
+export const getTrackDetail = (id) => {
+  return wx.sRequest(`${apiHost}${apis.findTrackDetail}?id=${id}`).catch(err => {})
+}
+/**
+ * 获取当前用户的船只
+ */
+export const getCurrentShip = () => {
+  return wx.sRequest(`${apiHost}${apis.getCurrentUserShip}`).catch(err => {})
+}
+
+/**
+ * 后去船只历史航海记录
+ * @param {*} path 
+ */
+export const getFollowShipPoint = (id) => {
+  return wx.sRequest(`${apiHost}${apis.findFollowShipHistoryLocation}?shipId=${id}`).catch(err => {})
+}
+/**
+ * 查询监测类型
+ */
+export const findTypeOfInquiry = () => {
+  return wx.sRequest(`${apiHost}${apis.findTypeOfInquiry}`).catch(err => {})
+}
+/**
+ * 查询监测记录
+ * @param {*} id 
+ */
+export const findMonitoringById = (id) => {
+  return wx.sRequest(`${apiHost}${apis.findShipMonitoringById}?id=${id}`).catch(err => {})
+}
+/**
+ * 添加&修改监测数据
+ * @param {*} ops 
+ */
+export const saveMonitoring = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.saveShipMonitoring}`, ops, {
+    method: 'POST'
+  }).catch(err => {})
+}
+/**
  * 上传图片
  * @param {*} path 
  */
@@ -124,3 +194,4 @@ export const uploadImg = (path) => {
     }
   }, 'uploadFile').catch((e) => {})
 }
+

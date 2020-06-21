@@ -212,6 +212,19 @@ export const passwords = [
 export const fishType = [
   {
     id: 1,
+    title: '监测日期：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    value: '',
+    maxlength: 15,
+    isSlot: true,
+    attrKey: 'surveyTime'
+  },
+  {
+    id: 2,
     title: '种类：',
     isInput: true,
     canShow: true,
@@ -219,10 +232,11 @@ export const fishType = [
     readonly: false,
     placeholder: '鱼种',
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    attrKey: 'fish_kind'
   },
   {
-    id: 2,
+    id: 3,
     title: '数量：',
     isInput: true,
     canShow: true,
@@ -231,10 +245,11 @@ export const fishType = [
     placeholder: '单位:尾',
     value: '',
     maxlength: 20,
-    inputtype: 'number'
+    inputtype: 'digit',
+    attrKey: 'fish_count'
   },
   {
-    id: 3,
+    id: 4,
     title: '重量：',
     isInput: true,
     canShow: true,
@@ -243,28 +258,31 @@ export const fishType = [
     placeholder: '单位:kg',
     value: '',
     maxlength: 20,
-    inputtype: 'digit'
-  },
-  {
-    id: 4,
-    title: '记录人：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '请输入旧密码',
-    value: '马化腾',
-    maxlength: 20
+    inputtype: 'digit',
+    attrKey: 'fish_weight'
   },
   {
     id: 5,
+    title: '记录人：',
+    isInput: true,
+    canShow: false,
+    iconmore: false,
+    readonly: false,
+    placeholder: '请输入旧密码',
+    value: '',
+    maxlength: 20,
+    attrKey: 'createByName'
+  },
+  {
+    id: 6,
     title: '记录时间：',
     isInput: false,
-    canShow: true,
+    canShow: false,
     iconmore: false,
     readonly: false,
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    attrKey: 'surveyTime'
   }
 ]
 
@@ -272,6 +290,19 @@ export const fishType = [
 export const initType = [
   {
     id: 1,
+    title: '监测日期：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    value: '',
+    maxlength: 15,
+    isSlot: true,
+    attrKey: 'surveyTime'
+  },
+  {
+    id: 2,
     title: '鱼卵数：',
     isInput: true,
     canShow: true,
@@ -280,10 +311,11 @@ export const initType = [
     placeholder: '单位:粒',
     value: '',
     maxlength: 10,
-    inputtype: 'number'
+    inputtype: 'number',
+    attrKey: 'spawn_count'
   },
   {
-    id: 2,
+    id: 3,
     title: '鱼苗数：',
     isInput: true,
     canShow: true,
@@ -292,10 +324,11 @@ export const initType = [
     placeholder: '单位:尾',
     value: '',
     maxlength: 10,
-    inputtype: 'number'
+    inputtype: 'number',
+    attrKey: 'fries_count'
   },
   {
-    id: 3,
+    id: 4,
     title: '采集网次：',
     isInput: true,
     canShow: true,
@@ -304,10 +337,11 @@ export const initType = [
     placeholder: '单位:次',
     value: '',
     maxlength: 10,
-    inputtype: 'number'
+    inputtype: 'number',
+    attrKey: 'net_count'
   },
   {
-    id: 4,
+    id: 5,
     title: '单位采集网次时间：',
     isInput: true,
     canShow: true,
@@ -316,28 +350,31 @@ export const initType = [
     placeholder: '单位:分钟',
     value: '',
     maxlength: 10,
-    inputtype: 'number'
-  },
-  {
-    id: 5,
-    title: '记录人：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '马化腾',
-    maxlength: 20
+    inputtype: 'number',
+    attrKey: 'net_period'
   },
   {
     id: 6,
+    title: '记录人：',
+    isInput: true,
+    canShow: false,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 20,
+    attrKey: 'createByName'
+  },
+  {
+    id: 7,
     title: '记录时间：',
     isInput: false,
-    canShow: true,
+    canShow: false,
     iconmore: false,
     readonly: false,
     value: '',
-    maxlength: 20
+    maxlength: 20,
+    attrKey: 'surveyTime'
   }
 ]
 
@@ -345,101 +382,130 @@ export const initType = [
 export const environmentType = [
   {
     id: 1,
-    title: '水质因子：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 10
-  },
-  {
-    id: 2,
-    title: '浮游植物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 3,
-    title: '浮游动物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 4,
-    title: '低栖动物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 5,
-    title: '周丛生物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 6,
-    title: '漂浮生物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 7,
-    title: '水生植物：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '',
-    maxlength: 100
-  },
-  {
-    id: 8,
-    title: '记录人：',
-    isInput: true,
-    canShow: true,
-    iconmore: false,
-    readonly: false,
-    placeholder: '',
-    value: '马化腾',
-    maxlength: 20
-  },
-  {
-    id: 9,
-    title: '记录时间：',
+    title: '监测日期：',
+    iconClass: '',
     isInput: false,
     canShow: true,
     iconmore: false,
     readonly: false,
     value: '',
-    maxlength: 20
+    maxlength: 15,
+    isSlot: true,
+    attrKey: 'surveyTime'
+  },
+  {
+    id: 2,
+    title: '水质因子：',
+    placeholder: '请输入水质因子',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 200,
+    attrKey: 'water_quality_factors'
+  },
+  {
+    id: 3,
+    title: '浮游植物：',
+    placeholder: '请输入浮游植物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'neuston'
+  },
+  {
+    id: 4,
+    title: '浮游动物：',
+    placeholder: '请输入浮游动物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'zooplankton'
+  },
+  {
+    id: 6,
+    title: '低栖动物：',
+    placeholder: '请输入低栖动物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'zoobenthos'
+  },
+  {
+    id: 6,
+    title: '周丛生物：',
+    placeholder: '请输入周丛生物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'periphyton'
+  },
+  {
+    id: 7,
+    title: '漂浮生物：',
+    placeholder: '请输入漂浮生物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'hytoplankton'
+  },
+  {
+    id: 8,
+    title: '水生植物：',
+    placeholder: '请输入水生植物',
+    isInput: true,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '',
+    maxlength: 100,
+    attrKey: 'hydrophyte'
+  },
+  {
+    id: 9,
+    title: '记录人：',
+    isInput: true,
+    canShow: false,
+    iconmore: false,
+    readonly: false,
+    placeholder: '',
+    value: '马化腾',
+    maxlength: 20,
+    attrKey: 'createByName'
+  },
+  {
+    id: 10,
+    title: '记录时间：',
+    isInput: false,
+    canShow: false,
+    iconmore: false,
+    readonly: false,
+    value: '',
+    maxlength: 20,
+    attrKey: 'surveyTime'
   }
 ]
 

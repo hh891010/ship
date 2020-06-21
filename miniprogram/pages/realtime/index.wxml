@@ -3,8 +3,8 @@
       title='{{title}}'  
       background='#7dc5eb'></navBar>
     <map
-      longitude="{{longitude}}" 
-      latitude="{{latitude}}"
+      longitude="{{current.longitude}}" 
+      latitude="{{current.latitude}}"
       show-compass="true" 
       scale="16"
       markers="{{markers}}"

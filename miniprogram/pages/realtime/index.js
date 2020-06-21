@@ -1,7 +1,7 @@
 const com = require('../../commons/constant') 
 const util = require('../../commons/utils')
 const { apis, userAuthKey, openidKey, userInfoKey, apiHost } = require('../../commons/config')
-const { getUserInfo } = require('../../commons/sApi')
+const { getUserInfo, getFollowShipPoint } = require('../../commons/sApi')
 const app = getApp()
 Page({
 
@@ -9,9 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '未知',
-    latitude: 37.48205260,
-    longitude: 121.44577861,
+    title: '首页',
+    current: {},
     markers: [
       {
         id: 1,
@@ -88,26 +87,7 @@ Page({
       }
     ],
     polyline: [{
-      points: [{
-          longitude: 121.44577861,
-          latitude: 37.48205260
-        }, {
-          longitude: 121.44611657,
-          latitude: 37.48207388
-        }, {
-          longitude: 121.44725382,
-          latitude: 37.48224841
-        }, {
-          longitude: 121.44766152,
-          latitude: 37.48237186
-        },{
-          longitude: 121.4475274100,
-          latitude: 37.4827039000
-        },{
-          longitude: 121.44748986,
-          latitude: 37.48299336
-        }
-      ],
+      points: [],
       color: "#33c9FF",
       width: 3,
       dottedLine: false,
@@ -126,17 +106,6 @@ Page({
     const _that = this
     if (!app.globalData.token) {
       _that.onLogin()
-    } else {
-    util.promisify(wx.showModal, {
-      title: '提示',
-      content: '您暂无船只权限，请联系管理员',
-      showCancel: false,
-      confirmText: '知道了'
-    }).then(res => {
-      if (res.confirm) {
-        console.log('用户点了ok')
-      }
-    })
     }
   },
   async getOpenidAndToken(code) {
@@ -154,9 +123,7 @@ Page({
     util.setStorageSync(openidKey, openid)
     if (!token) {
       wx.$eventBus.$on('login_success', (token) => {
-        _that.getCurrentUser().then(res => {
-          _that.realtimeGetLocation()
-        })
+        _that.getCurrentUser()
       })
       wx.navigateTo({
         url: '/pages/home/login/index'
@@ -165,9 +132,46 @@ Page({
       _that.getCurrentUser()
     }
   },
+  getCurrentShipPoint() {
+    const _that = this
+    const _user = util.getStorageSync(userInfoKey)
+    if (_user && _user.followShipId) {
+      getFollowShipPoint(3).then(res => {
+        const { spotList, shipName } = res || {}
+        _that.setData({
+          title: shipName
+        })
+        if (spotList && spotList.length > 0) {
+          _that.setData({
+            current: spotList[0],
+            ['polyline[0].points']: spotList
+          })
+        }
+      })
+    } else {
+      util.promisify(wx.showModal, {
+        title: '提示',
+        content: '您暂无船只权限，请联系管理员',
+        showCancel: false,
+        confirmText: '知道了'
+      }).then(res => {
+        if (res.confirm) {
+          console.log('用户点了ok')
+        }
+      })
+    }
+  },
   async getCurrentUser() {
     const user = await getUserInfo()
+    const { latitude, longitude } = await util.promisify(wx.getLocation, {})
+    this.setData({
+      current: {
+        latitude,
+        longitude
+      }
+    })
     util.setStorageSync(userInfoKey, user)
+    this.getCurrentShipPoint()
     return user
   },
   onLogin() {
@@ -178,43 +182,5 @@ Page({
       const { code } = res || {}
       _that.getOpenidAndToken(code)
     })
-  },
-  realtimeGetLocation() {
-    const _that = this
-    const _locations = [
-      {
-        longitude: 121.4476454300,
-        latitude: 37.4831679000
-      },{
-        longitude: 121.4478063600,
-        latitude: 37.4831381000
-      },{
-        longitude: 121.4479565600,
-        latitude: 37.4831295800
-      },{
-        longitude: 121.4480263000,
-        latitude: 37.4831636400
-      },{
-        longitude: 121.44820869,
-        latitude: 37.48330837
-      }
-    ]
-    let index = 0
-    const timer = setInterval(() => {
-      if (index >= _locations.length) {
-        clearInterval(timer)
-        return
-      }
-      const _points = _that.data.polyline[0].points
-      const currentLocat = _locations[index]
-      const _markers = _that.data.markers
-      const lastmarker = `markers[${_markers.length - 1}]`
-      _points.push(_locations[index])
-      _that.setData({
-        ['polyline[0].points']: _points,
-        [lastmarker]: Object.assign(_markers[_markers.length - 1], currentLocat)
-      })
-      index++
-    }, 2000);
   }
 })

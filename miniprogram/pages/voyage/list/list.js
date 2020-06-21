@@ -1,18 +1,23 @@
 // miniprogram/pages/voyage/list/list.js
+const { findTrackPage } = require('../../../commons/sApi');
+const uitl = require('../../../commons/utils');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    voyages: [1, 2, 3, 4, 5, 6, 7]
+    voyages: [1, 2, 3, 4, 5, 6, 7],
+    startDate: '2020-01-01',
+    endDate: uitl.formatTime(new Date(), '-', false),
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initFun()
   },
   handlerGobackClick() {
     wx.navigateBack({
@@ -26,6 +31,41 @@ Page({
 
   },
 
+  initFun(){
+    findTrackPage({
+      startDate: this.data.startDate,
+      endDate: this.data.endDate
+    }).then( res => {
+        const { records } = res || {}
+        this.setData({
+          list: records.map((x, index) => {
+            x.isOpen = false
+            x.index = index + 1
+            return x
+          })
+        })
+        console.log(res)
+    })					
+  },
+  onVoyageClick(e) {
+    const item = e.detail
+    wx.navigateTo({
+      url: `/pages/voyage/detail/index?id=${item.pkid}`
+    });
+  },
+  onSwitchClick(e) {
+    const _that = this
+    const { detail } = e || {}
+    _that.setData({
+      list: _that.data.list.map(x => {
+        if (x.index === detail.pkid) {
+          x.isOpen = detail.isOpen
+        }
+        return x
+      })
+    })
+    console.log(e)
+  },
   /**
    * 生命周期函数--监听页面显示
    */
