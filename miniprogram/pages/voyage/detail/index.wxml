@@ -1,0 +1,30 @@
+<view class="voyage-detail">
+  <navBar title='航迹详情' background='#7dc5eb'     
+    back="{{true}}"  
+    home="{{true}}" 
+    bindback="handlerGobackClick" 
+    bindhome="handlerGohomeClick"></navBar>
+  <view class="detail">
+    <view class="wrapper-tab">
+        <view >11</view>  
+        <view >22</view>  
+    </view>
+  <view class="swiper-content">
+    <swiper bindchange="swiperChange" style="height: {{swiperHeight}};min-height:100%;" current="{{currentIndex}}">
+      <swiper-item class="swiper-item">
+        <view>
+            test
+        
+        </view>
+      </swiper-item>
+      <swiper-item class="swiper-item">
+        <view>
+            jkkkkkkkkk
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  </view>
+</view>
+
+

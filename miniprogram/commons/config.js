@@ -18,5 +18,8 @@ export const apis = {
     selectWorkingShips: '/ship-api/api/ship/findActive',
     selectShipDetail: '/ship-api/api/ship/findById',
     setWakeStatus: '/ship-api/api/ship/setWakeStatus',
-    setFollowByShipId: '/ship-api/api/user/setFollow'			
+    setFollowByShipId: '/ship-api/api/user/setFollow',
+    calculateTrackInfo: '/ship-api/api/track/calculateTrackInfo'	,
+    findCurrentTrack: '/ship-api/api/track/findCurrentTrack',
+    findTrackPage: '/ship-api/api/track/findTrackPage'				
 }

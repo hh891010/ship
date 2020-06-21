@@ -1,17 +1,19 @@
 {
   "pages": [
-    "pages/personcenter/user/usermanager",    
+    "pages/voyage/detail/index",
+    "pages/realtime/index",
+    "pages/personcenter/user/usermanager",
     "pages/ship/working/index",
     "pages/personcenter/home/index",
     "pages/ship/list/index",
     "pages/ship/detail/index",
-    "pages/realtime/index",
     "pages/home/login/index",
     "pages/track/index",
     "pages/personcenter/detail/detail",
     "pages/personcenter/password/index",
     "pages/monitor/detail/index",
     "pages/voyage/list/list"
+
   ],
   "usingComponents": {},
   "window": {

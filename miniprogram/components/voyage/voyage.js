@@ -14,6 +14,12 @@ Component({
     isOpen: {
       type: Boolean,
       value: false
+    },
+    voyagesDate: {
+      type: String
+    },
+    pkid: {
+      type: Number
     }
   },
 
@@ -28,6 +34,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    switchClick() {
+      this.triggerEvent('onSwitchClick', {
+        pkid: this.properties.pkid,
+        isOpen:  !this.properties.isOpen
+      })
+    }
   }
 })

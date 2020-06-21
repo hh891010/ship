@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "s-icon";
+  src: url('iconfont.eot?t=1589460649174');
+  /* IE9 */
+  src: url('iconfont.eot?t=1589460649174#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'), url('iconfont.woff?t=1589460649174') format('woff'), url('iconfont.ttf?t=1589460649174') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('iconfont.svg?t=1589460649174#s-icon') format('svg');
+  /* iOS 4.1- */
+}
+.s-icon {
+  font-family: "s-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconmima:before {
+  content: "\e612";
+}
+.iconzhanghao:before {
+  content: "\e613";
+}
+.iconhangcheng:before {
+  content: "\e610";
+}
+.iconjilu:before {
+  content: "\e611";
+}
+.iconshouqi:before {
+  content: "\e60e";
+}
+.iconzhankai:before {
+  content: "\e60f";
+}
+.iconclose:before {
+  content: "\e60d";
+}
+.iconsearch:before {
+  content: "\e60c";
+}
+.iconguanli:before {
+  content: "\e60a";
+}
+.iconbianji:before {
+  content: "\e60b";
+}
+.icontianjia:before {
+  content: "\e609";
+}
+.iconchuanbo:before {
+  content: "\e608";
+}
+.icongerenziliao:before {
+  content: "\e607";
+}
+.iconxiugaimima:before {
+  content: "\e604";
+}
+.iconyonghuguanli:before {
+  content: "\e606";
+}
+.iconmore:before {
+  content: "\e602";
+}
+.icondingwei:before {
+  content: "\e601";
+}
+.voyage {
+  width: 100%;
+  border-radius: 10rpx;
+  margin-bottom: 16rpx;
+}
+.voyage .gap {
+  width: 100%;
+  height: 6rpx;
+  background: #eeeeee;
+}
+.voyage .voyage-date {
+  display: flex;
+  justify-content: space-between;
+  height: 70rpx;
+  align-items: center;
+}
+.voyage .voyage-item {
+  display: flex;
+  width: 100%;
+  height: 50rpx;
+  align-items: center;
+  color: #666666;
+  margin-top: 10rpx;
+}
+.voyage .voyage-item .detail {
+  flex: 1;
+  display: flex;
+  border-bottom: 1px solid #EEEEEE;
+  align-items: center;
+}
+.voyage .voyage-item .detail .shipname {
+  flex: 1;
+}
+.voyage .voyage-item .detail .mileage {
+  width: 35%;
+  text-align: center;
+}
+.voyage .voyage-item .detail .record {
+  width: 10%;
+  text-align: center;
+}
+.voyage .voyage-item .detail .data {
+  font-size: 36rpx;
+}
