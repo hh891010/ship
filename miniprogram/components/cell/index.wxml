@@ -13,7 +13,7 @@
             password="{{inputInfo.password}}"
             maxlength="{{inputInfo.maxlength}}"
             placeholder="{{inputInfo.placeholder}}" 
-            readonly="{{inputInfo.readonly}}"></input>
+            disabled="{{inputInfo.readonly}}"></input>
         </block>
         <slot></slot>
       </view>

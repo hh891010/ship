@@ -6,20 +6,27 @@
   bindback="handlerGobackClick" 
   bindhome="handlerGohomeClick"></navBar>
 <view class="wrapper-detail">
-  <view class="head">
+  <view wx:if="{{isHead}}" class="head">
     <open-data type="userAvatarUrl" class="head-img"></open-data>
   </view>
   <block wx:for="{{cells}}" wx:key="id" >
-    <s-cell wx:if="{{item.canShow}}" bind:onCellClick="onCellClick" inputInfo="{{item}}">
+    <s-cell wx:if="{{item.canShow}}" bind:onChange="onInputChange" bind:onCellClick="onCellClick" inputInfo="{{item}}">
       <view wx:if="{{item.isSlot}}">
-        <picker 
+        <picker
+          wx:if="{{item.attrKey === 'sex'}}"
           mode="selector" 
+          disabled="{{item.readonly}}"
           bindchange="sexPickerChange" 
           value="{{sexIndex}}" range="{{sexs}}">{{sexs[sexIndex]}}</picker>
+        <picker
+          wx:if="{{item.attrKey === 'roleId'}}"
+          mode="selector" 
+          disabled="{{item.readonly}}"
+          bindchange="rolePickerChange" 
+          value="{{roleIndex}}" range="{{roleNames}}">{{roleNames[roleIndex]}}</picker>
       </view>
     </s-cell>
   </block>
-  
-  <button class="savebtn">保存并使用</button>
+  <button bindtap="addUser" wx:if="{{userPkid === 0}}" class="savebtn">保存并使用</button>
 </view>
 

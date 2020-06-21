@@ -1,0 +1,44 @@
+
+<view class="wrapper-detail">
+  <navBar 
+    title='{{pageTitle}}'  
+    background='#7dc5eb' 
+    back="{{true}}"  
+    home="{{true}}" 
+    bindback="handlerGobackClick" 
+    bindhome="handlerGohomeClick"></navBar>
+  <view class="opts">
+    <block wx:for="{{cells}}" wx:key="id" >
+      <s-cell wx:if="{{item.canShow}}" bind:onChange="onInputChange" bind:onCellClick="onCellClick" inputInfo="{{item}}">
+        <view wx:if="{{item.isSlot}}">
+          <picker 
+            mode="selector" 
+            disabled="{{item.readonly}}"
+            bindchange="shipStatusPickerChange" 
+            value="{{statusIndex}}" range="{{shipStatus}}">{{shipStatus[statusIndex]}}</picker>
+        </view>
+      </s-cell>
+    </block>
+    <view class="upload-img">
+      <view class="title">
+        <view>图片上传</view>
+        <view>{{shipImages.length}}/3</view>
+      </view>
+      <view class="imgInfo">
+        <block wx:key="item" wx:for="{{shipImages}}">
+          <view class="imgbox">
+            <image class="shipImg" src="{{item}}" />
+            <image data-url="{{item}}"  bindtap="delImg" class="del" src="https://img1.tuhu.org/FMVUAB2CbmCNDmsUuMSJ3w/delete.png" />
+          </view>
+        </block>
+        <view wx:if="{{shipImages.length < 3}}" bindtap="chooseImg" class="upload-btn">
+          <image class="upload-icon" src="https://img1.tuhu.org/8PA0nVnJTy3T39a3hMi2Wg/add.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+   <view class="savebtn">
+     <button class="save" bindtap="save" wx:if="{{shipId === 0 || isEdit}}">保存并使用</button>
+   </view>
+</view>
+

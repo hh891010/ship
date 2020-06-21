@@ -1,3 +1,11 @@
+const shipOpsCom = {
+  iconClass: '',
+  isInput: true,
+  canShow: true,
+  iconmore: false,
+  readonly: false,
+  value: ''
+}
 // 个人中心
 export const homelist = [
   {
@@ -44,12 +52,14 @@ export const userOps = [
     id: 1,
     title: '姓名：',
     iconClass: '',
+    placeholder: '请输入姓名',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: false,
-    value: '马化腾',
-    maxlength: 10
+    value: '',
+    maxlength: 10,
+    attrKey: 'userName'
   },
   {
     id: 2,
@@ -61,64 +71,97 @@ export const userOps = [
     readonly: true,
     value: '',
     maxlength: 2,
-    isSlot: true
+    isSlot: true,
+    attrKey: 'sex'
   },
   {
     id: 3,
     title: '电子邮箱：',
+    placeholder: '请输入电子邮箱',
     iconClass: '',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: 'mahuaten@tuhu.cn',
+    value: '',
     maxlength: 50,
-    inputtype: 'text'
+    inputtype: 'text',
+    attrKey: 'email'
   },
   {
     id: 4,
     title: '电话：',
     iconClass: '',
+    placeholder: '请输入电话号码',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '18888888888',
+    value: '',
     maxlength: 11,
-    inputtype: 'number'
+    inputtype: 'number',
+    attrKey: 'mobile'
   },
   {
     id: 5,
     title: '所属部门：',
     iconClass: '',
+    placeholder: '请输入所属部门',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '腾讯总部董事会',
-    maxlength: 50
+    value: '',
+    maxlength: 50,
+    attrKey: 'department'
   },
   {
     id: 6,
     title: '登录用户名：',
     iconClass: '',
+    placeholder: '请输入登录用户名',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: 'mahuaten',
-    maxlength: 20
+    value: '',
+    maxlength: 20,
+    attrKey: 'userCode'
   },
   {
     id: 7,
-    title: '角色类型：',
+    title: '初始密码：',
     iconClass: '',
+    placeholder: '请输入初始密码',
     isInput: true,
     canShow: true,
     iconmore: false,
     readonly: true,
-    value: '管理员',
-    maxlength: 20
+    value: '',
+    maxlength: 20,
+    attrKey: 'password'
+  },
+  {
+    id: 8,
+    title: '角色类型：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: true,
+    value: '',
+    maxlength: 10,
+    isSlot: true,
+    attrKey: 'roleId'
+  },
+  {
+    id: 9,
+    title: '船舶权限：',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: true,
+    attrKey: 'userShipIds'
   }
 ]
 
@@ -134,7 +177,8 @@ export const passwords = [
     placeholder: '请输入旧密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'oldPassword'
   },
   {
     id: 2,
@@ -146,7 +190,8 @@ export const passwords = [
     placeholder: '请输入新密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'password'
   },
   {
     id: 3,
@@ -158,7 +203,8 @@ export const passwords = [
     placeholder: '请再次输入新密码',
     value: '',
     maxlength: 20,
-    password: true
+    password: true,
+    attrKey: 'repeatPassword'
   }
 ]
 
@@ -394,6 +440,103 @@ export const environmentType = [
     readonly: false,
     value: '',
     maxlength: 20
+  }
+]
+
+// 船舶
+export const shipOps = [
+  {
+    id: 1,
+    title: '名称：',
+    maxlength: 50,
+    attrKey: 'shipName',
+    placeholder: '请输入科考船名称',
+    ...shipOpsCom
+  },
+  {
+    id: 2,
+    title: '编号：',
+    placeholder: '请输入科考船编号',
+    maxlength: 50,
+    attrKey: 'shipCode',
+    ...shipOpsCom
+  },
+  {
+    id: 3,
+    title: '码头：',
+    placeholder: '请输入码头名称',
+    maxlength: 50,
+    attrKey: 'dockName',
+    ...shipOpsCom
+  },
+  {
+    id: 4,
+    title: '备用码头：',
+    placeholder: '请输入备用码头名称',
+    maxlength: 50,
+    attrKey: 'spareDockName',
+    ...shipOpsCom
+  },
+  {
+    id: 5,
+    title: '责任人：',
+    placeholder: '请输入责任人名称',
+    maxlength: 20,
+    attrKey: 'chargePerson',
+    ...shipOpsCom
+  },
+  {
+    id: 6,
+    title: '责任人电话：',
+    placeholder: '请输入责任人电话',
+    maxlength: 11,
+    attrKey: 'chargePersonMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 7,
+    title: '船长姓名：',
+    placeholder: '请输入船长名称',
+    maxlength: 10,
+    attrKey: 'captain',
+    ...shipOpsCom
+  },
+  {
+    id: 8,
+    title: '船长电话：',
+    placeholder: '请输入船长电话',
+    maxlength: 11,
+    attrKey: 'captainMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 9,
+    title: 'GPS设备识别号：',
+    placeholder: '请输入GPS设备识别号',
+    maxlength: 30,
+    attrKey: 'gpsNumber',
+    ...shipOpsCom
+  },
+  {
+    id: 10,
+    title: 'GPS设备手机号：',
+    placeholder: '请输入GPS设备手机号：',
+    maxlength: 11,
+    attrKey: 'gpsMobile',
+    ...shipOpsCom
+  },
+  {
+    id: 11,
+    title: '船舶状态：',
+    maxlength: 5,
+    attrKey: 'status',
+    isSlot: true,
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: false,
+    readonly: false,
+    value: ''
   }
 ]
 

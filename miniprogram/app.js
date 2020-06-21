@@ -35,7 +35,6 @@ App({
   },
   globalData: {
     share: false,  // 分享默认为false
-    token: '',
-    api_host: 'https://www.orangesoda.cn'
+    token: ''
   }
 })

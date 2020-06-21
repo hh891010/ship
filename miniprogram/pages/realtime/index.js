@@ -1,5 +1,7 @@
 const com = require('../../commons/constant') 
 const util = require('../../commons/utils')
+const { apis, userAuthKey, openidKey, userInfoKey, apiHost } = require('../../commons/config')
+const { getUserInfo } = require('../../commons/sApi')
 const app = getApp()
 Page({
 
@@ -139,25 +141,34 @@ Page({
   },
   async getOpenidAndToken(code) {
     const _that = this
-    const _url = `${app.globalData.api_host}/ship-api/api/user/findOpenId`
+    const _url = `${apiHost}${apis.getOpenidAndToken}`
     const param = {
       code
     }
     const userInfo = await wx.sRequest(_url, param, {
       isLoading: true,
       noAuth: true
-    })
-    const { token } = userInfo || {}
-    app.globalData.token = token
+    }).catch(() => {})
+    const { token, openid } = userInfo || {}
+    util.setStorageSync(userAuthKey, token)
+    util.setStorageSync(openidKey, openid)
     if (!token) {
-      wx.$eventBus.$on('sLogin', (res) => {
-        console.log('sLogin back', res)
-        _that.realtimeGetLocation()
+      wx.$eventBus.$on('login_success', (token) => {
+        _that.getCurrentUser().then(res => {
+          _that.realtimeGetLocation()
+        })
       })
       wx.navigateTo({
         url: '/pages/home/login/index'
       })
+    } else {
+      _that.getCurrentUser()
     }
+  },
+  async getCurrentUser() {
+    const user = await getUserInfo()
+    util.setStorageSync(userInfoKey, user)
+    return user
   },
   onLogin() {
     const _that = this

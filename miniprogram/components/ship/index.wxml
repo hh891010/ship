@@ -1,0 +1,43 @@
+<view class="ship-item" bindtap="toDetail">
+  <view class="ship-name">
+    <view style="color: #1296db;" class="s-icon iconchuanbo"></view>
+    <view class="name">{{ship.shipName}}</view>
+  </view>
+  <view class="ship-info">
+    <view class="ship-image">
+      <image src="{{ship.shipImage}}"></image>
+    </view>
+    <view class="detail">
+      <view class="item">
+        <view class="title">编号：</view>
+        <view class="nametext">{{ship.shipCode}}</view>
+      </view>
+      <view class="item">
+        <view class="title">责任人：</view>
+        <view class="nametext">{{ship.chargePerson}}</view>
+      </view>
+      <view class="item">
+        <view class="title">电话：</view>
+        <view class="nametext">{{ship.chargePersonMobile}}</view>
+      </view>
+      <view class="item">
+        <view class="title">码头：</view>
+        <view class="nametext">{{ship.dockName}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="ship-icons">
+    <view catchtap="toDetail" class="icon s-icon iconguanli"></view>
+    <view catchtap="edit" class="icon s-icon iconbianji"></view>
+    <view catchtap="watchShip" class="icon s-icon icondingwei {{ship.follow ? '' : 'watchShip'}}"></view>
+    <view catchtap="catchtapFn">
+      <switch 
+        class="" 
+        style="zoom:0.6;"
+        checked="{{ship.wake}}" 
+        type="switch"
+        color="#1296db"
+        bindchange="switchChange"></switch>
+    </view>
+  </view>
+</view>

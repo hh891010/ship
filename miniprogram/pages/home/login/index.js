@@ -1,5 +1,5 @@
-// const com = require('../../../commons/utils')
-const { apis } = require('../../../commons/config')
+const { setStorageSync } = require('../../../commons/utils')
+const { apis, userAuthKey, apiHost } = require('../../../commons/config')
 const base64 = require('js-base64').Base64
 const app = getApp()
 Page({
@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: '',
-    password: ''
+    username: 'admin110',
+    password: 'surveyship$2020'
   },
 
   /**
@@ -28,6 +28,14 @@ Page({
     this.setData({
       [key]: value
     })
+  },
+  createFormdata(obj = {}) {
+    let result = ''
+    for (let name of Object.keys(obj)) {
+      let value = obj[name];
+      result += `\r\n--XXX\r\nContent-Disposition: form-data; name="${name}"\r\n\r\n${value}`
+    }
+    return result + '\r\n--XXX--'
   },
   userCheck() {
     let _ = true
@@ -51,24 +59,28 @@ Page({
     const _that = this
     if (_that.userCheck()) {
       const basicAuth = base64.encode(`webapp:surveyship$2020`)
-      console.log(basicAuth)
-      wx.sRequest(`${app.globalData.api_host}:${apis.userLogin}`, {
+      const _ = _that.createFormdata({
         grant_type: 'password',
         username: _that.data.username,
         password: _that.data.password
-      }, {
+      })
+      wx.sRequest(`${apiHost}${apis.userLogin}`, _, {
         isLoading: true,
         loadingTitle: '登录中...',
         method: 'POST',
         header: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'multipart/form-data;boundary=XXX',
           Authorization: `Basic ${basicAuth}`
-        }
+        },
+        specialResponse: true
       }).then(res => {
-        console.log('login success', res)
-      }).catch(err => {
-        console.log('login error', err)
-      })
+        const { access_token } = res || {}
+        setStorageSync(userAuthKey, access_token)
+        wx.$eventBus.$emit('login_success', access_token)
+        wx.navigateBack({
+          delta: 1
+        })
+      }).catch(() => {})
     }
     // setTimeout(() => {
     //   wx.hideLoading()
