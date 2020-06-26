@@ -5,7 +5,7 @@
   home="{{true}}" 
   bindback="handlerGobackClick" 
   bindhome="handlerGohomeClick"></navBar>
-<view class="wrapper-detail">
+<view wx:if="{{!isloading}}" class="wrapper-detail">
   <view wx:if="{{isHead}}" class="head">
     <open-data type="userAvatarUrl" class="head-img"></open-data>
   </view>

@@ -1,7 +1,9 @@
 const com = require('../../commons/constant') 
 const util = require('../../commons/utils')
+const websocket = require('../../commons/websocket')
 const { apis, userAuthKey, openidKey, userInfoKey, apiHost } = require('../../commons/config')
-const { getUserInfo, getFollowShipPoint } = require('../../commons/sApi')
+const { getUserInfo, getFollowShipPoint, getShipHistory } = require('../../commons/sApi')
+// const icon = require('../../images/current.png')
 const app = getApp()
 Page({
 
@@ -10,89 +12,31 @@ Page({
    */
   data: {
     title: '首页',
-    current: {},
-    markers: [
-      {
-        id: 1,
-        longitude: 121.44597861,
-        latitude: 37.48515260,
-        zIndex: 10,
-        iconPath: '../../images/current.png',
-        width: 20,
-        height: 20,
-        callout: {
-          color: "#FFFFFF",
-          content: '长江一号',
-          display: 'ALWAYS',
-          bgColor: '#9a9341',
-          borderRadius: 5
-        }
-      },
-      {
-        id: 2,
-        longitude: 121.44577861,
-        latitude: 37.48405260,
-        zIndex: 10,
-        iconPath: '../../images/current.png',
-        width: 20,
-        height: 30,
-        callout: {
-          color: "#FFFFFF",
-          content: '长江二号',
-          display: 'ALWAYS',
-          bgColor: '#9a9341',
-          borderRadius: 5
-        }
-      },
-      {
-        id: 3,
-        longitude: 121.44507861,
-        latitude: 37.48499260,
-        zIndex: 10,
-        iconPath: '../../images/current.png',
-        width: 20,
-        height: 20,
-        callout: {
-          color: "#FFFFFF",
-          content: '长江三号',
-          display: 'ALWAYS',
-          bgColor: '#9a9341',
-          borderRadius: 5
-        }
-      },
-      {
-        id: 4,
-        longitude: 121.44577861,
-        latitude: 37.48205260,
-        zIndex: 10,
-        iconPath: '../../images/start.png',
-        width: 30,
-        height: 30
-      },
-      {
-        id: 5,
-        longitude: 121.44748986,
-        latitude: 37.48299336,
-        zIndex: 10,
-        iconPath: '../../images/current.png',
-        width: 20,
-        height: 20,
-        callout: {
-          color: "#FFFFFF",
-          content: '南极科考1号',
-          display: 'ALWAYS',
-          bgColor: '#9a9341',
-          borderRadius: 5
-        }
+    baseMorkerItem: {
+      id: 0,
+      zIndex: 10,
+      iconPath: '../../images/current.png',
+      width: 20,
+      height: 20,
+      callout: {
+        color: "#FFFFFF",
+        content: '',
+        display: 'ALWAYS',
+        bgColor: '#9a9341',
+        borderRadius: 5
       }
-    ],
+    },
+    longitude: 0,
+    latitude: 0,
+    markers: [],
     polyline: [{
       points: [],
       color: "#33c9FF",
-      width: 3,
+      width: 5,
       dottedLine: false,
       arrowLine: true
-    }]
+    }],
+    followShipId: 0
   },
   addMonitor() {
     wx.navigateTo({
@@ -136,14 +80,19 @@ Page({
     const _that = this
     const _user = util.getStorageSync(userInfoKey)
     if (_user && _user.followShipId) {
-      getFollowShipPoint(3).then(res => {
+      _that.setData({
+        followShipId: _user.followShipId
+      })
+      getFollowShipPoint(_user.followShipId).then(res => {
         const { spotList, shipName } = res || {}
         _that.setData({
           title: shipName
         })
         if (spotList && spotList.length > 0) {
+          const { longitude, latitude } = spotList[0]
           _that.setData({
-            current: spotList[0],
+            longitude,
+            latitude,
             ['polyline[0].points']: spotList
           })
         }
@@ -162,17 +111,32 @@ Page({
     }
   },
   async getCurrentUser() {
+    const _that = this
     const user = await getUserInfo()
     const { latitude, longitude } = await util.promisify(wx.getLocation, {})
     this.setData({
-      current: {
-        latitude,
-        longitude
-      }
+      latitude,
+      longitude
     })
     util.setStorageSync(userInfoKey, user)
-    this.getCurrentShipPoint()
+    getShipHistory().then(res => {
+      _that.setData({
+        markers: _that.shipMarkerData(res) || []
+      })
+    })
+    _that.getCurrentShipPoint()
+    this.acceptLocationData(user.pkid)
     return user
+  },
+  shipMarkerData(list) {
+    const _that = this
+    const _markerItem = _that.data.baseMorkerItem
+    return list.map((x ,index) => {
+      const item = Object.assign(_markerItem, x)
+      item.callout.content = x.shipName
+      item.id = index
+      return item
+    })
   },
   onLogin() {
     const _that = this
@@ -181,6 +145,28 @@ Page({
     }).then(res => {
       const { code } = res || {}
       _that.getOpenidAndToken(code)
+    })
+  },
+  acceptLocationData(sid){
+    let _that = this
+    const followShipId = _that.data.followShipId
+    websocket.ws_connect(sid,(data)=>{
+      const ships = (data || []).filter(x => x.shipId === followShipId)
+      if (ships && ships.length > 0) {
+        const { longitude, latitude } = ships[0]
+        const _spotList = _that.data.polyline[0].points
+        _spotList.push({ longitude, latitude })
+        _that.setData({
+          longitude,
+          latitude,
+          ['polyline[0].points']: _spotList,
+          markers: _that.shipMarkerData(data)
+        })
+      } else {
+        _that.setData({
+          markers: _that.shipMarkerData(data)
+        })
+      }
     })
   }
 })

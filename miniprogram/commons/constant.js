@@ -360,7 +360,7 @@ export const initType = [
     canShow: false,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 20,
     attrKey: 'createByName'
@@ -401,7 +401,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 200,
     attrKey: 'water_quality_factors'
@@ -414,7 +414,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 100,
     attrKey: 'neuston'
@@ -427,7 +427,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 100,
     attrKey: 'zooplankton'
@@ -440,7 +440,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 100,
     attrKey: 'zoobenthos'
@@ -453,7 +453,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 100,
     attrKey: 'periphyton'
@@ -466,7 +466,6 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
     value: '',
     maxlength: 100,
     attrKey: 'hytoplankton'
@@ -479,7 +478,7 @@ export const environmentType = [
     canShow: true,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '',
     maxlength: 100,
     attrKey: 'hydrophyte'
@@ -491,7 +490,7 @@ export const environmentType = [
     canShow: false,
     iconmore: false,
     readonly: false,
-    placeholder: '',
+    
     value: '马化腾',
     maxlength: 20,
     attrKey: 'createByName'

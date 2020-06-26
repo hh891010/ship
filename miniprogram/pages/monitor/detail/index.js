@@ -153,11 +153,34 @@ Page({
       }
     })
     _param.content = JSON.stringify(_)
+    const attr = _that.checkMonitorData(_key, _)
+    if (attr > 0) {
+      wx.showToast({
+        title: '监测数据填写不完整',
+        icon: 'none'
+      })
+      return
+    }
     saveMonitoring(_param).then(res => {
       if (res > 0) {
         _that.handlerGobackClick()
       }
     })
+  },
+  checkMonitorData(key, item) {
+    let num = 0
+    const _data = {
+      fishType: ['fish_kind', 'fish_count', 'fish_weight'],
+      initType: ['spawn_count', 'fries_count', 'net_count', 'net_period'],
+      environmentType: ['water_quality_factors', 'neuston', 'zooplankton', 'zoobenthos', 'periphyton', 'hytoplankton', 'hydrophyte']
+    }
+    const attrs = _data[key]
+    attrs.map(x => {
+      if (!item[x]) {
+        num++
+      }
+    })
+    return num
   },
   async getMonitorInfo() {
     const result = await findMonitoringById()

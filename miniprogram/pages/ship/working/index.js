@@ -6,7 +6,8 @@ Page({
    */
   data: {
     cells: null,
-    uPkid: ''
+    uPkid: '',
+    isloading: true
   },
 
   /**
@@ -14,6 +15,7 @@ Page({
    */
   onLoad: function (options) {
     const { pkid } = options || {}
+    wx.showLoading({ title: '加载中...' })
     this.setData({
       uPkid: pkid || ''
     })
@@ -34,8 +36,10 @@ Page({
       x.selected = userShipIds.includes(x.pkid)
       return x
     })
+    wx.hideLoading()
     this.setData({
-      cells: _cells
+      cells: _cells,
+      isloading: false
     })
   },
   switchChange(e) {

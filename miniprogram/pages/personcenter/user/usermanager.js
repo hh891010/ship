@@ -8,13 +8,17 @@ Page({
     pageIndex: 1,
     pageSize: 100,
     userName: '',
-    userList: null
+    userList: null,
+    isloading: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中...',
+    })
     this.getUserList()
   },
   async getUserList() {
@@ -25,8 +29,10 @@ Page({
       pageSize,
       userName
     })
-    const { records } = result || {} 
+    const { records } = result || {}
+    wx.hideLoading()
     _that.setData({
+      isloading: false,
       userList: (records || []).map(x => {
         const arr = (x.userName || '').split('');
         x.surname = arr.length > 0 ? arr[0] : ''

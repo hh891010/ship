@@ -17,6 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({ title: '加载中...' })
     this.initFun()
   },
   handlerGobackClick() {
@@ -37,6 +38,7 @@ Page({
       endDate: this.data.endDate
     }).then( res => {
         const { records } = res || {}
+        wx.hideLoading()
         this.setData({
           list: records.map((x, index) => {
             x.isOpen = false
@@ -44,7 +46,6 @@ Page({
             return x
           })
         })
-        console.log(res)
     })					
   },
   onVoyageClick(e) {

@@ -7,7 +7,7 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-    <view wx:if="{{cells && cells.length > 0}}" class="working-ships">
+    <view wx:if="{{cells && cells.length > 0 && !isloading}}" class="working-ships">
         <block wx:key="pkid" wx:for="{{cells}}">
             <s-cell inputInfo="{{item}}">
                 <view class="shipinfo" wx:if="{{item.isSlot}}">
@@ -24,7 +24,7 @@
         </block>
     </view>
      <view class="nodata" wx:if="{{cells && cells.length === 0}}">暂无数据</view>
-    <view class="savebtn">
+    <view wx:if="{{!isloading}}" class="savebtn">
         <button class="save" bindtap="save">保存并使用</button>
     </view>
 </view>

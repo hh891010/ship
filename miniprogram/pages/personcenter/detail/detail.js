@@ -11,6 +11,7 @@ Page({
     cells: userOps,
     isHead: false,
     isEdit: false,
+    isloading: true,
     sexs: ['男', '女'],
     sexIndex: 0,
     userPkid: 0,
@@ -30,6 +31,9 @@ Page({
   async initFn(ops) {
     const _that = this
     const { pkid, isEdit = false } = ops || {}
+    wx.showLoading({
+      title: '加载中...',
+    })
     const _roles = await selectRoleList()
     _that.setData({
       roles: _roles || [],
@@ -46,12 +50,14 @@ Page({
     } else {
       const cells = _that.data.cells
       _that.setData({
+        isloading: false,
         cells: cells.map(x => {
           x.value = ''
           x.readonly = false
           return x
         })
       })
+      wx.hideLoading()
     }
   },
   async getUserDetail(isEdit) {
@@ -59,6 +65,7 @@ Page({
     const _userDetail = await getCurrentUserDetail(_that.data.userPkid)
     const cells = _that.data.cells
     _that.setData({
+      isloading: false,
       cells: cells.map(x => {
         x.value = _userDetail[x.attrKey]
         x.readonly = !isEdit
@@ -66,6 +73,7 @@ Page({
         return x
       })
     })
+    wx.hideLoading()
   },
   onCellClick(e) {
     const _that = this
@@ -77,7 +85,7 @@ Page({
         })
       })
       wx.navigateTo({
-        url: `/pages/ship/working/index`
+        url: `/pages/ship/working/index?pkid=${_that.data.userPkid}`
       });
     }
   },
@@ -92,7 +100,6 @@ Page({
     _param.sex = sexs[sexIndex]
     _param.roleId = roles[roleIndex].pkid
     _param.pkid = _that.data.userPkid
-    console.log(1111, _param)
     saveUserInfo(_param).then(res => {
       if (res) {
         wx.$eventBus.$emit('add_success', res)

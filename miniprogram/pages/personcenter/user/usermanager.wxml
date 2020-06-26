@@ -13,7 +13,7 @@
       </block> 
     </view>
     <view class="nodata" wx:if="{{userList && userList.length === 0}}">暂无用户数据</view>
-    <view class="add">
+    <view wx:if="{{!isloading}}" class="add">
       <button bindtap="addUser" class="addbtn">添加用户</button>
     </view>
 </view>

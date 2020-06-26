@@ -2,6 +2,7 @@ export const userAuthKey = 's_user_token'
 export const openidKey = 's_user_appid'
 export const userInfoKey = 's_user_info'
 export const apiHost = 'https://www.orangesoda.cn'
+export const websocketServer = 'wss://www.orangesoda.cn/websocket/'
 export const apis = {
     userLogin: '/ship-auth-server/oauth/token',
     userLogout: '/ship-auth-server/api/exit',
@@ -27,5 +28,6 @@ export const apis = {
     findFollowShipHistoryLocation: '/ship-api/api/user/findFollowShipHistoryLocation',
     findTypeOfInquiry: '/ship-api/api/config/findTypeOfInquiry',
     findShipMonitoringById: '/ship-api/api/ship/findShipMonitoringById',
-    saveShipMonitoring: '/ship-api/api/ship/saveShipMonitoring'
+    saveShipMonitoring: '/ship-api/api/ship/saveShipMonitoring',
+    findShipCurrentLocation: '/ship-api/api/user/findShipCurrentLocation'
 }

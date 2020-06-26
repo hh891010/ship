@@ -11,27 +11,31 @@ Page({
     currentIndex: 0,
     tabs: ['自定义', '总计'],
     swiperHeight: '',
-    startDate: '2020-01-01',
+    startDate: '2020-06-20',
     endDate: uitl.formatTime(new Date(), '-', false),
     currentDate: uitl.formatTime(new Date(), '-', false),
     totalMileage: 0,
     totalTrackCount: 0,
     totalMonitoringCount: 0,
     showDate: '',
-    voyages: []
+    voyages: [],
+    totalTrack: {
+      totalMileage: 0,
+      totalTrackCount: 0,
+      totalMonitoringCount: 0
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initFn()
+    this.initFn(true)
   },
-  initFn() {
+  initFn(isInit) {
     calculateTrackInfo({
       startDate: this.data.startDate,
       endDate: this.data.endDate
-      
     }).then(res => {
       const { totalMileage, totalTrackCount, totalMonitoringCount } = res || {}
       this.setData({
@@ -39,10 +43,17 @@ Page({
         totalTrackCount,
         totalMonitoringCount
       })
-      console.log(res)
+      if (isInit) {
+        this.setData({
+          totalTrack: {
+            totalMileage,
+            totalTrackCount,
+            totalMonitoringCount
+          }
+        })
+      }
     })
     this.getCurrentTrack();
-
   },
   getCurrentTrack(){
     findCurrentTrack().then(res => {
@@ -72,7 +83,6 @@ Page({
     if (this.data.endDate) {
       const _startDate = +(new Date(value))
       const _endDate = +(new Date(this.data.endDate))
-      console.log(_startDate, _endDate)
       if (_startDate > _endDate) {
         this.setData({
           endDate: ''
@@ -83,6 +93,7 @@ Page({
     this.setData({
       [_type]: value
     })
+    this.initFn()
   },
   onVoyageClick(e) {
     const item = e.detail

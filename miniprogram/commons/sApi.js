@@ -178,6 +178,14 @@ export const saveMonitoring = (ops) => {
     method: 'POST'
   }).catch(err => {})
 }
+
+/**
+ * 获取当前用户船只历史记录
+ */
+export const getShipHistory = () => {
+  return wx.sRequest(`${apiHost}${apis.findShipCurrentLocation}`).catch(err => {})
+}
+
 /**
  * 上传图片
  * @param {*} path 

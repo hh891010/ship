@@ -31,12 +31,13 @@
           </view>
           <total-voyage totalMileage="{{totalMileage}}" totalTrackCount="{{totalTrackCount}}" totalMonitoringCount="{{totalMonitoringCount}}"></total-voyage>
           <s-voyage bind:onVoyageClick="onVoyageClick" isSwitch="{{false}}" isOpen="{{true}}" voyages="{{voyages}}" voyagesDate="{{showDate}}"></s-voyage>
+          <view wx:if="{{!voyages || voyages.length === 0}}" class="todayNoData">今天暂无记录</view>
           <view bind:tap="moreVoyage" class="showmore">查看更多<text class="s-icon iconzhankai"></text></view>
         </view>
       </swiper-item>
       <swiper-item class="swiper-item">
         <view class="swiper-item-info">
-          <total-voyage ></total-voyage>
+          <total-voyage totalMileage="{{totalTrack.totalMileage}}" totalTrackCount="{{totalTrack.totalTrackCount}}" totalMonitoringCount="{{totalTrack.totalMonitoringCount}}" ></total-voyage>
         </view>
       </swiper-item>
     </swiper>

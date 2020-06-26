@@ -45,6 +45,12 @@
   width: 100%;
   padding: 0 20rpx;
 }
+.wrapper-track .swiper-content .swiper-item .swiper-item-info .todayNoData {
+  font-size: 40rpx;
+  color: #666666;
+  text-align: center;
+  margin: 30rpx 0;
+}
 .wrapper-track .swiper-content .swiper-item .swiper-item-info .times {
   height: 100rpx;
   display: flex;
