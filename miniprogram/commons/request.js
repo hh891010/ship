@@ -11,7 +11,7 @@ const sRequest = (url, data, options) => {
     method,
     noAuth
   } = options || {}
-  const _header = Object({
+  const _header = Object.assign({
     Authorization: `Bearer ${userToken}`
   }, header)
   if (noAuth) {
