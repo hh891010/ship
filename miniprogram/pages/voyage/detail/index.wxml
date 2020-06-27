@@ -16,13 +16,13 @@
   <view class="swiper-content">
     <swiper bindchange="swiperChange" style="height: {{swiperHeight}};min-height:100%;" current="{{currentIndex}}">
       <swiper-item class="swiper-item">
-      <map
-        longitude="{{current.longitude}}" 
-        latitude="{{current.latitude}}"
-        show-compass="true" 
-        scale="16"
-        polyline="{{polyline}}"
-        style="width: 100%; height: 100vh;"></map>
+        <map
+          longitude="{{current.longitude}}" 
+          latitude="{{current.latitude}}"
+          show-compass="true" 
+          scale="16"
+          polyline="{{polyline}}"
+          style="width: 100%; height: 100vh;"></map>
         <view class="voyage-shipinfo">
           <view class="voyage-date">{{voyageTime}}</view>
           <view>{{shipName}}</view>
@@ -33,20 +33,22 @@
         </view>
       </swiper-item>
       <swiper-item class="swiper-item">
-        <block wx:key="idx" wx:for-index="idx"  wx:for="{{monitoringList}}">
-          <view class="gauging">
-            <view>
+        <view wx:if="{{monitoringList && monitoringList.length > 0}}" class="monitoringList">
+          <block wx:key="idx" wx:for-index="idx"  wx:for="{{monitoringList}}">
+            <view data-monitoring="{{item}}" bindtap="moreClick" class="gauging">
               <view>
-                <text>2020062012</text>
-                <text class="gauging-type">鱼类资源</text>
-                <text>田博士</text>
+                <view>
+                  <text>{{item.resourceCode}}</text>
+                  <text class="gauging-type">{{item.resourceTypeName}}</text>
+                  <text>{{item.createByName}}</text>
+                </view>
+                <view class="gauging-time">{{item.surveyTime}}</view>
               </view>
-              <view class="gauging-time">2020-09-12 12:23:22</view>
+              <text  class="s-icon iconmore"></text>
             </view>
-            <text bindtap="moreClick" class="s-icon iconmore"></text>
-          </view>
-        </block>
-        <view wx:if="{{monitoringList || monitoringList.length === 0}}" class="nodata">暂无监测记录</view>
+          </block>
+        </view>
+        <view wx:if="{{monitoringList && monitoringList.length === 0}}" class="nodata">暂无监测记录</view>
       </swiper-item>
     </swiper>
   </view>

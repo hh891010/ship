@@ -29,7 +29,7 @@
       <view class="imgInfo">
         <block wx:key="item" wx:for="{{shipImages}}">
           <view class="imgbox">
-            <image class="shipImg" src="{{apiHost + item}}" />
+            <image class="shipImg" src="{{apiHost + '/ship-api' + item}}" />
             <image data-url="{{item}}"  bindtap="delImg" class="del" src="https://img1.tuhu.org/FMVUAB2CbmCNDmsUuMSJ3w/delete.png" />
           </view>
         </block>

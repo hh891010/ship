@@ -1,4 +1,9 @@
-const com = require('../../../commons/constant');
+const {
+  monitorKeys,
+  fishType,
+  initType,
+  environmentType
+} = require('../../../commons/constant');
 const { userInfoKey } = require('../../../commons/config')
 const { formatTime, getStorageSync } = require('../../../commons/utils');
 const { findTypeOfInquiry, findMonitoringById, saveMonitoring, getCurrentShip } = require('../../../commons/sApi')
@@ -10,11 +15,12 @@ Page({
   data: {
     currentTime: formatTime(new Date()),
     surveyTime: formatTime(new Date(), '', false),
+    id: 0,
     typeIndex: 0,
     trackIndex: 0,
-    fishType: com.fishType,
-    initType: com.initType,
-    environmentType: com.environmentType,
+    fishType,
+    initType,
+    environmentType,
     trackShip: {
       id: 1,
       title: '选择船只：',
@@ -36,7 +42,8 @@ Page({
       value: '',
       isSlot: true
     },
-    monitorTypes: []
+    monitorTypes: [],
+    isloading: true
   },
   trackPickerChange(e) {
     this.setData({
@@ -64,9 +71,9 @@ Page({
    */
   onLoad: function (options) {
     const pkid = options.id || 0
-    if (pkid > 0) {
-
-    }
+    this.setData({
+      id: pkid
+    })
     this.initFn()
     console.log(pkid)
   },
@@ -100,9 +107,16 @@ Page({
     })
   },
   async initFn() {
-    // this.getMonitorInfo()
-    this.getMonitorType()
-    this.getCurrentUserShip()
+    wx.showLoading({ title: '加载中...' });
+    await this.getMonitorType()
+    await this.getCurrentUserShip()
+    if (this.data.id > 0) {
+      await this.getMonitorInfo()
+    }
+    wx.hideLoading();
+    this.setData({
+      isloading: false
+    })
   },
   getCurrentUserShip() {
     const _that = this
@@ -173,12 +187,7 @@ Page({
   },
   checkMonitorData(key, item) {
     let num = 0
-    const _data = {
-      fishType: ['fish_kind', 'fish_count', 'fish_weight'],
-      initType: ['spawn_count', 'fries_count', 'net_count', 'net_period'],
-      environmentType: ['water_quality_factors', 'neuston', 'zooplankton', 'zoobenthos', 'periphyton', 'hytoplankton', 'hydrophyte']
-    }
-    const attrs = _data[key]
+    const attrs = monitorKeys[key]
     attrs.map(x => {
       if (!item[x]) {
         num++
@@ -187,7 +196,54 @@ Page({
     return num
   },
   async getMonitorInfo() {
-    const result = await findMonitoringById()
-    console.log(result)
+    const _that = this
+    const result = await findMonitoringById(this.data.id)
+    const { shipId, resourceType, content, surveyTime, createByName, createdTime } = result || {}
+    // 调查种类
+    const typeIndex = _that.data.monitorTypes.map(x => x.key).indexOf(resourceType)
+    // 选择船只
+    const trackIndex = _that.data.trackShips.map(x => x.shipId).indexOf(shipId)
+    // 监测时间
+    const _surveyTime = formatTime(new Date(surveyTime), '', false)
+    let item = JSON.parse(content || {})
+    let _key = ''
+    _that.setData({
+      typeIndex,
+      trackIndex,
+      ['trackShip.readonly']: true,
+      ['monitorType.readonly']: true
+    })
+    switch (resourceType) {
+      case 1:
+          _key = 'fishType'
+        break;
+      case 2:
+          _key = 'initType'
+        break;
+      case 3:
+          _key = 'environmentType'
+        break;
+    }
+    const cells = monitorKeys[_key]
+    const cellItems = _that.data[_key]
+    _that.setData({
+      [_key]: cellItems.map(x => {
+        x.readonly = true
+        x.canShow = true
+        if (x.attrKey === 'surveyTime') {
+          x.value = _surveyTime
+        }
+        if (x.attrKey === 'createByName') {
+          x.value = createByName
+        }
+        if (x.attrKey === 'createdTime') {
+          x.value = formatTime(new Date(createdTime), '', false)
+        }
+        if (cells.indexOf(x.attrKey) > -1) {
+          x.value = item[x.attrKey]
+        }
+        return x
+      })
+    })
   }
 })

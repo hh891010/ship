@@ -69,7 +69,7 @@ Page({
     if (tempFilePaths && tempFilePaths.length > 0) {
       const path = tempFilePaths[0]
       uploadImg(path).then(res => {
-        const _url = `/ship-api${res}`
+        const _url = `${res}`
         _that.data.shipImages.push(_url)
         _that.setData({
           shipImages: _that.data.shipImages

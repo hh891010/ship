@@ -6,13 +6,13 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-  
-  <view class="opts">
+  <view wx:if="{{!isloading}}" class="opts">
     <s-cell inputInfo="{{trackShip}}">
       <picker
         mode="selector" 
         bindchange="trackPickerChange" 
         value="{{trackIndex}}" 
+        disabled="{{trackShip.readonly}}"
         name=""
         range-key="value" 
         range="{{trackShips}}">
@@ -24,6 +24,7 @@
         mode="selector" 
         bindchange="monitorTypePickerChange" 
         value="{{typeIndex}}" 
+        disabled="{{monitorType.readonly}}"
         name=""
         range-key="value" 
         range="{{monitorTypes}}">
@@ -73,8 +74,8 @@
       </s-cell>
     </block>
   </view>
-  <view class="savebtn">
-    <button bindtap="saveShipMonitorInfo" class="save">保存并使用</button>       
+  <view wx:if="{{!isloading}}" class="savebtn">
+    <button wx:if="{{id === 0}}" bindtap="saveShipMonitorInfo" class="save">保存并使用</button>       
   </view>
 </view>
   

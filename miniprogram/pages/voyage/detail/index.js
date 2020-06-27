@@ -1,4 +1,5 @@
 const { getTrackDetail } = require('../../../commons/sApi')
+const { formatTime } = require('../../../commons/utils')
 Page({
 
   /**
@@ -19,7 +20,8 @@ Page({
       width: 5,
       dottedLine: false,
       arrowLine: true
-    }]
+    }],
+    id: 0
   },
   handlerGobackClick() {
     wx.navigateBack({
@@ -31,12 +33,18 @@ Page({
    */
   onLoad: function (options) {
     const id = options.id
-    this.initFn(id)
+    this.setData({
+      id
+    })
+    this.initFn()
   },
-  async initFn(id) {
-   const result = await getTrackDetail(id)
+  async initFn() {
+   const result = await getTrackDetail(this.data.id)
    const { showDate, shipName, mileage, monitoringList, shipSpotList } = result || {}
-   debugger
+   monitoringList.map(x => {
+     x.surveyTime = formatTime(new Date(x.surveyTime), '', false)
+     return x
+   })
    this.setData({
     voyageTime: showDate,
     shipName: shipName,
@@ -61,6 +69,16 @@ Page({
     this.setData({
       currentIndex: index
     })
+  },
+  moreClick(e) {
+    const { monitoring } = e.currentTarget.dataset
+    console.log(monitoring)
+    wx.$eventBus.$on('refresh_voyage', (obj) => {
+      this.initFn()
+    })
+    wx.navigateTo({
+      url: `/pages/monitor/detail/index?id=${monitoring.pkid}`
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

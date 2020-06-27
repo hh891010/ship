@@ -42,7 +42,7 @@ Page({
         if (arr && arr.length > 0) {
           let _Img = arr[0]
           if (_Img.indexOf('http') === -1) {
-            _Img = `${apiHost}${_Img}`
+            _Img = `${apiHost}/ship-api${_Img}`
           }
           x.shipImage = _Img
         }

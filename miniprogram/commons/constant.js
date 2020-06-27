@@ -276,13 +276,13 @@ export const fishType = [
   {
     id: 6,
     title: '记录时间：',
-    isInput: false,
+    isInput: true,
     canShow: false,
     iconmore: false,
     readonly: false,
     value: '',
     maxlength: 20,
-    attrKey: 'surveyTime'
+    attrKey: 'createdTime'
   }
 ]
 
@@ -368,13 +368,13 @@ export const initType = [
   {
     id: 7,
     title: '记录时间：',
-    isInput: false,
+    isInput: true,
     canShow: false,
     iconmore: false,
     readonly: false,
     value: '',
     maxlength: 20,
-    attrKey: 'surveyTime'
+    attrKey: 'createdTime'
   }
 ]
 
@@ -490,7 +490,6 @@ export const environmentType = [
     canShow: false,
     iconmore: false,
     readonly: false,
-    
     value: '马化腾',
     maxlength: 20,
     attrKey: 'createByName'
@@ -498,16 +497,21 @@ export const environmentType = [
   {
     id: 10,
     title: '记录时间：',
-    isInput: false,
+    isInput: true,
     canShow: false,
     iconmore: false,
     readonly: false,
     value: '',
     maxlength: 20,
-    attrKey: 'surveyTime'
+    attrKey: 'createdTime'
   }
 ]
 
+export const monitorKeys = {
+  fishType: ['fish_kind', 'fish_count', 'fish_weight'],
+  initType: ['spawn_count', 'fries_count', 'net_count', 'net_period'],
+  environmentType: ['water_quality_factors', 'neuston', 'zooplankton', 'zoobenthos', 'periphyton', 'hytoplankton', 'hydrophyte']
+}
 // 船舶
 export const shipOps = [
   {

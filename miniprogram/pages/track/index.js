@@ -62,7 +62,7 @@ Page({
         showDate,
         voyages: shipTrackList
       })
-    })		
+    })
   },
   moreVoyage() {
     wx.navigateTo({

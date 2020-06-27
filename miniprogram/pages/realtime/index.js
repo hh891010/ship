@@ -12,22 +12,6 @@ Page({
    */
   data: {
     title: '首页',
-    baseMorkerItem: {
-      id: 0,
-      zIndex: 10,
-      iconPath: '../../images/boat.png',
-      width: 50,
-      height: 50,
-      callout: {
-        color: "#FFFFFF",
-        content: '',
-        display: 'ALWAYS',
-        bgColor: '#9a9341',
-        borderRadius: 5,
-        anchorY: 20,
-        anchorX: -5
-      }
-    },
     longitude: 0,
     latitude: 0,
     markers: [],
@@ -99,12 +83,11 @@ Page({
           _that.setData({
             longitude,
             latitude,
-            markers: _that.shipMarkerData([{
-              longitude,
-              latitude,
-              shipName
-            }]),
             ['polyline[0].points']: spotList
+          })
+        } else {
+          _that.setData({
+            ['polyline[0].points']: []
           })
         }
       })
@@ -131,7 +114,11 @@ Page({
     })
     util.setStorageSync(userInfoKey, user)
     getShipHistory().then(res => {
+      const _ships = (res || []).filter(x => x.shipId === user.followShipId)
+      let _ship = _ships.length > 0 ? _ships[0] : {}
       _that.setData({
+        latitude: _ship.latitude || latitude,
+        longitude: _ship.longitude || longitude,
         markers: _that.shipMarkerData(res) || []
       })
     })
@@ -140,12 +127,23 @@ Page({
     return user
   },
   shipMarkerData(list) {
-    const _that = this
-    const _markerItem = _that.data.baseMorkerItem
-    return list.map((x ,index) => {
-      const item = Object.assign(_markerItem, x)
-      item.callout.content = x.shipName
-      item.id = index
+    return list.map((x, index) => {
+      const item = Object.assign({
+        id: index + 1,
+        zIndex: 10,
+        iconPath: '../../images/boat.png',
+        width: 50,
+        height: 50,
+        callout: {
+          color: "#FFFFFF",
+          content: x.shipName,
+          display: 'ALWAYS',
+          bgColor: '#9a9341',
+          borderRadius: 5,
+          anchorY: 20,
+          anchorX: -5
+        }
+      }, x)
       return item
     })
   },
@@ -164,6 +162,7 @@ Page({
     websocket.ws_connect(sid,(data)=>{
       console.log(33333, data)
       const ships = (data || []).filter(x => x.shipId === followShipId)
+      const _markers = _that.shipMarkerData(data)
       if (ships && ships.length > 0) {
         const { longitude, latitude } = ships[0]
         const _spotList = _that.data.polyline[0].points
@@ -172,11 +171,11 @@ Page({
           longitude,
           latitude,
           ['polyline[0].points']: _spotList,
-          markers: _that.shipMarkerData(data)
+          markers: _markers
         })
       } else {
         _that.setData({
-          markers: _that.shipMarkerData(data)
+          markers: _markers
         })
       }
     })
