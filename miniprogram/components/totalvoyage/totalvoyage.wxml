@@ -3,7 +3,7 @@
   <view class="voyage-info"><text class="voyage">{{totalMileage}}</text>km</view>
   <view class="detail">
     <text class="item">运行船只: <text class="data">{{totalTrackCount}}</text>航次</text>
-    <text class="item">检测数据: <text class="data">{{totalMonitoringCount}}</text>批次</text>
+    <text class="item">监测数据: <text class="data">{{totalMonitoringCount}}</text>批次</text>
   </view>
 </view>
   

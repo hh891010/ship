@@ -14,7 +14,8 @@ Page({
     shipId: 0,
     isEdit: false,
     cells: shipOps,
-    shipImages: []
+    shipImages: [],
+    apiHost
   },
 
   /**
@@ -41,7 +42,10 @@ Page({
     _that.data.cells.map(x => {
       _param[x.attrKey] = x.value
     })
-    _param.pkid = _that.data.shipId
+    if (_that.data.shipId > 0) {
+      _param.pkid = _that.data.shipId
+      delete _param.gpsEnergy
+    }
     _param.status = _that.data.statusIndex
     _param.pic = _that.data.shipImages.join(',')
     if (!verifyPhone(_param.gpsMobile) || !verifyPhone(_param.chargePersonMobile)) {
@@ -65,7 +69,7 @@ Page({
     if (tempFilePaths && tempFilePaths.length > 0) {
       const path = tempFilePaths[0]
       uploadImg(path).then(res => {
-        const _url = `${apiHost}/ship-api${res}`
+        const _url = `/ship-api${res}`
         _that.data.shipImages.push(_url)
         _that.setData({
           shipImages: _that.data.shipImages
@@ -103,13 +107,13 @@ Page({
     selectShipInfo(_that.data.shipId).then(ship => {
       const cells = _that.data.cells
       const imgs = (ship.pic || '').split(',').filter(x => x)
-      console.log(imgs)
       _that.setData({
         statusIndex: ship.status,
         shipImages: imgs,
         cells: cells.map(x => {
           x.value = ship[x.attrKey]
           x.readonly = !_that.data.isEdit
+          x.canShow = true
           return x
         })
       })

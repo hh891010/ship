@@ -12,10 +12,12 @@
       <s-cell wx:if="{{item.canShow}}" bind:onChange="onInputChange" bind:onCellClick="onCellClick" inputInfo="{{item}}">
         <view wx:if="{{item.isSlot}}">
           <picker 
+            wx:if="{{item.attrKey === 'status'}}"
             mode="selector" 
             disabled="{{item.readonly}}"
             bindchange="shipStatusPickerChange" 
             value="{{statusIndex}}" range="{{shipStatus}}">{{shipStatus[statusIndex]}}</picker>
+          <view wx:if="{{item.attrKey === 'gpsEnergy' && shipId > 0}}">{{item.value || 0}}</view>
         </view>
       </s-cell>
     </block>
@@ -27,7 +29,7 @@
       <view class="imgInfo">
         <block wx:key="item" wx:for="{{shipImages}}">
           <view class="imgbox">
-            <image class="shipImg" src="{{item}}" />
+            <image class="shipImg" src="{{apiHost + item}}" />
             <image data-url="{{item}}"  bindtap="delImg" class="del" src="https://img1.tuhu.org/FMVUAB2CbmCNDmsUuMSJ3w/delete.png" />
           </view>
         </block>

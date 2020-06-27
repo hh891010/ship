@@ -1,7 +1,8 @@
 
 const com = require('../../../commons/constant');
-const { getStorageSync } = require('../../../commons/utils')
+const { getStorageSync, setStorageSync } = require('../../../commons/utils')
 const { userInfoKey } = require('../../../commons/config')
+const { getUserInfo } = require('../../../commons/sApi')
 Page({
 
   /**
@@ -30,24 +31,27 @@ Page({
         _url = "/pages/personcenter/user/usermanager"
         break;
     }
-    wx.$eventBus.$on('aaaaa', (obj) => {
-      console.log('aaa回来了', obj)
+    wx.$eventBus.$on('refresh_center', (obj) => {
+      this.getUserDetail()
     })
     wx.navigateTo({
       url: _url
     });
   },
-  getUserData(res) {
-    console.log(res.detail.userInfo.avatarUrl)
+  async getUserDetail() {
+    const _that = this
+    const user = await getUserInfo()
+    setStorageSync(userInfoKey, user)
+    _that.setData({
+      userInfo: getStorageSync(userInfoKey)
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
     const _that = this
-    _that.setData({
-      userInfo: getStorageSync(userInfoKey)
-    })
+    _that.getUserDetail()
   },
 
   /**

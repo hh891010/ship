@@ -6,70 +6,75 @@
     home="{{true}}" 
     bindback="handlerGobackClick" 
     bindhome="handlerGohomeClick"></navBar>
-  <s-cell inputInfo="{{trackShip}}">
-    <picker
-      mode="selector" 
-      bindchange="trackPickerChange" 
-      value="{{trackIndex}}" 
-      name=""
-      range-key="value" 
-      range="{{trackShips}}">
-      <view>{{trackShips[trackIndex].shipName}}</view>
-    </picker>
-  </s-cell>
-  <s-cell inputInfo="{{monitorType}}">
-    <picker 
-      mode="selector" 
-      bindchange="monitorTypePickerChange" 
-      value="{{typeIndex}}" 
-      name=""
-      range-key="value" 
-      range="{{monitorTypes}}">
-      <view>{{monitorTypes[typeIndex].value}}</view>
-    </picker>
-  </s-cell>
-  <block wx:if="{{typeIndex == 0}}" wx:for="{{fishType}}" wx:key="id" >
-    <s-cell data-type="{{1}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
-      <view wx:if="{{item.isSlot}}">
-        <picker
-          wx:if="{{item.attrKey === 'surveyTime'}}"
-          mode="date" 
-          data-type="surveyTime"
-          disabled="{{item.readonly}}"
-          bindchange="surveyTimeChange"
-          start="2020-01-01" 
-          end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
-      </view>
+  
+  <view class="opts">
+    <s-cell inputInfo="{{trackShip}}">
+      <picker
+        mode="selector" 
+        bindchange="trackPickerChange" 
+        value="{{trackIndex}}" 
+        name=""
+        range-key="value" 
+        range="{{trackShips}}">
+        <view>{{trackShips[trackIndex].shipName}}</view>
+      </picker>
     </s-cell>
-  </block>
-  <block wx:if="{{typeIndex == 1}}" wx:for="{{initType}}" wx:key="id" >
-    <s-cell data-type="{{2}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
-      <view wx:if="{{item.isSlot}}">
-        <picker
-          wx:if="{{item.attrKey === 'surveyTime'}}"
-          mode="date" 
-          data-type="surveyTime"
-          disabled="{{item.readonly}}"
-          bindchange="surveyTimeChange"
-          start="2020-01-01" 
-          end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
-      </view>
+    <s-cell inputInfo="{{monitorType}}">
+      <picker 
+        mode="selector" 
+        bindchange="monitorTypePickerChange" 
+        value="{{typeIndex}}" 
+        name=""
+        range-key="value" 
+        range="{{monitorTypes}}">
+        <view>{{monitorTypes[typeIndex].value}}</view>
+      </picker>
     </s-cell>
-  </block>
-  <block wx:if="{{typeIndex == 2}}" wx:for="{{environmentType}}" wx:key="id" >
-    <s-cell data-type="{{3}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
-      <view wx:if="{{item.isSlot}}">
-        <picker
-          wx:if="{{item.attrKey === 'surveyTime'}}"
-          mode="date" 
-          data-type="surveyTime"
-          disabled="{{item.readonly}}"
-          bindchange="surveyTimeChange"
-          start="2020-01-01" 
-          end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
-      </view>
-    </s-cell>
-  </block>
-  <button bindtap="saveShipMonitorInfo" class="savebtn">保存并使用</button>   
+    <block wx:if="{{typeIndex == 0}}" wx:for="{{fishType}}" wx:key="id" >
+      <s-cell data-type="{{1}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
+        <view wx:if="{{item.isSlot}}">
+          <picker
+            wx:if="{{item.attrKey === 'surveyTime'}}"
+            mode="date" 
+            data-type="surveyTime"
+            disabled="{{item.readonly}}"
+            bindchange="surveyTimeChange"
+            start="2020-01-01" 
+            end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
+        </view>
+      </s-cell>
+    </block>
+    <block wx:if="{{typeIndex == 1}}" wx:for="{{initType}}" wx:key="id" >
+      <s-cell data-type="{{2}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
+        <view wx:if="{{item.isSlot}}">
+          <picker
+            wx:if="{{item.attrKey === 'surveyTime'}}"
+            mode="date" 
+            data-type="surveyTime"
+            disabled="{{item.readonly}}"
+            bindchange="surveyTimeChange"
+            start="2020-01-01" 
+            end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
+        </view>
+      </s-cell>
+    </block>
+    <block wx:if="{{typeIndex == 2}}" wx:for="{{environmentType}}" wx:key="id" >
+      <s-cell data-type="{{3}}" bind:onChange="onInputChange" wx:if="{{item.canShow}}"  inputInfo="{{item}}">
+        <view wx:if="{{item.isSlot}}">
+          <picker
+            wx:if="{{item.attrKey === 'surveyTime'}}"
+            mode="date" 
+            data-type="surveyTime"
+            disabled="{{item.readonly}}"
+            bindchange="surveyTimeChange"
+            start="2020-01-01" 
+            end="{{currentTime}}">{{ surveyTime || '请选择监测日期'}}</picker>
+        </view>
+      </s-cell>
+    </block>
+  </view>
+  <view class="savebtn">
+    <button bindtap="saveShipMonitorInfo" class="save">保存并使用</button>       
+  </view>
 </view>
   

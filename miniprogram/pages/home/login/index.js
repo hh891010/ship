@@ -9,7 +9,8 @@ Page({
    */
   data: {
     username: 'admin110',
-    password: 'surveyship$2020'
+    password: 'surveyship$2020',
+    logoUrl: 'https://www.orangesoda.cn/ship-api/images/ba67ad77-18be-4a27-b8e9-7e29a39b8770.jpeg'
   },
 
   /**

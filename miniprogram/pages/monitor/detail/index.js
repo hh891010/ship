@@ -1,5 +1,6 @@
 const com = require('../../../commons/constant');
-const { formatTime } = require('../../../commons/utils');
+const { userInfoKey } = require('../../../commons/config')
+const { formatTime, getStorageSync } = require('../../../commons/utils');
 const { findTypeOfInquiry, findMonitoringById, saveMonitoring, getCurrentShip } = require('../../../commons/sApi')
 Page({
 
@@ -16,7 +17,7 @@ Page({
     environmentType: com.environmentType,
     trackShip: {
       id: 1,
-      title: '跟踪船只：',
+      title: '选择船只：',
       isInput: false,
       canShow: true,
       iconmore: false,
@@ -106,7 +107,10 @@ Page({
   getCurrentUserShip() {
     const _that = this
     getCurrentShip().then(res => {
+      const _user = getStorageSync(userInfoKey)
+      const _ships = res.map(x => x.shipId)
       _that.setData({
+        trackIndex: _ships.indexOf(_user.followShipId) === -1 ? 0 : _ships.indexOf(_user.followShipId),
         trackShips: (res || []).map(x => {
           x.value = x.shipName
           return x

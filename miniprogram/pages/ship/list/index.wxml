@@ -18,7 +18,7 @@
       </block>
     </view>
     <view class="nodata" wx:if="{{shipList && shipList.length === 0}}">暂无科考船数据</view>
-    <view class="add">
+    <view wx:if="{{shipList}}" class="add">
       <button bindtap="addShip" class="addbtn">添加科考船</button>
     </view>
   </view>

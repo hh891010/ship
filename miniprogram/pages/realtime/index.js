@@ -15,15 +15,17 @@ Page({
     baseMorkerItem: {
       id: 0,
       zIndex: 10,
-      iconPath: '../../images/current.png',
-      width: 20,
-      height: 20,
+      iconPath: '../../images/boat.png',
+      width: 50,
+      height: 50,
       callout: {
         color: "#FFFFFF",
         content: '',
         display: 'ALWAYS',
         bgColor: '#9a9341',
-        borderRadius: 5
+        borderRadius: 5,
+        anchorY: 20,
+        anchorX: -5
       }
     },
     longitude: 0,
@@ -51,6 +53,9 @@ Page({
     if (!app.globalData.token) {
       _that.onLogin()
     }
+    wx.$eventBus.$on('refresh_ship', () => {
+      _that.getCurrentUser()
+    })
   },
   async getOpenidAndToken(code) {
     const _that = this
@@ -89,10 +94,16 @@ Page({
           title: shipName
         })
         if (spotList && spotList.length > 0) {
-          const { longitude, latitude } = spotList[0]
+          const _ship = spotList[spotList.length - 1]
+          const { longitude, latitude } = _ship
           _that.setData({
             longitude,
             latitude,
+            markers: _that.shipMarkerData([{
+              longitude,
+              latitude,
+              shipName
+            }]),
             ['polyline[0].points']: spotList
           })
         }
@@ -151,6 +162,7 @@ Page({
     let _that = this
     const followShipId = _that.data.followShipId
     websocket.ws_connect(sid,(data)=>{
+      console.log(33333, data)
       const ships = (data || []).filter(x => x.shipId === followShipId)
       if (ships && ships.length > 0) {
         const { longitude, latitude } = ships[0]

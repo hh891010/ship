@@ -1,6 +1,6 @@
-<view class="s-cell">
+<view class="s-cell {{inputInfo.isTextarea ? 'textarea' : ''}}">
   <view class="titleicon" wx:if="{{inputInfo.titleIcon}}"  class="s-icon {{inputInfo.titleIcon}}"></view>
-  <view class="content">
+  <view class="content" bindtap="cellContentClick">
     <view class="content-info">
       <view class="title">{{inputInfo.title}}</view>
       <view class="content-right">
@@ -14,6 +14,15 @@
             maxlength="{{inputInfo.maxlength}}"
             placeholder="{{inputInfo.placeholder}}" 
             disabled="{{inputInfo.readonly}}"></input>
+        </block>
+        <block wx:if="{{inputInfo.isTextarea}}">
+          <textarea placeholder="placeholder"
+            class="textareacls"
+            bindinput="onChange"
+            value="{{inputInfo.value}}"
+            maxlength="{{inputInfo.maxlength}}"
+            placeholder="{{inputInfo.placeholder}}" 
+            disabled="{{inputInfo.readonly}}" />
         </block>
         <slot></slot>
       </view>

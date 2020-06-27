@@ -11,7 +11,7 @@
 </view>
 
 <block wx:for="{{list}}" wx:key="id" >
-  <s-cell wx:if="{{item.canShow}}" bind:onCellClick="onCellClick" inputInfo="{{item}}"></s-cell>
+  <s-cell wx:if="{{item.canShow}}" bind:onCellContentClick="onCellClick" inputInfo="{{item}}"></s-cell>
 </block>
 <!-- <picker 
   mode="date" 

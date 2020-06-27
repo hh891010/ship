@@ -46,7 +46,7 @@
             <text bindtap="moreClick" class="s-icon iconmore"></text>
           </view>
         </block>
-        <view wx:if="{{monitoringList || monitoringList.length === 0}}" class="nodata">暂无检测记录</view>
+        <view wx:if="{{monitoringList || monitoringList.length === 0}}" class="nodata">暂无监测记录</view>
       </swiper-item>
     </swiper>
   </view>

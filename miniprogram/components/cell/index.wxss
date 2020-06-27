@@ -70,6 +70,9 @@
   align-items: center;
   padding: 0 20rpx;
 }
+.s-cell.textarea {
+  height: 300rpx;
+}
 .s-cell .titleicon {
   width: 60rpx;
   height: 60rpx;
@@ -100,6 +103,10 @@
   width: 80%;
   text-align: right;
   color: #666666;
+}
+.s-cell .content .content-info .textareacls {
+  border: 1px solid #EEEEEE;
+  border-radius: 8rpx;
 }
 .s-cell .content .content-info .content-right {
   display: flex;

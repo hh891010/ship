@@ -1,6 +1,6 @@
 const { selectShips, setShipWakeStatus, setFollow, getUserInfo } = require('../../../commons/sApi')
-const { userInfoKey } = require('../../../commons/config')
-const { getStorageSync, setStorageSync } = require('../../../commons/utils')
+const { userInfoKey, apiHost } = require('../../../commons/config')
+const { getStorageSync, setStorageSync, promisify } = require('../../../commons/utils')
 Page({
 
   /**
@@ -14,6 +14,7 @@ Page({
     shipList: null
   },
   handlerGobackClick() {
+    wx.$eventBus.$emit('refresh_center')
     wx.navigateBack({
       delta: 1
     })
@@ -22,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({ title: '加载中...' })
     this.initFn()
   },
   initFn() {
@@ -35,16 +37,20 @@ Page({
       const totalPage = parseInt(res.total/pageSize) + 1
       const { followShipId } = getStorageSync(userInfoKey) || {}
       const shipList = res.records.map(x => {
-        console.log(x)
         let _imgUrl = ''
         const arr = (x.pic || '').split(',')
         if (arr && arr.length > 0) {
-          x.shipImage = arr[0]
+          let _Img = arr[0]
+          if (_Img.indexOf('http') === -1) {
+            _Img = `${apiHost}${_Img}`
+          }
+          x.shipImage = _Img
         }
-        x.wake = !!x.wakeStatus
+        x.wake = !x.wakeStatus
         x.follow = followShipId && followShipId === x.pkid
         return x
       })
+      wx.hideLoading()
       _that.setData({
         totalPage,
         shipList
@@ -76,40 +82,65 @@ Page({
     });
   },
   async watchShip(e) {
-    const shipId = e.detail.pkid
-    const result = await setFollow(shipId)
-    if (result) {
-      // 重新获取用户跟踪船只
-      const user = await getUserInfo()
-      setStorageSync(userInfoKey, user)
-      this.setData({
-        shipList: this.data.shipList.map(x => {
-          x.follow = false
-          if (x.pkid === shipId) {
-            x.follow = !x.follow
-          }
-          return x
-        })
-      })
-      wx.showToast({
-        title: '设置成功',
-        icon: 'none'
-      })
-    }
+    const ship = e.detail
+    const _that = this
+    promisify(wx.showModal, {
+      title: '跟踪设置',
+      content: `设置${ship.shipName}为当前跟踪船只！`,
+      showCancel: false,
+      confirmText: '知道了'
+    }).then(async res => {
+      if (res.confirm) {
+        const result = await setFollow(ship.pkid)
+        if (result) {
+          // 重新获取用户跟踪船只
+          const user = await getUserInfo()
+          setStorageSync(userInfoKey, user)
+          _that.setData({
+            shipList: _that.data.shipList.map(x => {
+              x.follow = false
+              if (x.pkid === ship.pkid) {
+                x.follow = !x.follow
+              }
+              return x
+            })
+          })
+          _that.refreshShip()
+          wx.showToast({
+            title: `设置${ship.shipName}为当前跟踪船只成功`,
+            icon: 'none'
+          })
+        }
+      }
+    })
   },
   switchChange(e) {
+    const _that = this
     const s = e.detail
-    setShipWakeStatus({
-      pkid: s.pkid,
-      wakeStatus: s.wakeStatus
-    }).then(res => {
-      if (res) {
-        wx.showToast({
-          title: `航迹已${s.wakeStatus ? '打开' : '关闭'}`,
-          icon: 'none'
+    promisify(wx.showModal, {
+      title: '开启航迹',
+      content: `${s.shipName}${s.wakeStatus ? '开启' : '关闭'}航迹记录！`,
+      showCancel: false,
+      confirmText: '知道了'
+    }).then(async res => {
+      if (res.confirm) {
+        setShipWakeStatus({
+          pkid: s.pkid,
+          wakeStatus: s.wakeStatus ? 0 : 1
+        }).then(res => {
+          if (res) {
+            _that.refreshShip()
+            wx.showToast({
+              title: `${s.shipName}航迹记录已${s.wakeStatus ? '开启' : '关闭'}`,
+              icon: 'none'
+            })
+          }
         })
       }
     })
+  },
+  refreshShip() {
+    wx.$eventBus.$emit('refresh_ship')
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

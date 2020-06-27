@@ -14,29 +14,9 @@ Page({
     monitoringList: null,
     current: {},
     polyline: [{
-      points: [
-        {
-          longitude: 121.44577861,
-          latitude: 37.48205260
-        }, {
-          longitude: 121.44611657,
-          latitude: 37.48207388
-        }, {
-          longitude: 121.44725382,
-          latitude: 37.48224841
-        }, {
-          longitude: 121.44766152,
-          latitude: 37.48237186
-        },{
-          longitude: 121.4475274100,
-          latitude: 37.4827039000
-        },{
-          longitude: 121.44748986,
-          latitude: 37.48299336
-        }
-      ],
+      points: [],
       color: "#33c9FF",
-      width: 3,
+      width: 5,
       dottedLine: false,
       arrowLine: true
     }]
@@ -56,6 +36,7 @@ Page({
   async initFn(id) {
    const result = await getTrackDetail(id)
    const { showDate, shipName, mileage, monitoringList, shipSpotList } = result || {}
+   debugger
    this.setData({
     voyageTime: showDate,
     shipName: shipName,

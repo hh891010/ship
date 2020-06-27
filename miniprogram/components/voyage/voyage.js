@@ -41,8 +41,8 @@ Component({
       })
     },
     voyageClick(e) {
-      const { item } = e.target.dataset
-      this.triggerEvent('onVoyageClick', item)
+      const { voyage } = e.currentTarget.dataset
+      this.triggerEvent('onVoyageClick', voyage)
     }
   }
 })

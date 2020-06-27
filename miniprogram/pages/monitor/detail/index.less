@@ -1,12 +1,21 @@
 .wrapper-detail{
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .opts{
+    flex: 1;
+    overflow: scroll;
+  }
   .savebtn{
-    position: absolute;
-    bottom: 35rpx;
-    left: 50%;
-    transform: translate(-50%);
-    width: 80%;
-    color: #FFFFFF;
-    background-color: #1296db;
+    height: 100rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .save{
+        color: #FFFFFF;
+        background: #7dc5eb;
+        width: 80%;
+      }
   }
 }

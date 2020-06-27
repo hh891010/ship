@@ -29,6 +29,10 @@ Component({
     cellClick() {
       const _that = this
       _that.triggerEvent('onCellClick', _that.properties.inputInfo)
+    },
+    cellContentClick() {
+      const _that = this
+      _that.triggerEvent('onCellContentClick', _that.properties.inputInfo)
     }
   }
 })

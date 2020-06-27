@@ -23,7 +23,7 @@ Page({
   },
   async initFn() {
     const _that = this
-    let userShipIds = ''
+    let userShipIds = []
     if (_that.uPkid) {
       const _currentUser = await getCurrentUserDetail(_that.uPkid)
       userShipIds = (_currentUser || {}).userShipIds || ''

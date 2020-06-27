@@ -1,7 +1,7 @@
 <view class="wrapper-login">
   <view class="content">
     <view class="logo-info">
-      <image class="logo" src="https://img3.tuhu.org/MLraNhsOmh7TG0b5uzkXQA/logo.jpg"  lazy-load="false"  />
+      <image class="logo" src="{{logoUrl}}"  lazy-load="false"  />
       <text class="system-name">科研调查船信息管理系统</text>
     </view>
     <view class="item">
