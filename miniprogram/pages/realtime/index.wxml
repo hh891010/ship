@@ -6,7 +6,6 @@
       longitude="{{longitude}}" 
       latitude="{{latitude}}"
       show-compass="true"
-      show-location="true"
       scale="16"
       markers="{{markers}}"
       polyline="{{polyline}}"

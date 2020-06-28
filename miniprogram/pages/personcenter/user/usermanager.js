@@ -47,16 +47,20 @@ Page({
   },
   addUser() {
     const _that = this
-    wx.$eventBus.$on('add_success', (obj) => {
-      _that.resetData()
-      _that.getUserList()
-    })
+    _that.refreshUserList()
     wx.navigateTo({
       url: `/pages/personcenter/detail/detail`
     });
   },
+  refreshUserList() {
+    wx.$eventBus.$on('add_user_success', () => {
+      this.resetData()
+      this.getUserList()
+    })
+  },
   onUserClick(e) {
     const _user = e.detail
+    this.refreshUserList()
     wx.navigateTo({
       url: `/pages/personcenter/detail/detail?pkid=${_user.pkid}&isEdit=true`
     });

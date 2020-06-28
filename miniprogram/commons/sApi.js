@@ -187,6 +187,15 @@ export const getShipHistory = () => {
 }
 
 /**
+ * 重置用户密码
+ */
+export const resetPassword = (ops) => {
+  return wx.sRequest(`${apiHost}${apis.resetPassword}`, ops, {
+    method: 'POST'
+  }).catch(err => {})
+}
+
+/**
  * 上传图片
  * @param {*} path 
  */

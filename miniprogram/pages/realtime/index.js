@@ -142,7 +142,12 @@ Page({
           borderRadius: 5,
           anchorY: 20,
           anchorX: -5
-        }
+        },
+        anchor: {
+          x: .4,
+          y: .5
+        },
+        rotate: x.direction
       }, x)
       return item
     })
@@ -167,6 +172,7 @@ Page({
         const { longitude, latitude } = ships[0]
         const _spotList = _that.data.polyline[0].points
         _spotList.push({ longitude, latitude })
+        console.log('_spotList', _spotList)
         _that.setData({
           longitude,
           latitude,

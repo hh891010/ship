@@ -7,6 +7,7 @@ Page({
    */
   data: {
     tabs: ['航迹记录', '监测记录'],
+    scale: 15,
     voyageTime: '',
     shipName: '',
     mileage: 0,
@@ -38,6 +39,17 @@ Page({
     })
     this.initFn()
   },
+  getScale(mileage) {
+    let _scale = 15
+    if (mileage < 5) {
+      _scale = 16
+    } else if (mileage > 50 && mileage < 100) {
+      _scale = 14
+    } else if (mileage > 100) {
+      _scale = 13
+    }
+    return _scale
+  },
   async initFn() {
    const result = await getTrackDetail(this.data.id)
    const { showDate, shipName, mileage, monitoringList, shipSpotList } = result || {}
@@ -45,13 +57,15 @@ Page({
      x.surveyTime = formatTime(new Date(x.surveyTime), '', false)
      return x
    })
+   
    this.setData({
     voyageTime: showDate,
     shipName: shipName,
     monitoringList,
     mileage,
+    scale: this.getScale(mileage),
     current: shipSpotList && shipSpotList.length > 0 ? shipSpotList[0] : {},
-    ['polyline[0].points']: shipSpotList.map(x => {
+    ['polyline[0].points']: shipSpotList.reverse().map(x => {
       return {
         longitude: x.longitude,
         latitude: x.latitude

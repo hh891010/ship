@@ -29,5 +29,6 @@ export const apis = {
     findTypeOfInquiry: '/ship-api/api/config/findTypeOfInquiry',
     findShipMonitoringById: '/ship-api/api/ship/findShipMonitoringById',
     saveShipMonitoring: '/ship-api/api/ship/saveShipMonitoring',
-    findShipCurrentLocation: '/ship-api/api/user/findShipCurrentLocation'
+    findShipCurrentLocation: '/ship-api/api/user/findShipCurrentLocation',
+    resetPassword: '/ship-api/api/user/resetPassword'
 }

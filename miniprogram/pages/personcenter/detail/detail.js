@@ -1,7 +1,13 @@
 const { userOps } = require('../../../commons/constant');
-const { apis, apiHost, userInfoKey } = require('../../../commons/config')
-const { selectRoleList, getCurrentUserDetail, saveUserInfo } = require('../../../commons/sApi')
-const { getStorageSync } = require('../../../commons/utils');
+const { userInfoKey, openidKey, userAuthKey } = require('../../../commons/config')
+const { 
+  selectRoleList,
+  getCurrentUserDetail,
+  saveUserInfo,
+  userLogout,
+  resetPassword
+} = require('../../../commons/sApi')
+const { getStorageSync, promisify, removeStorageSync } = require('../../../commons/utils');
 Page({
 
   /**
@@ -12,39 +18,43 @@ Page({
     isHead: false,
     isEdit: false,
     isloading: true,
-    sexs: ['男', '女'],
+    sexs: ['男士', '女士'],
     sexIndex: 0,
     userPkid: 0,
     user: null,
     roleNames: [],
     roles: [],
     roleIndex: 0,
-    workingShips: []
+    workingShips: [],
+    newPassword: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     const _that = this
-    _that.initFn(options)
+    const { pkid, isEdit = false } = options || {}
+    _that.setData({
+      userPkid: pkid,
+      isEdit: isEdit
+    })
+    _that.initFn()
   },
-  async initFn(ops) {
+  async initFn() {
     const _that = this
-    const { pkid, isEdit = false } = ops || {}
+    const { userPkid, isEdit } = _that.data
     wx.showLoading({
       title: '加载中...',
     })
     const _roles = await selectRoleList()
     _that.setData({
       roles: _roles || [],
-      roleNames: (_roles || []).map(x => x.roleName),
-      isEdit: isEdit
+      roleNames: (_roles || []).map(x => x.roleName)
     })
-    if (pkid > 0) {
+    if (userPkid > 0) {
       const _user = getStorageSync(userInfoKey)
       _that.setData({
-        userPkid: pkid,
-        isHead: pkid === _user.pkid
+        isHead: userPkid === _user.pkid && !isEdit
       })
       _that.getUserDetail(isEdit)
     } else {
@@ -64,8 +74,10 @@ Page({
     const _that = this
     const _userDetail = await getCurrentUserDetail(_that.data.userPkid)
     const cells = _that.data.cells
+    const _index = this.data.sexs.indexOf(_userDetail.sex)
     _that.setData({
       isloading: false,
+      sexIndex: _index,
       cells: cells.map(x => {
         x.value = _userDetail[x.attrKey]
         x.readonly = !isEdit
@@ -75,10 +87,10 @@ Page({
     })
     wx.hideLoading()
   },
-  onCellClick(e) {
+  onCellContentClick(e) {
     const _that = this
     const { id } = e.detail || {}
-    if (id === 9) {
+    if (id === 9 && this.data.isEdit) {
       wx.$eventBus.$on('working_success', (res) => {
         _that.setData({
           workingShips: res
@@ -102,10 +114,34 @@ Page({
     _param.pkid = _that.data.userPkid
     saveUserInfo(_param).then(res => {
       if (res) {
-        wx.$eventBus.$emit('add_success', res)
+        wx.$eventBus.$emit('add_user_success', res)
         _that.handlerGobackClick()
       }
     })
+  },
+  async loginOut() {
+    const res =  await promisify(wx.showModal, {
+      title: '退出登录',
+      content: `是否确定退出登录？`,
+      showCancel: true,
+      confirmText: '确定'
+    })
+    if (res.confirm) {
+      const userToken = getStorageSync(userAuthKey)
+      const openid = getStorageSync(openidKey)
+      const result = await userLogout(userToken,openid)
+      if (result || 1 === 1) {
+        this.cleanUpUserCache()
+      }
+    }
+  },
+  cleanUpUserCache() {
+    removeStorageSync(userInfoKey)
+    removeStorageSync(userAuthKey)
+    wx.switchTab({
+      url: '/pages/realtime/index'
+    })
+    wx.$eventBus.$emit('refresh_ship')
   },
   onInputChange(e) {
     const _that = this
@@ -135,52 +171,34 @@ Page({
       delta: 1
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onNewPasswordChange(e) {
+    const _that = this
+    const _password = e.detail.value
+    _that.setData({
+      newPassword: _password
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  async resetPassword() {
+    if (!this.data.newPassword) {
+      wx.showToast({ title: '新密码不能为空', icon: 'none'})
+      return
+    }
+    const res =  await promisify(wx.showModal, {
+      title: '重置密码',
+      content: `是否确定重置密码？`,
+      showCancel: true,
+      confirmText: '确定'
+    })
+    if (res.confirm) {
+      const result = await resetPassword({
+        password: this.data.newPassword
+      })
+      if (result) {
+        wx.showToast({ title: '密码已重置', icon: 'success'})
+        this.setData({
+          newPassword: ''
+        })
+      }
+    }
   }
 })

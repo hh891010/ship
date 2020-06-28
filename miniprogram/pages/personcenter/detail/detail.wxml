@@ -6,14 +6,16 @@
   bindback="handlerGobackClick" 
   bindhome="handlerGohomeClick"></navBar>
 <view wx:if="{{!isloading}}" class="wrapper-detail">
-  <view wx:if="{{isHead}}" class="head">
+  <!--<view wx:if="{{isHead}}" class="head">
     <open-data type="userAvatarUrl" class="head-img"></open-data>
-  </view>
+  </view>-->
   <block wx:for="{{cells}}" wx:key="id" >
-    <s-cell 
+    <s-cell
+      class="userCls"
       wx:if="{{item.canShow}}" 
       bind:onChange="onInputChange" 
-      bind:onCellClick="onCellClick" 
+      bind:onCellClick="onCellClick"
+      bind:onCellContentClick="onCellContentClick"
       inputInfo="{{item}}">
       <view wx:if="{{item.isSlot}}">
         <picker
@@ -31,6 +33,12 @@
       </view>
     </s-cell>
   </block>
+  <view wx:if="{{isEdit && userPkid > 0}}" class="reset-password">
+    <view>重置密码：</view>
+    <input maxlength="20" bindinput="onNewPasswordChange" value="{{newPassword}}"  class="newpassword" type="text" placeholder="请输入新密码"  />
+    <button class="resetBtn" size="mini" bindtap="resetPassword">重置</button>
+  </view>
+  <button wx:if="{{!isEdit && userPkid > 0}}" bindtap="loginOut" class="loginOut">退出登录</button>
   <button bindtap="addUser" wx:if="{{userPkid === 0 || isEdit}}" class="savebtn">保存并使用</button>
 </view>
 
