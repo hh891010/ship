@@ -118,7 +118,7 @@ Page({
     const _that = this
     const s = e.detail
     promisify(wx.showModal, {
-      title: '开启航迹',
+      title: `${s.wakeStatus ? '开启' : '关闭'}航迹`,
       content: `${s.shipName}${s.wakeStatus ? '开启' : '关闭'}航迹记录！`,
       showCancel: false,
       confirmText: '知道了'
