@@ -43,6 +43,15 @@ export const homelist = [
     canShow: true,
     iconmore: true,
     titleIcon: 'iconyonghuguanli'
+  },
+  {
+    id: 5,
+    title: '退出登录',
+    iconClass: '',
+    isInput: false,
+    canShow: true,
+    iconmore: true,
+    titleIcon: 'iconclose'
   }
 ]
 
