@@ -1,8 +1,9 @@
 
 const com = require('../../../commons/constant');
+const { userAuthKey, openidKey } = require('../../../commons/config')
 const { getStorageSync, setStorageSync } = require('../../../commons/utils')
 const { userInfoKey } = require('../../../commons/config')
-const { getUserInfo } = require('../../../commons/sApi')
+const { getUserInfo, userLogout } = require('../../../commons/sApi')
 Page({
 
   /**
@@ -30,6 +31,10 @@ Page({
       case 4:
         _url = "/pages/personcenter/user/usermanager"
         break;
+      case 5:
+        _url = "/pages/home/login/index"
+        this.loginout()
+        break;
     }
     wx.$eventBus.$on('refresh_center', (obj) => {
       this.getUserDetail()
@@ -37,6 +42,11 @@ Page({
     wx.navigateTo({
       url: _url
     });
+  },
+  async loginout(){
+    const userToken = getStorageSync(userAuthKey)
+    const openid = getStorageSync(openidKey)
+    await userLogout(userToken,openid)
   },
   async getUserDetail() {
     const _that = this
