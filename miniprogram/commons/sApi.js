@@ -202,4 +202,13 @@ export const uploadImg = (path) => {
     }
   }, 'uploadFile').catch((e) => {})
 }
-
+/**
+ * 退出登录
+ * @param {*} access_token 
+ * @param {*} openid 
+ */
+export const userLogout = (access_token,openid) => {
+  return wx.sRequest(`${apiHost}${apis.userLogout}?access_token=${access_token}&openid=${openid}`, {},{
+    method: 'DELETE'
+  })
+}
