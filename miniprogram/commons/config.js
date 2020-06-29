@@ -1,10 +1,12 @@
 export const userAuthKey = 's_user_token'
 export const openidKey = 's_user_appid'
 export const userInfoKey = 's_user_info'
+export const clientId = 'webapp'
+export const clientSecret = 'surveyship$2020'
 export const apiHost = 'https://www.orangesoda.cn'
 export const websocketServer = 'wss://www.orangesoda.cn/websocket/'
 export const apis = {
-    userLogin: '/ship-auth-server/oauth/token',
+    userLogin: '/ship-auth-server/api/login',
     userLogout: '/ship-auth-server/api/exit',
     getUserInfo: '/ship-api/api/user/findUserDetail',
     getUserList: '/ship-api/api/user/findPage',
