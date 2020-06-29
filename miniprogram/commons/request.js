@@ -3,7 +3,7 @@ const { userAuthKey } = require('./config')
 const { getStorageSync, removeStorageSync } = require('../commons/utils')
 const _host = 'https://www.orangesoda.cn'
 const filterApis = [
-  `${_host}/ship-auth-server/oauth/token`
+  `${_host}/ship-auth-server/api/login`
 ]
 const authFilter = (url) => {
   return filterApis.includes(url)
