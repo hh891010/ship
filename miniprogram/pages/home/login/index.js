@@ -1,5 +1,5 @@
-const { setStorageSync } = require('../../../commons/utils')
-const { apis, userAuthKey, apiHost } = require('../../../commons/config')
+const { setStorageSync, getStorageSync } = require('../../../commons/utils')
+const { apis, userAuthKey, apiHost, openidKey, clientId, clientSecret } = require('../../../commons/config')
 const base64 = require('js-base64').Base64
 const app = getApp()
 Page({
@@ -56,32 +56,28 @@ Page({
     }
     return _
   },
-  onLogin() {
+  async onLogin() {
     const _that = this
     if (_that.userCheck()) {
-      const basicAuth = base64.encode(`webapp:surveyship$2020`)
-      const _ = _that.createFormdata({
-        grant_type: 'password',
+      const param = {
+        clientId: clientId,
+        clientSecret: clientSecret,
+        grantType: 'password',
         username: _that.data.username,
-        password: _that.data.password
-      })
-      wx.sRequest(`${apiHost}${apis.userLogin}`, _, {
+        password: _that.data.password,
+        openid: getStorageSync(openidKey)
+      }
+      const access_token = await wx.sRequest(`${apiHost}${apis.userLogin}`, param, {
         isLoading: true,
         loadingTitle: '登录中...',
         method: 'POST',
-        header: {
-          'Content-Type': 'multipart/form-data;boundary=XXX',
-          Authorization: `Basic ${basicAuth}`
-        },
-        specialResponse: true
-      }).then(res => {
-        const { access_token } = res || {}
-        setStorageSync(userAuthKey, access_token)
-        wx.$eventBus.$emit('login_success', access_token)
-        wx.navigateBack({
-          delta: 1
-        })
+        noAuth: true
       }).catch(() => {})
+      setStorageSync(userAuthKey, access_token)
+      wx.$eventBus.$emit('login_success', access_token)
+      wx.navigateBack({
+        delta: 1
+      })
     }
     // setTimeout(() => {
     //   wx.hideLoading()
